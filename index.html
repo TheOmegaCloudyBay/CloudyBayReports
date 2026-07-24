@@ -22,6 +22,19 @@
     color:#e6e9ef;text-decoration:none;font-size:17px;background:#161d28}
   a:hover{border-color:#e11d33;color:#fff}
   a span{display:block;font-size:13px;color:#9aa4b2;margin-top:2px}
+  a.dcard{display:flex;align-items:center;gap:14px;margin:0 0 26px;padding:14px 16px;border:0;
+    border-radius:14px;background:#5865f2;color:#fff;box-shadow:0 6px 20px rgba(88,101,242,.38)}
+  a.dcard:hover{background:#4752c4;color:#fff}
+  a.dcard .ic{width:56px;height:56px;border-radius:14px;flex:0 0 auto;object-fit:cover;background:#404abf}
+  a.dcard .dlogo{display:flex;align-items:center;justify-content:center}
+  a.dcard .dlogo svg{width:32px;height:32px;fill:#fff}
+  a.dcard .info{flex:1;min-width:0}
+  a.dcard .nm{font-size:18px;font-weight:700;line-height:1.2}
+  a.dcard .st{font-size:13px;color:#e6e8ff;margin-top:3px;display:flex;align-items:center;gap:7px}
+  a.dcard .dotg{width:9px;height:9px;border-radius:50%;background:#23a55a;display:inline-block;flex:0 0 auto}
+  a.dcard .join{flex:0 0 auto;background:#fff;color:#4752c4;font-weight:700;font-size:14px;
+    padding:9px 15px;border-radius:9px;display:flex;align-items:center;gap:7px;white-space:nowrap}
+  a.dcard .join svg{width:18px;height:18px;fill:#4752c4}
   footer{margin-top:28px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     body{color:#18202c;background:#eef1f5} p,a span,footer{color:#5a6576}
@@ -38,6 +51,37 @@
       <p>SWGoH guild reports — Rise of the Empire.</p>
     </div>
   </div>
+  <a class="dcard" id="dcard" href="https://discord.gg/pwecTHqru3" target="_blank" rel="noopener">
+    <div class="ic dlogo"></div>
+    <div class="info"><div class="nm">Join our Discord</div><div class="st">Cloudy Bay</div></div>
+  </a>
+  <script>
+  (function(){
+    const INVITE="pwecTHqru3";
+    const LOGO='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3c-.2.36-.43.84-.59 1.23a18.27 18.27 0 0 0-5.94 0C9.87 3.84 9.63 3.36 9.43 3A19.74 19.74 0 0 0 5.68 4.37C2.4 9.26 1.5 14.03 1.95 18.74a19.9 19.9 0 0 0 6.07 3.08c.49-.67.93-1.38 1.3-2.13-.71-.27-1.4-.6-2.04-.99.17-.13.34-.26.5-.4 3.93 1.84 8.18 1.84 12.06 0 .17.14.33.27.5.4-.65.39-1.34.72-2.05.99.38.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.07-3.08c.56-5.47-.9-10.2-3.8-14.37zM8.02 15.83c-1.18 0-2.15-1.09-2.15-2.42 0-1.34.95-2.42 2.15-2.42 1.2 0 2.17 1.09 2.15 2.42 0 1.33-.95 2.42-2.15 2.42zm7.96 0c-1.18 0-2.15-1.09-2.15-2.42 0-1.34.95-2.42 2.15-2.42 1.2 0 2.17 1.09 2.15 2.42 0 1.33-.94 2.42-2.15 2.42z"/></svg>';
+    const card=document.getElementById('dcard');
+    const esc=s=>String(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+    fetch(`https://discord.com/api/v10/invites/${INVITE}?with_counts=true`)
+      .then(r=>r.ok?r.json():Promise.reject())
+      .then(j=>{
+        if(!j||!j.guild) throw 0;
+        const g=j.guild;
+        const icon=g.icon?`https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=128`:null;
+        const on=(j.approximate_presence_count||0).toLocaleString();
+        const tot=(j.approximate_member_count||0).toLocaleString();
+        card.innerHTML =
+          (icon?`<img class="ic" src="${icon}" alt="">`:`<div class="ic dlogo">${LOGO}</div>`)+
+          `<div class="info"><div class="nm">${esc(g.name)}</div>`+
+          `<div class="st"><i class="dotg"></i>${on} Online · ${tot} Members</div></div>`+
+          `<div class="join">${LOGO}Join</div>`;
+      })
+      .catch(()=>{
+        card.innerHTML=`<div class="ic dlogo">${LOGO}</div>`+
+          `<div class="info"><div class="nm">Join our Discord</div><div class="st">Cloudy Bay</div></div>`+
+          `<div class="join">${LOGO}Join</div>`;
+      });
+  })();
+  </script>
   <ul>
     <li><a href="reva-readiness.html">Reva Readiness<span>Who can field the Inquisitor team for the Reva special mission</span></a></li>
     <li><a href="rote-platoons.html">RotE Platoons<span>Platoon fill by planet/level, assignments, and who's closest</span></a></li>
