@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Guild Stats — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{--bg:#0f141c;--card:#161d28;--line:#2a3442;--txt:#e6e9ef;--dim:#9aa4b2;
+    --accent:#e11d33;--good:#37b24d;--bad:#e0524a;--raid:#7a3cc0;--tb:#0f8a99}
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;
+    margin:0 auto;max-width:1000px;padding:20px 14px 60px;color:var(--txt);background:var(--bg)}
+  a.homelink{color:var(--dim);text-decoration:none;font-size:13px}
+  a.homelink:hover{color:var(--txt)}
+  h1{font-size:24px;margin:12px 0 2px}
+  .sub{color:var(--dim);margin:0 0 14px;font-size:13px}
+  .tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:0 0 16px}
+  .tabs button{background:transparent;border:0;color:var(--dim);padding:9px 14px;cursor:pointer;
+    font:inherit;font-size:14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tabs button.on{color:var(--txt);border-bottom-color:var(--accent)}
+  .pane{display:none} .pane.on{display:block}
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:7px 9px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--dim);font-weight:600;cursor:pointer;user-select:none}
+  th.act::after{content:" \25BE";color:var(--accent)} th.asc::after{content:" \25B4";color:var(--accent)}
+  tr.mem{cursor:pointer} tr.mem:hover td{background:var(--card)}
+  td.num{font-variant-numeric:tabular-nums}
+  .win{color:var(--good);font-weight:600} .loss{color:var(--bad);font-weight:600}
+  .detail td{background:#0c1017;text-align:left;padding:10px 14px}
+  .chart svg{max-width:100%;height:auto}
+  .muted{color:var(--dim);font-size:12px;margin:4px 0}
+  footer{margin-top:30px;color:#5c6674;font-size:12px}
+  @media (prefers-color-scheme: light){:root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576} .detail td{background:#f4f6f9}}
+</style>
+</head>
+<body>
+  <a class="homelink" href="index.html">← Cloudy Bay reports</a>
+  <h1>Guild Stats</h1>
+  <p class="sub" id="sub"></p>
+  <div class="tabs">
+    <button data-tab="raids" class="on">Raids</button>
+    <button data-tab="tb">Territory Battle</button>
+    <button data-tab="tw">Territory War</button>
+  </div>
+  <div class="pane on" id="pane-raids"><div class="tblwrap"><table id="t-raids"></table></div></div>
+  <div class="pane" id="pane-tb"><div class="tblwrap"><table id="t-tb"></table></div></div>
+  <div class="pane" id="pane-tw"><div class="chart" id="tw-chart"></div><div class="tblwrap"><table id="t-tw"></table></div></div>
+  <footer id="foot"></footer>
+
+<script id="ga-data" type="application/json">{"guild":"Cloudy Bay","generatedAt":"2026-07-24 12:19","raidNode":"ORDER66","guildRaidTotal":42235000,"raidCount":1,"tbDef":"t05D","tbCount":2,"members":[{"id":"icm_xP8jSPOrzy8NpBPDXg","name":"4L1V3 2 THR1V3","rank":"","joinTs":1763789656,"gp":3473923,"lastRaidScore":1800000,"tbBanners":20201211,"tbDeploy":20201211,"seasonScore":0,"history":[{"t":1784716541000,"score":1800000}],"tbHistory":[{"t":1780247051000,"score":16738008},{"t":1783875772000,"score":20201211}]},{"id":"3sC3bXQcSLq1ARwtlma2-w","name":"FF","rank":"","joinTs":1764011069,"gp":4297060,"lastRaidScore":1350000,"tbBanners":24779080,"tbDeploy":24529080,"seasonScore":0,"history":[{"t":1784716541000,"score":1350000}],"tbHistory":[{"t":1780247051000,"score":26740222},{"t":1783875772000,"score":24779080}]},{"id":"uU2s4Ru4TMmU80V8DctiBw","name":"Asaf Nissan","rank":"","joinTs":1764255173,"gp":9587743,"lastRaidScore":null,"tbBanners":19807508,"tbDeploy":19507508,"seasonScore":177175,"history":[],"tbHistory":[{"t":1780247051000,"score":13517722},{"t":1783875772000,"score":19807508}]},{"id":"E2Qcgc11TUalmDfIj1igxA","name":"\u0422\u0430\u0439","rank":"","joinTs":1764954336,"gp":5260394,"lastRaidScore":272500,"tbBanners":31170563,"tbDeploy":30720563,"seasonScore":0,"history":[{"t":1784716541000,"score":272500}],"tbHistory":[{"t":1780247051000,"score":17885815},{"t":1783875772000,"score":31170563}]},{"id":"OCQq2YhyRXOW97EW-P7WAA","name":"Ven of Thila","rank":"","joinTs":1765255457,"gp":3230270,"lastRaidScore":1715000,"tbBanners":15429352,"tbDeploy":15429352,"seasonScore":0,"history":[{"t":1784716541000,"score":1715000}],"tbHistory":[{"t":1780247051000,"score":14520074},{"t":1783875772000,"score":15429352}]},{"id":"GwT6BfEbTgunOsyARgd_Qw","name":"The Omega","rank":"","joinTs":1765294635,"gp":4704436,"lastRaidScore":1950000,"tbBanners":27225594,"tbDeploy":27225594,"seasonScore":0,"history":[{"t":1784716541000,"score":1950000}],"tbHistory":[{"t":1780247051000,"score":22262604},{"t":1783875772000,"score":27225594}]},{"id":"coa3yMBiR--SCyfroB9fag","name":"Diego","rank":"","joinTs":1765841776,"gp":3794049,"lastRaidScore":300000,"tbBanners":7208635,"tbDeploy":7208635,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":14731871},{"t":1783875772000,"score":7208635}]},{"id":"F6_CjYpsRL6rQYwYt-fFQQ","name":"Matt The Radar Technician","rank":"","joinTs":1765952337,"gp":4627516,"lastRaidScore":600000,"tbBanners":27039683,"tbDeploy":27039683,"seasonScore":0,"history":[{"t":1784716541000,"score":600000}],"tbHistory":[{"t":1780247051000,"score":19685577},{"t":1783875772000,"score":27039683}]},{"id":"Lvz9IaC1Q8iYaPI6ujuDQw","name":"zohar","rank":"","joinTs":1765961112,"gp":4551507,"lastRaidScore":250000,"tbBanners":26141150,"tbDeploy":26141150,"seasonScore":0,"history":[{"t":1784716541000,"score":250000}],"tbHistory":[{"t":1780247051000,"score":22833845},{"t":1783875772000,"score":26141150}]},{"id":"FwM1zIYNQROfLWpxwXlB8g","name":"order66","rank":"","joinTs":1765982866,"gp":2767620,"lastRaidScore":300000,"tbBanners":10859803,"tbDeploy":10859803,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":1817802},{"t":1783875772000,"score":10859803}]},{"id":"PRCdvZ1gQS2_wtafmhoWHw","name":"Squaredevil","rank":"","joinTs":1767248927,"gp":6282438,"lastRaidScore":1200000,"tbBanners":36280427,"tbDeploy":36280427,"seasonScore":0,"history":[{"t":1784716541000,"score":1200000}],"tbHistory":[{"t":1780247051000,"score":23777285},{"t":1783875772000,"score":36280427}]},{"id":"mRUPggJYQJOZfFZyMb5etw","name":"Henry","rank":"","joinTs":1768078533,"gp":3810857,"lastRaidScore":750000,"tbBanners":22604598,"tbDeploy":22404598,"seasonScore":0,"history":[{"t":1784716541000,"score":750000}],"tbHistory":[{"t":1780247051000,"score":18452556},{"t":1783875772000,"score":22604598}]},{"id":"1s4K9Kp6R4GzyfM15da_Mw","name":"DeathlessKing","rank":"","joinTs":1768232020,"gp":3848145,"lastRaidScore":0,"tbBanners":11540318,"tbDeploy":11090318,"seasonScore":0,"history":[{"t":1784716541000,"score":0}],"tbHistory":[{"t":1780247051000,"score":11273179},{"t":1783875772000,"score":11540318}]},{"id":"BQqYLa5FSZ-5Auxm9iac8w","name":"Yarael Poof","rank":"","joinTs":1768812702,"gp":4539673,"lastRaidScore":1200000,"tbBanners":26075674,"tbDeploy":26075674,"seasonScore":0,"history":[{"t":1784716541000,"score":1200000}],"tbHistory":[{"t":1780247051000,"score":12383520},{"t":1783875772000,"score":26075674}]},{"id":"SYJ2ge4KTRuy0Up1Ow2tuw","name":"original name","rank":"","joinTs":1770742685,"gp":2934959,"lastRaidScore":687500,"tbBanners":16675394,"tbDeploy":16675394,"seasonScore":0,"history":[{"t":1784716541000,"score":687500}],"tbHistory":[{"t":1780247051000,"score":12363236},{"t":1783875772000,"score":16675394}]},{"id":"BTF9VO3SQsuZhB1nRKMB4Q","name":"Eytanobi","rank":"","joinTs":1770839995,"gp":10769367,"lastRaidScore":1610000,"tbBanners":55981069,"tbDeploy":53656069,"seasonScore":394674,"history":[{"t":1784716541000,"score":1610000}],"tbHistory":[{"t":1780247051000,"score":46152333},{"t":1783875772000,"score":55981069}]},{"id":"ci_0FKzLTDS0ntHOnEnz_A","name":"DarthMalgus","rank":"","joinTs":1770967605,"gp":5028791,"lastRaidScore":220000,"tbBanners":25320874,"tbDeploy":24620874,"seasonScore":0,"history":[{"t":1784716541000,"score":220000}],"tbHistory":[{"t":1780247051000,"score":27702491},{"t":1783875772000,"score":25320874}]},{"id":"1Mm1mhFYTquGU7UnKKDH3Q","name":"Hot ca","rank":"","joinTs":1771427773,"gp":2824499,"lastRaidScore":300000,"tbBanners":5491289,"tbDeploy":5491289,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":14110823},{"t":1783875772000,"score":5491289}]},{"id":"8HB1zskUScun-eQSzBJsWA","name":"MO0855","rank":"","joinTs":1772037054,"gp":4420790,"lastRaidScore":300000,"tbBanners":26341210,"tbDeploy":26141210,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":28313294},{"t":1783875772000,"score":26341210}]},{"id":"n4VTOrN2TEaRoM92GStj2g","name":"Torin Woodle","rank":"","joinTs":1772336457,"gp":4702696,"lastRaidScore":587500,"tbBanners":22322748,"tbDeploy":22197748,"seasonScore":0,"history":[{"t":1784716541000,"score":587500}],"tbHistory":[{"t":1780247051000,"score":14970649},{"t":1783875772000,"score":22322748}]},{"id":"Ldq167IiREWBJVfAkev8Dg","name":"DAVE115","rank":"","joinTs":1773155647,"gp":4684931,"lastRaidScore":900000,"tbBanners":23219251,"tbDeploy":22469251,"seasonScore":0,"history":[{"t":1784716541000,"score":900000}],"tbHistory":[{"t":1780247051000,"score":22578041},{"t":1783875772000,"score":23219251}]},{"id":"soWuDyk7Qf6ZxwflkHpBHg","name":"Vibara","rank":"","joinTs":1773740749,"gp":10806689,"lastRaidScore":645000,"tbBanners":64519206,"tbDeploy":64519206,"seasonScore":624699,"history":[{"t":1784716541000,"score":645000}],"tbHistory":[{"t":1780247051000,"score":53089004},{"t":1783875772000,"score":64519206}]},{"id":"vCZVx_9hTH2cnrwG70Kdvw","name":"Itsmemario","rank":"","joinTs":1774217838,"gp":6233014,"lastRaidScore":390000,"tbBanners":36432574,"tbDeploy":36432574,"seasonScore":54603,"history":[{"t":1784716541000,"score":390000}],"tbHistory":[{"t":1780247051000,"score":24776807},{"t":1783875772000,"score":36432574}]},{"id":"pAkUyKquS-SJbXboxOX8uQ","name":"alfa","rank":"","joinTs":1774775822,"gp":4584926,"lastRaidScore":300000,"tbBanners":22717664,"tbDeploy":21967664,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":22710668},{"t":1783875772000,"score":22717664}]},{"id":"uhiWWxl2QQa4Y2tMSvbvsw","name":"ZivGG","rank":"","joinTs":1775573535,"gp":5551408,"lastRaidScore":1050000,"tbBanners":27219526,"tbDeploy":26569526,"seasonScore":0,"history":[{"t":1784716541000,"score":1050000}],"tbHistory":[{"t":1780247051000,"score":38607853},{"t":1783875772000,"score":27219526}]},{"id":"RnGrB5ZSSgKqUjJWrKg9Tw","name":"Chewwy29","rank":"","joinTs":1777011543,"gp":4170415,"lastRaidScore":1125000,"tbBanners":24165180,"tbDeploy":23590180,"seasonScore":0,"history":[{"t":1784716541000,"score":1125000}],"tbHistory":[{"t":1780247051000,"score":12073523},{"t":1783875772000,"score":24165180}]},{"id":"l1H4B9MrTIOq_snuDzTaag","name":"R0ttin","rank":"","joinTs":1777297452,"gp":2867161,"lastRaidScore":665000,"tbBanners":12641278,"tbDeploy":12641278,"seasonScore":0,"history":[{"t":1784716541000,"score":665000}],"tbHistory":[{"t":1780247051000,"score":11792117},{"t":1783875772000,"score":12641278}]},{"id":"2g6KnrdfS9G2WimSJ4QP1g","name":"FallenProphett","rank":"","joinTs":1777869684,"gp":4245615,"lastRaidScore":300000,"tbBanners":20644627,"tbDeploy":20644627,"seasonScore":19608,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":16341810},{"t":1783875772000,"score":20644627}]},{"id":"CYwhNjbYSRexDuYZeedu5A","name":"Mol Eliza","rank":"","joinTs":1778093460,"gp":6044268,"lastRaidScore":300000,"tbBanners":18418942,"tbDeploy":18068942,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":24254895},{"t":1783875772000,"score":18418942}]},{"id":"UJYkn1JQQeW9Jthu3NJBLw","name":"Mol Eliza","rank":"","joinTs":1778093461,"gp":2894862,"lastRaidScore":300000,"tbBanners":14133904,"tbDeploy":14133904,"seasonScore":0,"history":[{"t":1784716541000,"score":300000}],"tbHistory":[{"t":1780247051000,"score":11924923},{"t":1783875772000,"score":14133904}]},{"id":"EcLW7da9Tq-m4Io1WQMZxQ","name":"Javin Vigil","rank":"","joinTs":1779600665,"gp":5484343,"lastRaidScore":627500,"tbBanners":27018182,"tbDeploy":27018182,"seasonScore":0,"history":[{"t":1784716541000,"score":627500}],"tbHistory":[{"t":1780247051000,"score":25907858},{"t":1783875772000,"score":27018182}]},{"id":"qFGsFM1gQkm5L10PN8edjg","name":"Jchiodo","rank":"","joinTs":1779654625,"gp":5108135,"lastRaidScore":830000,"tbBanners":24824674,"tbDeploy":24824674,"seasonScore":0,"history":[{"t":1784716541000,"score":830000}],"tbHistory":[{"t":1780247051000,"score":23228612},{"t":1783875772000,"score":24824674}]},{"id":"eijkXlwkQ96KWj9DZBxl8w","name":"Seamus dono","rank":"","joinTs":1779722735,"gp":4603130,"lastRaidScore":15000,"tbBanners":22714943,"tbDeploy":22714943,"seasonScore":0,"history":[{"t":1784716541000,"score":15000}],"tbHistory":[{"t":1780247051000,"score":20875413},{"t":1783875772000,"score":22714943}]},{"id":"a5KtdgnsQMu6VJokzUwkhQ","name":"EW","rank":"","joinTs":1780336450,"gp":9612790,"lastRaidScore":607500,"tbBanners":38302233,"tbDeploy":38202233,"seasonScore":221465,"history":[{"t":1784716541000,"score":607500}],"tbHistory":[{"t":1783875772000,"score":38302233}]},{"id":"gbIiPOV0QQSIKlkWDjhDRQ","name":"Nexzos","rank":"","joinTs":1781143667,"gp":13167150,"lastRaidScore":8880000,"tbBanners":79730392,"tbDeploy":78580392,"seasonScore":267507,"history":[{"t":1784716541000,"score":8880000}],"tbHistory":[{"t":1783875772000,"score":79730392}]},{"id":"PqO7iSpvRIK0h9u-brcncg","name":"LeviDaTurtle","rank":"","joinTs":1781341100,"gp":4155657,"lastRaidScore":0,"tbBanners":4253675,"tbDeploy":4128675,"seasonScore":147314,"history":[{"t":1784716541000,"score":0}],"tbHistory":[{"t":1783875772000,"score":4253675}]},{"id":"pkD44f09Q7m8A7-WIcc00A","name":"Mando","rank":"","joinTs":1781808331,"gp":4322421,"lastRaidScore":430000,"tbBanners":16560464,"tbDeploy":16460464,"seasonScore":0,"history":[{"t":1784716541000,"score":430000}],"tbHistory":[{"t":1783875772000,"score":16560464}]},{"id":"17oz1dfrQf6LzdMS64ufmQ","name":"sugoflyerguy","rank":"","joinTs":1782336410,"gp":4984326,"lastRaidScore":1837500,"tbBanners":28538539,"tbDeploy":28138539,"seasonScore":0,"history":[{"t":1784716541000,"score":1837500}],"tbHistory":[{"t":1783875772000,"score":28538539}]},{"id":"srzO-w5nQceCsFLZtoMQhA","name":"Mol Eliza","rank":"","joinTs":1782438879,"gp":3894207,"lastRaidScore":0,"tbBanners":7552040,"tbDeploy":7552040,"seasonScore":0,"history":[{"t":1784716541000,"score":0}],"tbHistory":[{"t":1783875772000,"score":7552040}]},{"id":"G6hUrH6MQdy8qXPWiyUXsA","name":"Paladin12434","rank":"","joinTs":1782983844,"gp":3726436,"lastRaidScore":555000,"tbBanners":14719200,"tbDeploy":14319200,"seasonScore":0,"history":[{"t":1784716541000,"score":555000}],"tbHistory":[{"t":1780247051000,"score":23110725},{"t":1783875772000,"score":14719200}]},{"id":"JqimXGZdS8ehFXV0GHK5dQ","name":"lordbigius771","rank":"","joinTs":1783262950,"gp":5667909,"lastRaidScore":0,"tbBanners":2833886,"tbDeploy":2833886,"seasonScore":13052,"history":[{"t":1784716541000,"score":0}],"tbHistory":[{"t":1783875772000,"score":2833886}]},{"id":"7NcDTrMuRe-YHKcJuhe6BA","name":"Vlad","rank":"","joinTs":1783484300,"gp":3832795,"lastRaidScore":255000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":255000}],"tbHistory":[]},{"id":"tRXFr1xLTxuMzZHvzQvCSA","name":"kingmaxaluf","rank":"","joinTs":1783507436,"gp":5025996,"lastRaidScore":1155000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":1155000}],"tbHistory":[]},{"id":"l298KI-tSoCllSCp0uAu9w","name":"somo4","rank":"","joinTs":1783879106,"gp":2515588,"lastRaidScore":275000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":275000}],"tbHistory":[]},{"id":"-qQxIsfRSQCM03tqZ602zQ","name":"Snappy","rank":"","joinTs":1784195142,"gp":2333574,"lastRaidScore":1800000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":1800000}],"tbHistory":[]},{"id":"ctFjcLtQQYWbXFJd_fNbvg","name":"Snappy2","rank":"","joinTs":1784195368,"gp":713642,"lastRaidScore":1800000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":1800000}],"tbHistory":[]},{"id":"JN3sxdCITSa8iJj2aVDCTA","name":"ArtVendeley","rank":"","joinTs":1784195557,"gp":1575807,"lastRaidScore":1800000,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[{"t":1784716541000,"score":1800000}],"tbHistory":[]},{"id":"YBU2GakqSd2mdh-9JWsZMw","name":"harel","rank":"","joinTs":1784821047,"gp":2337120,"lastRaidScore":null,"tbBanners":null,"tbDeploy":null,"seasonScore":0,"history":[],"tbHistory":[]}],"tw":[{"t":1780509600000,"score":14798,"opp":4955,"power":206923385,"win":true},{"t":1780851600000,"score":11571,"opp":8747,"power":200883411,"win":true},{"t":1782061219000,"score":13624,"opp":12937,"power":207841799,"win":true},{"t":1782928804000,"score":9585,"opp":7579,"power":214283370,"win":true}],"twCount":4}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('ga-data').textContent);
+const fmt = n => (n==null?"—":Number(n).toLocaleString());
+const esc = s => String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const dstr = ms => new Date(ms).toLocaleDateString(undefined,{month:'short',day:'numeric'});
+
+document.getElementById('sub').textContent = `${DATA.guild} · ${DATA.members.length} members · snapshot ${DATA.generatedAt}`;
+document.getElementById('foot').textContent =
+  `Raids: ${DATA.raidCount} · TBs: ${DATA.tbCount} · TWs: ${DATA.twCount}. Raid/TB history grows as the report is re-run; TW is guild-level.`;
+
+function chartBlock(hist,label,stroke,dot,unit){
+  const h=(hist||[]).slice().sort((a,b)=>a.t-b.t);
+  if(h.length===0) return `<div class="muted">No ${unit} data yet.</div>`;
+  if(h.length===1) return `<div class="muted"><b>${label}</b>: ${fmt(h[0].score)} (1 ${unit} so far — history builds as the report re-runs).</div>`;
+  const W=Math.min(720,60+h.length*90),H=140,pad=28;
+  const xs=h.map((_,i)=>pad+i*((W-2*pad)/(h.length-1)));
+  const max=Math.max(...h.map(p=>p.score)),min=Math.min(...h.map(p=>p.score));
+  const y=v=>H-pad-(max===min?(H-2*pad)/2:(v-min)/(max-min)*(H-2*pad));
+  const pts=h.map((p,i)=>`${xs[i]},${y(p.score)}`).join(" ");
+  const dots=h.map((p,i)=>`<circle cx="${xs[i]}" cy="${y(p.score)}" r="3" fill="${dot}"><title>${fmt(p.score)}</title></circle>`).join("");
+  const lbl=h.map((p,i)=>i%Math.ceil(h.length/6)===0?`<text x="${xs[i]}" y="${H-8}" font-size="9" fill="#9aa4b2" text-anchor="middle">${dstr(p.t)}</text>`:"").join("");
+  return `<div style="margin-top:6px"><b>${label}</b> — ${h.length} ${unit} (max ${fmt(max)})</div>
+    <svg viewBox="0 0 ${W} ${H}" width="${W}"><polyline points="${pts}" fill="none" stroke="${stroke}" stroke-width="2"/>${dots}${lbl}</svg>`;
+}
+
+function memberTable(tableId, cols, chartCfg){
+  let key=cols.find(c=>c.def)?.k||cols[0].k, asc=false;
+  const tbl=document.getElementById(tableId);
+  function draw(){
+    const rows=[...DATA.members].filter(m=>m[chartCfg.metric]!=null || key==='name').sort((a,b)=>{
+      let x=a[key],y=b[key];
+      if(typeof x==="string"||typeof y==="string"){x=String(x||"");y=String(y||"");return asc?x.localeCompare(y):y.localeCompare(x);}
+      x=x??-1;y=y??-1;return asc?x-y:y-x;
+    });
+    tbl.innerHTML=`<thead><tr>${cols.map(c=>`<th data-k="${c.k}" class="${c.k===key?(asc?'asc':'act'):''}">${c.label}</th>`).join("")}</tr></thead>`+
+      `<tbody>${rows.map(m=>`<tr class="mem" data-id="${m.id}">${cols.map(c=>`<td class="${c.cls||'num'}">${c.render(m)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+    tbl.querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===key)asc=!asc;else{key=k;asc=false;}draw();});
+    tbl.querySelectorAll('tr.mem').forEach(tr=>tr.onclick=()=>{
+      const nx=tr.nextElementSibling; if(nx&&nx.classList.contains('detail')){nx.remove();return;}
+      tbl.querySelectorAll('tr.detail').forEach(e=>e.remove());
+      const m=DATA.members.find(x=>x.id===tr.dataset.id);
+      const d=document.createElement('tr');d.className='detail';
+      d.innerHTML=`<td colspan="${cols.length}" class="chart">${chartBlock(m[chartCfg.hist],esc(m.name)+" — "+chartCfg.label,chartCfg.stroke,chartCfg.dot,chartCfg.unit)}${chartCfg.extra?chartCfg.extra(m):""}</td>`;
+      tr.after(d);
+    });
+  }
+  draw();
+}
+
+memberTable('t-raids',[
+  {k:'name',label:'Member',cls:'l',render:m=>esc(m.name)},
+  {k:'lastRaidScore',label:'Last raid score',def:true,render:m=>fmt(m.lastRaidScore)},
+],{hist:'history',metric:'lastRaidScore',label:'raid score',stroke:'var(--raid)',dot:'#b478f0',unit:'raids'});
+
+memberTable('t-tb',[
+  {k:'name',label:'Member',cls:'l',render:m=>esc(m.name)},
+  {k:'tbBanners',label:'Last TB banners',def:true,render:m=>fmt(m.tbBanners)},
+  {k:'tbDeploy',label:'GP deployed',render:m=>fmt(m.tbDeploy)},
+],{hist:'tbHistory',metric:'tbBanners',label:'TB banners',stroke:'var(--tb)',dot:'#2bb6c4',unit:'TBs'});
+
+(function(){
+  const tw=[...(DATA.tw||[])].sort((a,b)=>b.t-a.t);
+  const chartData=[...tw].reverse().map(w=>({t:w.t,score:w.score}));
+  document.getElementById('tw-chart').innerHTML=chartData.length?chartBlock(chartData,DATA.guild+" — TW score",'var(--accent)','#e11d33','wars'):"";
+  const wins=tw.filter(w=>w.win).length;
+  document.getElementById('t-tw').innerHTML=
+    `<thead><tr><th class="l">War ended</th><th>Our score</th><th>Opponent</th><th>Result</th><th>Guild power</th></tr></thead>`+
+    `<tbody>${tw.map(w=>`<tr><td class="l">${dstr(w.t)}</td><td class="num">${fmt(w.score)}</td><td class="num">${fmt(w.opp)}</td>
+      <td class="num ${w.win?'win':'loss'}">${w.win?'WIN':'LOSS'}</td><td class="num">${fmt(w.power)}</td></tr>`).join("")}</tbody>`;
+  if(tw.length){const c=document.createElement('p');c.className='muted';c.textContent=`Record: ${wins}W – ${tw.length-wins}L over ${tw.length} wars.`;document.getElementById('pane-tw').insertBefore(c,document.getElementById('tw-chart'));}
+})();
+
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('on',p.id==='pane-'+b.dataset.tab));
+});
+</script>
+</body>
+</html>
