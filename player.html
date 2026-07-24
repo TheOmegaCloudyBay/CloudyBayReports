@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Players Data — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{--bg:#0f141c;--card:#161d28;--line:#2a3442;--txt:#e6e9ef;--dim:#9aa4b2;
+    --accent:#e11d33;--bar:#2b6cb0}
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.55;
+    max-width:860px;margin:0 auto;padding:20px 16px 60px;color:var(--txt);background:var(--bg)}
+  a.homelink{color:var(--dim);text-decoration:none;font-size:13px}
+  a.homelink:hover{color:var(--txt)}
+  h1{font-size:26px;margin:14px 0 2px}
+  .sub{color:var(--dim);margin:0 0 18px;font-size:14px}
+  input{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:8px;
+    background:var(--card);color:var(--txt);width:100%;max-width:320px;margin:0 0 14px}
+  .msg{padding:12px 14px;border-radius:8px;margin:14px 0;font-size:14px;background:var(--card);border:1px solid var(--line)}
+  .msg.err{background:#3a1113;border-color:#63232a;color:#f3b5bb}
+  /* directory */
+  ul.dir{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+  ul.dir a{display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:11px 14px;border:1px solid var(--line);border-radius:9px;background:var(--card);
+    color:var(--txt);text-decoration:none}
+  ul.dir a:hover{border-color:var(--accent)}
+  ul.dir .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  ul.dir .gp{color:var(--dim);font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* snapshot */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .card .k{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+  .card .v{font-size:21px;font-weight:600;margin-top:2px}
+  section{margin:24px 0}
+  h2{font-size:16px;margin:0 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .dist{display:grid;grid-template-columns:40px 1fr 42px;gap:6px 10px;align-items:center;font-size:13px}
+  .dist .lbl{color:var(--dim);text-align:right}
+  .track{background:#0c1017;border:1px solid var(--line);border-radius:5px;height:16px;overflow:hidden}
+  .fill{height:100%;background:var(--bar)}
+  .fill.relic{background:linear-gradient(90deg,#7a3cc0,#b478f0)}
+  .cnt{text-align:right;font-variant-numeric:tabular-nums}
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{color:var(--dim);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .r{color:#b478f0;font-weight:600}
+  .back{display:inline-block;margin:0 0 8px;color:var(--dim);text-decoration:none;font-size:13px}
+  .back:hover{color:var(--txt)}
+  footer{margin-top:34px;color:#5c6674;font-size:12px}
+  @media (prefers-color-scheme: light){
+    :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
+    .track{background:#e7ebf1}
+  }
+</style>
+</head>
+<body>
+  <a class="homelink" href="index.html">← Cloudy Bay reports</a>
+  <div id="out"><div class="msg">Loading…</div></div>
+  <footer>Snapshots generated from live game data. Roster: stars / gear / relic per unit. Refreshed when the guild is swept.</footer>
+
+<script>
+const $ = s => document.querySelector(s);
+const out = $("#out");
+const fmt = n => (n ?? 0).toLocaleString();
+const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+async function getJSON(url){ const r = await fetch(url); if(!r.ok) throw new Error("HTTP "+r.status); return r.json(); }
+
+// ---- directory -----------------------------------------------------------
+async function directory(){
+  let idx;
+  try { idx = await getJSON("players/index.json"); }
+  catch { out.innerHTML = `<h1>Players Data</h1><div class="msg err">No player data published yet. Run <code>publish</code> to generate it.</div>`; return; }
+
+  const rows = idx.members.map(m =>
+    `<li data-name="${esc(m.name).toLowerCase()}"><a href="?ally=${m.code}">
+       <span class="nm">${esc(m.name)}</span><span class="gp">${fmt(m.gp)} GP</span></a></li>`).join("");
+
+  out.innerHTML = `
+    <h1>${esc(idx.guild)} — Players</h1>
+    <p class="sub">${idx.total} members · snapshot ${esc(idx.generatedAt)}. Click a member for their roster.</p>
+    <input id="filter" placeholder="Filter by name…" autocomplete="off">
+    <ul class="dir" id="dir">${rows}</ul>`;
+
+  const f = $("#filter"), items = [...document.querySelectorAll("#dir li")];
+  f.addEventListener("input", () => {
+    const q = f.value.toLowerCase();
+    for (const li of items) li.style.display = li.dataset.name.includes(q) ? "" : "none";
+  });
+  f.focus();
+}
+
+// ---- one player ----------------------------------------------------------
+async function player(code){
+  out.innerHTML = `<div class="msg">Loading ${esc(code)}…</div>`;
+  let d;
+  try { d = await getJSON(`players/${code}.json`); }
+  catch { out.innerHTML = `<a class="back" href="player.html">← all players</a><div class="msg err">No snapshot for ${esc(code)}.</div>`; return; }
+
+  const units = d.units || [];
+  const chars = units.filter(u => u.c === 1);
+  const ships = units.filter(u => u.c === 2);
+  const seven  = chars.filter(u => u.r === 7).length;
+  const g13    = chars.filter(u => u.g === 13).length;
+  const relicd = chars.filter(u => u.rt > 0).length;
+
+  const rel = Array(10).fill(0);
+  for (const u of chars) if (u.rt > 0) rel[u.rt]++;
+  const relMax = Math.max(1, ...rel);
+  let relRows = "";
+  for (let r=9;r>=1;r--) relRows += `<div class="lbl">R${r}</div><div class="track"><div class="fill relic" style="width:${rel[r]/relMax*100}%"></div></div><div class="cnt">${rel[r]}</div>`;
+
+  const gear = Array(14).fill(0);
+  for (const u of chars) gear[u.g] = (gear[u.g]||0)+1;
+  const gMax = Math.max(1, ...gear.slice(1));
+  let gRows = "";
+  for (let g=13;g>=1;g--){ if(!gear[g] && g<7) continue; gRows += `<div class="lbl">G${g}</div><div class="track"><div class="fill" style="width:${gear[g]/gMax*100}%"></div></div><div class="cnt">${gear[g]}</div>`; }
+
+  const top = [...chars].sort((a,b)=> b.rt-a.rt || b.g-a.g || b.r-a.r).slice(0,40);
+  const rows = top.map(u => `<tr>
+      <td>${esc(u.n)}</td>
+      <td class="num">${u.r}★</td>
+      <td class="num">G${u.g}</td>
+      <td class="num">${u.rt?`<span class="r">R${u.rt}</span>`:"—"}</td>
+    </tr>`).join("");
+
+  out.innerHTML = `
+    <a class="back" href="player.html">← all players</a>
+    <h1>${esc(d.name)}</h1>
+    <p class="sub">Lvl ${d.level} · ${esc(d.guild||"—")} · ally ${d.code} · snapshot ${esc(d.updated)}</p>
+    <div class="cards">
+      <div class="card"><div class="k">Galactic Power</div><div class="v">${fmt(d.gp)}</div></div>
+      <div class="card"><div class="k">Character GP</div><div class="v">${fmt(d.cgp)}</div></div>
+      <div class="card"><div class="k">Ship GP</div><div class="v">${fmt(d.sgp)}</div></div>
+    </div>
+    <section>
+      <h2>Collection</h2>
+      <div class="cards">
+        <div class="card"><div class="k">Characters</div><div class="v">${chars.length}</div></div>
+        <div class="card"><div class="k">Ships</div><div class="v">${ships.length}</div></div>
+        <div class="card"><div class="k">7★ Characters</div><div class="v">${seven}</div></div>
+        <div class="card"><div class="k">Gear 13</div><div class="v">${g13}</div></div>
+        <div class="card"><div class="k">Relic'd</div><div class="v">${relicd}</div></div>
+      </div>
+    </section>
+    <section><h2>Relic levels</h2><div class="dist">${relRows}</div></section>
+    <section><h2>Gear levels</h2><div class="dist">${gRows}</div></section>
+    <section>
+      <h2>Top 40 characters (by relic / gear)</h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>Unit</th><th class="num">★</th><th class="num">Gear</th><th class="num">Relic</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>
+    </section>`;
+}
+
+const code = new URLSearchParams(location.search).get("ally");
+(code ? player(code) : directory()).catch(e => out.innerHTML = `<div class="msg err">${esc(e.message)}</div>`);
+</script>
+</body>
+</html>
