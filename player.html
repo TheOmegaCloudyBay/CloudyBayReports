@@ -47,6 +47,9 @@
   .r{color:#b478f0;font-weight:600}
   .back{display:inline-block;margin:0 0 8px;color:var(--dim);text-decoration:none;font-size:13px}
   .back:hover{color:var(--txt)}
+  .journeylink{display:inline-block;padding:8px 14px;border:1px solid var(--accent);border-radius:8px;
+    color:var(--txt);text-decoration:none;font-size:14px;background:rgba(225,29,51,.08)}
+  .journeylink:hover{background:var(--accent);color:#fff}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -129,6 +132,7 @@ async function player(code){
     <a class="back" href="player.html">← all players</a>
     <h1>${esc(d.name)}</h1>
     <p class="sub">Lvl ${d.level} · ${esc(d.guild||"—")} · ally ${d.code} · snapshot ${esc(d.updated)}</p>
+    <p><a class="journeylink" href="journeys/${d.code}.html">Journey / GL readiness →</a></p>
     <div class="cards">
       <div class="card"><div class="k">Galactic Power</div><div class="v">${fmt(d.gp)}</div></div>
       <div class="card"><div class="k">Character GP</div><div class="v">${fmt(d.cgp)}</div></div>
