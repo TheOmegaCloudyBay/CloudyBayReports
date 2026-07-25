@@ -130,11 +130,11 @@ async function player(code){
   const g13    = chars.filter(u => u.g === 13).length;
   const relicd = chars.filter(u => u.rt > 0).length;
 
-  const rel = Array(10).fill(0);
+  const rel = Array(11).fill(0);
   for (const u of chars) if (u.rt > 0) rel[u.rt]++;
   const relMax = Math.max(1, ...rel);
   let relRows = "";
-  for (let r=9;r>=1;r--) relRows += `<div class="lbl">R${r}</div><div class="track"><div class="fill relic" style="width:${rel[r]/relMax*100}%"></div></div><div class="cnt">${rel[r]}</div>`;
+  for (let r=10;r>=1;r--) relRows += `<div class="lbl">R${r}</div><div class="track"><div class="fill relic" style="width:${rel[r]/relMax*100}%"></div></div><div class="cnt">${rel[r]}</div>`;
 
   const gear = Array(14).fill(0);
   for (const u of chars) gear[u.g] = (gear[u.g]||0)+1;
@@ -205,7 +205,7 @@ function relicMats(fromR, toR){
 // what a unit still needs to reach the chosen target
 function needs(u, target){
   let gearTo = 0, relicTo = 0;
-  if (target === "next"){ if (u.g < 13) gearTo = u.g + 1; else relicTo = Math.min(9, u.rt + 1); }
+  if (target === "next"){ if (u.g < 13) gearTo = u.g + 1; else relicTo = Math.min(10, u.rt + 1); }
   else if (target[0] === "g") gearTo = +target.slice(1);
   else if (target[0] === "r") relicTo = +target.slice(1);
   let gearTiers = [], relic = {};
@@ -241,7 +241,7 @@ async function renderPlanner(chars){
 
   const targets = [["next","Next level"],["g11","Gear → 11"],["g12","Gear → 12"],["g13","Gear → 13"],
     ["r1","Relic → 1"],["r2","Relic → 2"],["r3","Relic → 3"],["r4","Relic → 4"],["r5","Relic → 5"],
-    ["r6","Relic → 6"],["r7","Relic → 7"],["r8","Relic → 8"],["r9","Relic → 9"]];
+    ["r6","Relic → 6"],["r7","Relic → 7"],["r8","Relic → 8"],["r9","Relic → 9"],["r10","Relic → 10"]];
   host.innerHTML = `<h2>Gear planner</h2>
     <div class="pcontrols">
       <select id="gtarget">${targets.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select>
