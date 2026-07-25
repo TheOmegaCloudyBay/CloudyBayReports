@@ -50,6 +50,28 @@
   .journeylink{display:inline-block;padding:8px 14px;border:1px solid var(--accent);border-radius:8px;
     color:var(--txt);text-decoration:none;font-size:14px;background:rgba(225,29,51,.08)}
   .journeylink:hover{background:var(--accent);color:#fff}
+  /* gear planner */
+  .pcontrols{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+  .pcontrols select,.pcontrols input{font:inherit;padding:9px 12px;border:1px solid var(--line);
+    border-radius:8px;background:var(--card);color:var(--txt);margin:0}
+  .pcontrols input{flex:1;min-width:160px;max-width:none}
+  #gunits{display:flex;flex-direction:column;gap:5px}
+  .urow{border:1px solid var(--line);border-radius:9px;background:var(--card);overflow:hidden}
+  .uhead{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;
+    padding:9px 13px;cursor:pointer}
+  .uhead:hover{background:rgba(127,140,160,.06)}
+  .uhead .un{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .uhead .uc{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .uhead .us{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:70px;text-align:right}
+  .uhead .us .done{color:#37b24d}
+  .udet:empty{display:none}
+  .udet{padding:4px 13px 12px}
+  .gtier{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:start;padding:5px 0;border-top:1px solid var(--line)}
+  .gtier .glbl{font-size:12px;color:var(--dim);font-weight:600;padding-top:3px}
+  .chips{display:flex;flex-wrap:wrap;gap:4px}
+  .chip{font-size:11.5px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);background:#0c1017}
+  .chip.relic{border-color:#5a3c80;background:rgba(176,107,224,.12)}
+  @media (prefers-color-scheme: light){.chip{background:#eef1f5} .chip.relic{background:rgba(138,63,191,.1)}}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -120,14 +142,6 @@ async function player(code){
   let gRows = "";
   for (let g=13;g>=1;g--){ if(!gear[g] && g<7) continue; gRows += `<div class="lbl">G${g}</div><div class="track"><div class="fill" style="width:${gear[g]/gMax*100}%"></div></div><div class="cnt">${gear[g]}</div>`; }
 
-  const top = [...chars].sort((a,b)=> b.rt-a.rt || b.g-a.g || b.r-a.r).slice(0,40);
-  const rows = top.map(u => `<tr>
-      <td>${esc(u.n)}</td>
-      <td class="num">${u.r}★</td>
-      <td class="num">G${u.g}</td>
-      <td class="num">${u.rt?`<span class="r">R${u.rt}</span>`:"—"}</td>
-    </tr>`).join("");
-
   out.innerHTML = `
     <a class="back" href="player.html">← all players</a>
     <h1>${esc(d.name)}</h1>
@@ -150,13 +164,116 @@ async function player(code){
     </section>
     <section><h2>Relic levels</h2><div class="dist">${relRows}</div></section>
     <section><h2>Gear levels</h2><div class="dist">${gRows}</div></section>
-    <section>
-      <h2>Top 40 characters (by relic / gear)</h2>
-      <div class="tblwrap"><table>
-        <thead><tr><th>Unit</th><th class="num">★</th><th class="num">Gear</th><th class="num">Relic</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table></div>
-    </section>`;
+    <section id="planner"><h2>Gear planner</h2><div class="sub">Loading gear data…</div></section>`;
+
+  renderPlanner(chars);
+}
+
+// ---- gear planner (client-side, uses shared game-data assets) --------------
+let ASSETS = null;
+async function assets(){
+  if (ASSETS) return ASSETS;
+  const [gear, ename, relic, mname] = await Promise.all(
+    ["gear-recipes","equip-names","relic-recipes","mat-names"].map(n => getJSON(`data/${n}.json`)));
+  ASSETS = { gear, ename, relic, mname };
+  return ASSETS;
+}
+// gear pieces needed per tier [fromGear, toGear), skipping slots already equipped on fromGear
+function gearByTier(baseId, fromGear, toGear, eq){
+  const rec = ASSETS.gear[baseId]; const out = [];
+  if (!rec) return out;
+  const eqset = new Set(eq || []);
+  for (let t = Math.max(1, fromGear); t < toGear; t++){
+    const set = rec[String(t)]; if (!set) continue;
+    const mats = {};
+    for (let slot = 0; slot < set.length; slot++){
+      if (t === fromGear && eqset.has(slot)) continue;
+      mats[set[slot]] = (mats[set[slot]] || 0) + 1;
+    }
+    if (Object.keys(mats).length) out.push({ tier: t, mats });
+  }
+  return out;
+}
+function relicMats(fromR, toR){
+  const acc = {};
+  for (let t = fromR + 1; t <= toR; t++){
+    const ing = ASSETS.relic[String(t)]; if (!ing) continue;
+    for (const i of ing) acc[i.id] = (acc[i.id] || 0) + i.qty;
+  }
+  return acc;
+}
+// what a unit still needs to reach the chosen target
+function needs(u, target){
+  let gearTo = 0, relicTo = 0;
+  if (target === "next"){ if (u.g < 13) gearTo = u.g + 1; else relicTo = Math.min(9, u.rt + 1); }
+  else if (target[0] === "g") gearTo = +target.slice(1);
+  else if (target[0] === "r") relicTo = +target.slice(1);
+  let gearTiers = [], relic = {};
+  if (relicTo > 0){
+    if (u.g < 13) gearTiers = gearByTier(u.b, u.g, 13, u.eq);
+    const fromR = u.g >= 13 ? u.rt : 0;
+    if (relicTo > fromR) relic = relicMats(fromR, relicTo);
+  } else if (gearTo > 0 && u.g < gearTo){
+    gearTiers = gearByTier(u.b, u.g, gearTo, u.eq);
+  }
+  const gearCount = gearTiers.reduce((a,t)=>a + Object.values(t.mats).reduce((x,y)=>x+y,0), 0);
+  const relicCount = Object.values(relic).reduce((a,b)=>a+b, 0);
+  return { gearTiers, relic, gearCount, relicCount, done: gearCount===0 && relicCount===0 };
+}
+function detailHtml(need){
+  if (need.done) return '<div class="sub" style="padding:6px 0">Target already met.</div>';
+  let h = "";
+  for (const t of need.gearTiers){
+    const chips = Object.entries(t.mats).map(([id,q])=>`<span class="chip">${esc(ASSETS.ename[id]||id)} ×${q}</span>`).join("");
+    h += `<div class="gtier"><span class="glbl">Gear ${t.tier}</span><div class="chips">${chips}</div></div>`;
+  }
+  if (need.relicCount){
+    const chips = Object.entries(need.relic).sort((a,b)=>b[1]-a[1])
+      .map(([id,q])=>`<span class="chip relic">${esc(ASSETS.mname[id]||id)} ×${q}</span>`).join("");
+    h += `<div class="gtier"><span class="glbl">Relic mats</span><div class="chips">${chips}</div></div>`;
+  }
+  return h;
+}
+async function renderPlanner(chars){
+  const host = document.getElementById("planner");
+  try { await assets(); }
+  catch { host.innerHTML = '<h2>Gear planner</h2><div class="msg err">Gear data not published yet — run <code>publish</code>.</div>'; return; }
+
+  const targets = [["next","Next level"],["g11","Gear → 11"],["g12","Gear → 12"],["g13","Gear → 13"],
+    ["r1","Relic → 1"],["r2","Relic → 2"],["r3","Relic → 3"],["r4","Relic → 4"],["r5","Relic → 5"],
+    ["r6","Relic → 6"],["r7","Relic → 7"],["r8","Relic → 8"],["r9","Relic → 9"]];
+  host.innerHTML = `<h2>Gear planner</h2>
+    <div class="pcontrols">
+      <select id="gtarget">${targets.map(([v,l])=>`<option value="${v}">${l}</option>`).join("")}</select>
+      <input id="gsearch" placeholder="search unit…" autocomplete="off">
+    </div>
+    <div id="gunits"></div>`;
+  const sel = document.getElementById("gtarget"), search = document.getElementById("gsearch"), unitsEl = document.getElementById("gunits");
+  sel.value = "g13";
+
+  function draw(){
+    const target = sel.value, q = search.value.toLowerCase();
+    const list = chars.filter(u => !q || u.n.toLowerCase().includes(q))
+      .map(u => ({ u, need: needs(u, target) }))
+      .sort((a,b)=> (b.need.gearCount + b.need.relicCount) - (a.need.gearCount + a.need.relicCount) || a.u.n.localeCompare(b.u.n));
+    unitsEl.innerHTML = list.map(({u,need}) => {
+      const cur = `${u.r}★ G${u.g}${u.rt?' R'+u.rt:''}`;
+      const summ = need.done ? '<span class="done">✓ met</span>'
+        : [need.gearCount?`${need.gearCount} gear`:null, need.relicCount?`${need.relicCount} relic`:null].filter(Boolean).join(' + ');
+      return `<div class="urow" data-b="${u.b}">
+        <div class="uhead"><span class="un">${esc(u.n)}</span><span class="uc">${cur}</span><span class="us">${summ}</span></div>
+        <div class="udet"></div></div>`;
+    }).join("") || '<div class="sub">no units</div>';
+    unitsEl.querySelectorAll(".urow").forEach(row => {
+      row.querySelector(".uhead").onclick = () => {
+        const det = row.querySelector(".udet");
+        if (det.innerHTML){ det.innerHTML = ""; return; }
+        const u = chars.find(x => x.b === row.dataset.b);
+        det.innerHTML = detailHtml(needs(u, sel.value));
+      };
+    });
+  }
+  sel.onchange = draw; search.oninput = draw; draw();
 }
 
 const code = new URLSearchParams(location.search).get("ally");
