@@ -136,6 +136,39 @@
   .tabs button.on{color:var(--txt);border-bottom-color:var(--accent);font-weight:600}
   .pane{display:none} .pane.on{display:block}
   .pane section:first-child{margin-top:6px}
+  /* journey tab (reuses cards/chips/track from above) */
+  .jctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+  .jctrl input{margin:0;flex:1;min-width:150px;max-width:none}
+  .jctrl .count{margin-left:auto;color:var(--dim);font-size:12px;white-space:nowrap}
+  .jev{border:1px solid var(--line);border-radius:11px;background:var(--card);margin:0 0 10px;overflow:hidden}
+  .jev.unlocked{opacity:.55}
+  .jevh{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;flex-wrap:wrap}
+  .jevh .rw{font-weight:700} .jevh .tt{color:var(--dim);font-size:12px}
+  .jevh .ty{font-size:10.5px;color:var(--dim);border:1px solid var(--line);border-radius:20px;padding:1px 8px}
+  .jb{margin-left:auto;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid var(--line);white-space:nowrap}
+  .jb.ok{color:#5bc46f;border-color:#2c5233;background:rgba(76,175,80,.1)}
+  .jb.go{color:#e0b53d;border-color:#6b571d;background:rgba(224,181,61,.12)}
+  .jb.work{color:#f3b05a;border-color:#6b4a1d;background:rgba(224,150,40,.12)}
+  .jb.faction{color:var(--dim);border-style:dashed}
+  .jev .track{border-radius:0;height:5px;border-left:0;border-right:0}
+  .jbody{display:none;padding:0 14px 14px} .jev.open .jbody{display:block}
+  .jtot{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 8px}
+  @media(max-width:640px){.jtot{grid-template-columns:1fr}}
+  .jtot .box{border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  .jtot h4{margin:0 0 8px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);
+    font-weight:700;border:0;padding:0}
+  .jshard{font-size:12px;color:#e0b53d;margin:2px 0 8px}
+  .jev td.l,.jev th.l{text-align:left}
+  .jrow.exp{cursor:pointer} .jrow.exp:hover td{background:rgba(127,140,160,.06)}
+  .jcaret{display:inline-block;width:12px;color:var(--dim);font-size:9px}
+  .jrow.open .jcaret{color:var(--accent)}
+  .jdetail{display:none} .jdetail.show{display:table-row}
+  .jdetail td{background:var(--bg);text-align:left;padding:8px 14px 12px 24px}
+  .jmiss{color:var(--accent);font-size:10px;border:1px solid var(--accent);border-radius:5px;padding:0 5px;margin-left:5px}
+  .jdsec{margin:8px 0} .jdlbl{display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--dim);font-weight:700;margin-bottom:5px}
+  .jnone{color:#5bc46f;font-size:12px}
+  .mcWhy{color:#f3868f;font-size:10px;margin-top:5px;line-height:1.3}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -218,7 +251,6 @@ async function player(code){
     <a class="back" href="player.html">← all players</a>
     <h1>${esc(d.name)}</h1>
     <p class="sub">Lvl ${d.level} · ${esc(d.guild||"—")} · ally ${d.code} · snapshot ${esc(d.updated)}</p>
-    <p><a class="journeylink" href="journeys/${d.code}.html">Journey / GL readiness →</a></p>
     <div class="cards">
       <div class="card"><div class="k">Galactic Power</div><div class="v">${fmt(d.gp)}</div></div>
       <div class="card"><div class="k">Character GP</div><div class="v">${fmt(d.cgp)}</div></div>
@@ -226,12 +258,17 @@ async function player(code){
     </div>
 
     <div class="tabs">
-      <button data-pane="chars" class="on">Characters</button>
+      <button data-pane="journey" class="on">Journey</button>
+      <button data-pane="chars">Characters</button>
       <button data-pane="ships">Ships</button>
       <button data-pane="mods">Mods</button>
     </div>
 
-    <div class="pane on" id="pane-chars">
+    <div class="pane on" id="pane-journey">
+      <section id="jrn"><h2>Journey / GL readiness</h2><div class="sub">Loading…</div></section>
+    </div>
+
+    <div class="pane" id="pane-chars">
       <section>
         <div class="cards">
           <div class="card"><div class="k">Characters</div><div class="v">${chars.length}</div></div>
@@ -266,6 +303,7 @@ async function player(code){
     out.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === "pane-" + btn.dataset.pane));
   });
 
+  renderJourney(d.code);
   renderPlanner(chars, d.code);
   renderMods(d.code);
 }
@@ -458,6 +496,14 @@ const MC_HEX  = {1:"#8a94a3",2:"#4caf50",3:"#3d7bd6",4:"#a259e6",5:"#e0b53d"};
 const MC_NAME = {1:"Gray",2:"Green",3:"Blue",4:"Purple",5:"Gold"};
 
 const fmtStat = (label, v) => label.includes("%") ? `${v}%` : `+${v}`;
+const SPEED_FLOOR = {1:3,2:5,3:8,4:10,5:12};
+const OFF_SETS = new Set([2,4,5,6]);   // Offense, Crit Chance, Crit Damage, Potency
+// why a mod is a delete candidate (clash beats low-speed). Square/diamond/circle have fixed
+// primaries so they never clash — they can only be flagged for low speed.
+function delReason(m){
+  if (m.cl) return OFF_SETS.has(m.set) ? "offense set · defensive primary" : "defense set · offensive primary";
+  return `speed ${m.sp} < ${SPEED_FLOOR[m.c]} floor (${MC_NAME[m.c]})`;
+}
 function modTile(m){
   const b = m.b || "keep";
   const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
@@ -482,6 +528,7 @@ function modTile(m){
       ${calAvail?'<span class="calAv">⚙ calibrate</span>':""}</div>
     <div class="mcPrim"><span class="pl">${esc(m.pr)}</span><b>${fmtStat(m.pr, m.pv)}</b></div>
     <div class="mcSecs">${secs}</div>
+    ${b==="del"?`<div class="mcWhy">🔴 ${esc(delReason(m))}</div>`:""}
   </div>`;
 }
 
@@ -545,6 +592,104 @@ async function renderMods(code){
   reqEl.onchange = drawUnits;
   if (eqEl) eqEl.onchange = drawPool;
   drawUnits(); drawPool();
+}
+
+// ---- journey / GL readiness tab (renders the JourneyReport payload in the site style) ------
+async function renderJourney(code){
+  const host = document.getElementById("jrn");
+  let D;
+  try { D = await getJSON(`players/${code}-journey.json`); }
+  catch { host.innerHTML = '<h2>Journey / GL readiness</h2><div class="sub">Journey data appears after the next full sweep.</div>'; return; }
+
+  const E = D.events;
+  const lockedSpecific = E.filter(e => !e.unlocked && e.hasSpecific);
+  const unlockedList   = E.filter(e => e.unlocked);
+  const factionOnly    = E.filter(e => !e.unlocked && !e.hasSpecific);
+  const ready          = lockedSpecific.filter(e => e.needCount === 0);
+  let filter = "locked", q = "", gm = false;   // gm = raw salvage
+
+  host.innerHTML = `<h2>Journey / GL readiness</h2>
+    <div class="cards">
+      <div class="card"><div class="k">Unlocked</div><div class="v">${unlockedList.length}</div></div>
+      <div class="card"><div class="k">Ready to enter</div><div class="v">${ready.length}</div></div>
+      <div class="card"><div class="k">In progress</div><div class="v">${lockedSpecific.length-ready.length}</div></div>
+      <div class="card"><div class="k">Faction-gated</div><div class="v">${factionOnly.length}</div></div>
+    </div>
+    <div class="jctrl">
+      <div class="seg2" id="jfilter"><button data-f="locked" class="on">To unlock</button><button data-f="all">All</button><button data-f="unlocked">Unlocked</button></div>
+      <div class="seg2" id="jgear"><button data-g="asm" class="on">Assembled</button><button data-g="raw">Raw salvage</button></div>
+      <input id="jq" placeholder="filter event or unit…" autocomplete="off">
+      <span class="count" id="jcount"></span>
+    </div>
+    <div id="jlist"></div>
+    <p class="sub" style="margin-top:16px">Requirements from swgoh.wiki + game data. Every unit is also required at 7★ — shard counts are an upper bound ("banked shards aren't exposed by the API). Relic requirements include gear to G13 first.</p>`;
+
+  const listEl = host.querySelector("#jlist"), countEl = host.querySelector("#jcount"), qEl = host.querySelector("#jq");
+  const chipsOf = (list, cls) => (list||[]).map(x => `<span class="chip${cls==="relic"?" relic":""}">${esc(x.name)} ×${fmt(x.qty)}</span>`).join("");
+  const matChips = (list, cls) => list && list.length ? chipsOf(list, cls) : '<span class="jnone">— none —</span>';
+
+  function unitRow(u){
+    const cur = u.owned ? `${u.curStars}★ G${u.curGear}${u.curRelic>0?" R"+u.curRelic:""}` : "unowned";
+    const req = u.kind==="relic"?`7★ R${u.need}`:u.kind==="gear"?`7★ G${u.need}`:"7★";
+    const gList = gm ? u.salvage : u.gear, gCount = gm ? u.salvageCount : u.gearCount;
+    const parts = [];
+    if (u.relicCount) parts.push(u.relicCount+" relic");
+    if (gCount) parts.push(gCount+(gm?" salvage":" gear"));
+    if (u.shards) parts.push("≤"+u.shards+" shards");
+    const exp = !u.done && (u.relicCount || gCount || u.shards);
+    const status = u.done ? '<span style="color:#5bc46f">✓</span>' : (parts.length ? parts.join(" + ") : "—");
+    const caret = `<span class="jcaret">${exp?"▸":""}</span>`;
+    const main = `<tr class="jrow${u.done?" done":""}${exp?" exp":""}"${exp?` onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('show')"`:""}>
+      <td class="l">${caret}${esc(u.name)}${u.owned?"":'<span class="jmiss">unowned</span>'}</td>
+      <td class="num">${cur}</td><td class="num">→</td><td class="num">${req}</td><td class="num">${status}</td></tr>`;
+    if (!exp) return main;
+    const sec = [];
+    if (gCount) sec.push(`<div class="jdsec"><span class="jdlbl">${gm?"Raw salvage to farm":"Gear to assemble"} (${fmt(gCount)})</span><div class="chips">${chipsOf(gList)}</div></div>`);
+    if (u.relicCount) sec.push(`<div class="jdsec"><span class="jdlbl">Relic materials (${fmt(u.relicCount)})</span><div class="chips">${chipsOf(u.relic,"relic")}</div></div>`);
+    if (u.shards) sec.push(`<div class="jdsec"><span class="jdlbl">Shards</span><span class="jshard">up to ${fmt(u.shards)} to reach 7★</span></div>`);
+    return main + `<tr class="jdetail"><td colspan="5">${sec.join("")}</td></tr>`;
+  }
+
+  function eventCard(e){
+    const pct = e.totalUnits ? Math.round((e.totalUnits-e.needCount)/e.totalUnits*100) : 100;
+    let badge;
+    if (e.unlocked) badge = '<span class="jb ok">✓ Unlocked</span>';
+    else if (!e.hasSpecific) badge = '<span class="jb faction">faction / own-unit</span>';
+    else if (e.needCount===0) badge = '<span class="jb go">★ Ready</span>';
+    else badge = `<span class="jb work">${e.needCount} to go</span>`;
+    const head = `<div class="jevh" onclick="this.parentNode.classList.toggle('open')">
+      <span class="rw">${esc(e.reward||e.title)}</span><span class="tt">${esc(e.title)}</span>
+      <span class="ty">${esc(e.type)}</span>${badge}</div>`;
+    if (e.unlocked) return `<div class="jev unlocked">${head}</div>`;
+    if (!e.hasSpecific) return `<div class="jev">${head}<div style="padding:0 14px 12px"><span class="sub">Requires: ${esc(e.requires||"—")}</span></div></div>`;
+    const gTot = gm ? e.salvageTotals : e.gearTotals, gGr = gm ? e.salvageGrand : e.gearGrand;
+    const body = `<div class="track"><div class="fill" style="width:${pct}%"></div></div>
+      <div class="jbody">
+        <div class="jtot">
+          <div class="box"><h4>Relic materials (${fmt(e.relicGrand)})</h4><div class="chips">${matChips(e.relicTotals,"relic")}</div></div>
+          <div class="box"><h4>${gm?"Raw salvage":"Gear pieces"} (${fmt(gGr)})</h4><div class="chips">${matChips(gTot.slice(0,18))}</div></div>
+        </div>
+        ${e.shardGrand?`<div class="jshard">★ up to ${fmt(e.shardGrand)} shards to 7★ across units</div>`:""}
+        <div class="tblwrap"><table><thead><tr><th class="l">Unit</th><th class="num">Current</th><th></th><th class="num">Req</th><th class="num">Needs</th></tr></thead>
+          <tbody>${e.units.map(unitRow).join("")}</tbody></table></div>
+      </div>`;
+    return `<div class="jev">${head}${body}</div>`;
+  }
+
+  function draw(){
+    let list = filter==="locked" ? lockedSpecific.concat(factionOnly) : filter==="unlocked" ? unlockedList : E.slice();
+    list = list.slice().sort((a,b)=>{
+      const ra=a.unlocked?3:(!a.hasSpecific?2:0), rb=b.unlocked?3:(!b.hasSpecific?2:0);
+      return ra!==rb ? ra-rb : (a.needCount??99)-(b.needCount??99);
+    });
+    if (q) list = list.filter(e => (e.reward||"").toLowerCase().includes(q) || e.title.toLowerCase().includes(q) || (e.units||[]).some(u=>u.name.toLowerCase().includes(q)));
+    listEl.innerHTML = list.map(eventCard).join("") || '<div class="sub">no events</div>';
+    countEl.textContent = list.length + " events";
+  }
+  host.querySelectorAll("#jfilter button").forEach(b => b.onclick = () => { filter=b.dataset.f; host.querySelectorAll("#jfilter button").forEach(x=>x.classList.toggle("on",x===b)); draw(); });
+  host.querySelectorAll("#jgear button").forEach(b => b.onclick = () => { gm=b.dataset.g==="raw"; host.querySelectorAll("#jgear button").forEach(x=>x.classList.toggle("on",x===b)); draw(); });
+  qEl.oninput = () => { q=qEl.value.toLowerCase(); draw(); };
+  draw();
 }
 
 const code = new URLSearchParams(location.search).get("ally");
