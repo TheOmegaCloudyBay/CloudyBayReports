@@ -462,8 +462,9 @@ function modTile(m){
   const b = m.b || "keep";
   const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
   const pips = Array.from({length: m.d}, () => `<i style="background:${MC_HEX[m.c]}"></i>`).join("");
-  // 6-dot mod with a speed secondary and calibrations left can still be calibrated up for speed
-  const calAvail = m.d === 6 && m.sp > 0 && m.cal < 6;
+  // Worth calibrating for speed: 6-dot with a speed secondary not yet maxed on rolls (<5), still in
+  // the cheap calibration range (>3 of the 6 remaining, i.e. fewer than 3 used — they get pricey after the 3rd).
+  const calAvail = m.d === 6 && m.sp > 0 && m.sr < 5 && m.cal < 3;
   const secs = (m.ss || []).map(s => {
     const isSpd = s.k === "Speed";
     return `<div class="mcSec${isSpd?" spd":""}">
@@ -472,7 +473,7 @@ function modTile(m){
   }).join("");
   const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l}`
     + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""} used` : "")
-    + (calAvail ? ` · can calibrate speed (${6-m.cal} left)` : "")
+    + (calAvail ? ` · worth calibrating speed (${6-m.cal} cheap calibrations left)` : "")
     + (m.cl ? " · ⚠ set/primary clash" : "") + ` · potential ${m.pot}`;
   return `<div class="mcard mc${m.c}${m.cl?" clash":""}" title="${esc(title)}">
     <div class="mcHead"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
