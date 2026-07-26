@@ -105,19 +105,33 @@
   .mhead .mn{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mhead .mmeta{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
   .mhead .mcnt{font-size:12px;white-space:nowrap}
-  .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:6px}
-  .mtile{position:relative;border:1px solid var(--line);border-left-width:4px;border-radius:7px;background:#0c1017;
-    padding:5px 7px;font-size:11.5px;line-height:1.35;cursor:default}
-  @media (prefers-color-scheme: light){.mtile{background:#f3f5f8}}
-  .mtile .mtop{display:flex;justify-content:space-between;align-items:center;gap:4px}
-  .mtile .msym{font-size:13px} .mtile .mset{font-weight:600} .mtile .mpr{color:var(--dim)}
-  .mtile .mspd{font-weight:700;font-variant-numeric:tabular-nums}
-  .mtile .mspd.zero{color:var(--dim);font-weight:400}
-  .mtile.work{border-left-color:#e0b53d} .mtile.del{border-left-color:#e11d33}
-  .mtile.done{border-left-color:#4caf50} .mtile.keep{border-left-color:var(--line)}
-  .mtile.clash{outline:1px dashed #e11d33;outline-offset:-4px}
-  .mpool{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:6px;margin:6px 0 4px}
-  .mpoolhdr{font-size:13px;font-weight:600;margin:14px 0 2px;display:flex;gap:8px;align-items:center}
+  .mgrid,.mpool{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+  .mpool{margin:6px 0 4px}
+  .mcard{position:relative;border:1px solid var(--line);border-top-width:3px;border-radius:9px;
+    background:#0c1017;padding:8px 10px;font-size:12px}
+  @media (prefers-color-scheme: light){.mcard{background:#f3f5f8}}
+  .mcard.work{border-top-color:#e0b53d} .mcard.del{border-top-color:#e11d33}
+  .mcard.done{border-top-color:#4caf50} .mcard.keep{border-top-color:var(--line)}
+  .mcard.clash{box-shadow:inset 0 0 0 1px #e11d33}
+  .mcHead{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+  .mcHead .msym{font-size:15px;line-height:1} .mcHead .mcSet{font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mcHead .mcBadge{font-size:11px}
+  .mcSub{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--dim);
+    font-variant-numeric:tabular-nums;margin-bottom:5px}
+  .pips{display:inline-flex;gap:2px} .pips i{width:5px;height:5px;border-radius:50%;display:inline-block}
+  .mcPrim{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line);margin-bottom:3px}
+  .mcPrim .pl{color:var(--dim)} .mcPrim b{font-variant-numeric:tabular-nums}
+  .mcSec{display:flex;justify-content:space-between;gap:8px;line-height:1.5;font-variant-numeric:tabular-nums}
+  .mcSec .sl{color:var(--dim)} .mcSec.spd{color:#7fd4ff;font-weight:600}
+  .mcSec .rr{color:var(--dim);font-size:9px;letter-spacing:1px}
+  .mpoolhdr{font-size:13px;font-weight:600;margin:14px 0 4px;display:flex;gap:8px;align-items:center}
+  /* tabs */
+  .tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:18px 0 16px}
+  .tabs button{font:inherit;font-size:14px;padding:9px 16px;background:none;border:0;border-bottom:2px solid transparent;
+    color:var(--dim);cursor:pointer;margin-bottom:-1px}
+  .tabs button.on{color:var(--txt);border-bottom-color:var(--accent);font-weight:600}
+  .pane{display:none} .pane.on{display:block}
+  .pane section:first-child{margin-top:6px}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -188,6 +202,14 @@ async function player(code){
   let gRows = "";
   for (let g=13;g>=1;g--){ if(!gear[g] && g<7) continue; gRows += `<div class="lbl">G${g}</div><div class="track"><div class="fill" style="width:${gear[g]/gMax*100}%"></div></div><div class="cnt">${gear[g]}</div>`; }
 
+  const shipStars = Array(8).fill(0);
+  for (const u of ships) shipStars[u.r] = (shipStars[u.r]||0)+1;
+  const ssMax = Math.max(1, ...shipStars.slice(1));
+  let shipDist = "";
+  for (let s=7;s>=1;s--){ if(!shipStars[s]) continue; shipDist += `<div class="lbl">${s}★</div><div class="track"><div class="fill" style="width:${shipStars[s]/ssMax*100}%"></div></div><div class="cnt">${shipStars[s]}</div>`; }
+  const shipRows = [...ships].sort((a,b)=> b.r-a.r || a.n.localeCompare(b.n))
+    .map(u=>`<tr><td>${esc(u.n)}</td><td class="num">${u.r}★</td></tr>`).join("");
+
   out.innerHTML = `
     <a class="back" href="player.html">← all players</a>
     <h1>${esc(d.name)}</h1>
@@ -198,20 +220,47 @@ async function player(code){
       <div class="card"><div class="k">Character GP</div><div class="v">${fmt(d.cgp)}</div></div>
       <div class="card"><div class="k">Ship GP</div><div class="v">${fmt(d.sgp)}</div></div>
     </div>
-    <section>
-      <h2>Collection</h2>
-      <div class="cards">
-        <div class="card"><div class="k">Characters</div><div class="v">${chars.length}</div></div>
-        <div class="card"><div class="k">Ships</div><div class="v">${ships.length}</div></div>
-        <div class="card"><div class="k">7★ Characters</div><div class="v">${seven}</div></div>
-        <div class="card"><div class="k">Gear 13</div><div class="v">${g13}</div></div>
-        <div class="card"><div class="k">Relic'd</div><div class="v">${relicd}</div></div>
-      </div>
-    </section>
-    <section><h2>Relic levels</h2><div class="dist">${relRows}</div></section>
-    <section><h2>Gear levels</h2><div class="dist">${gRows}</div></section>
-    <section id="planner"><h2>Gear planner</h2><div class="sub">Loading gear data…</div></section>
-    <section id="mods"><h2>Mods</h2><div class="sub">Loading mods…</div></section>`;
+
+    <div class="tabs">
+      <button data-pane="chars" class="on">Characters</button>
+      <button data-pane="ships">Ships</button>
+      <button data-pane="mods">Mods</button>
+    </div>
+
+    <div class="pane on" id="pane-chars">
+      <section>
+        <div class="cards">
+          <div class="card"><div class="k">Characters</div><div class="v">${chars.length}</div></div>
+          <div class="card"><div class="k">7★ Characters</div><div class="v">${seven}</div></div>
+          <div class="card"><div class="k">Gear 13</div><div class="v">${g13}</div></div>
+          <div class="card"><div class="k">Relic'd</div><div class="v">${relicd}</div></div>
+        </div>
+      </section>
+      <section><h2>Relic levels</h2><div class="dist">${relRows}</div></section>
+      <section><h2>Gear levels</h2><div class="dist">${gRows}</div></section>
+      <section id="planner"><h2>Gear planner</h2><div class="sub">Loading gear data…</div></section>
+    </div>
+
+    <div class="pane" id="pane-ships">
+      <section>
+        <div class="cards">
+          <div class="card"><div class="k">Ships</div><div class="v">${ships.length}</div></div>
+          <div class="card"><div class="k">Ship GP</div><div class="v">${fmt(d.sgp)}</div></div>
+          <div class="card"><div class="k">7★ Ships</div><div class="v">${shipStars[7]||0}</div></div>
+        </div>
+      </section>
+      <section><h2>Ship rarity</h2><div class="dist">${shipDist||'<div class="sub">No ships.</div>'}</div></section>
+      <section><h2>All ships</h2><div class="tblwrap"><table><thead><tr><th>Ship</th><th class="num">Stars</th></tr></thead><tbody>${shipRows}</tbody></table></div></section>
+    </div>
+
+    <div class="pane" id="pane-mods">
+      <section id="mods"><h2>Mods</h2><div class="sub">Loading mods…</div></section>
+    </div>`;
+
+  out.querySelectorAll(".tabs button").forEach(btn => btn.onclick = () => {
+    out.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("on", x === btn));
+    out.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === "pane-" + btn.dataset.pane));
+  });
 
   renderPlanner(chars, d.code);
   renderMods(d.code);
@@ -404,17 +453,26 @@ const SLOT_SYM = {1:"■",2:"➤",3:"◆",4:"▲",5:"●",6:"✚"};
 const MC_HEX  = {1:"#8a94a3",2:"#4caf50",3:"#3d7bd6",4:"#a259e6",5:"#e0b53d"};
 const MC_NAME = {1:"Gray",2:"Green",3:"Blue",4:"Purple",5:"Gold"};
 
+const fmtStat = (label, v) => label.includes("%") ? `${v}%` : `+${v}`;
 function modTile(m){
   const b = m.b || "keep";
-  const spd = m.sp > 0 ? `+${m.sp}` : "—";
-  const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l} · ${m.pr} primary`
-    + (m.sp ? ` · +${m.sp} speed (${m.sr} roll${m.sr!==1?"s":""})` : " · no speed secondary")
+  const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
+  const pips = Array.from({length: m.d}, () => `<i style="background:${MC_HEX[m.c]}"></i>`).join("");
+  const secs = (m.ss || []).map(s => {
+    const isSpd = s.k === "Speed";
+    return `<div class="mcSec${isSpd?" spd":""}">
+      <span class="sl">${esc(s.k)}${s.r?` <span class="rr">${"•".repeat(s.r)}</span>`:""}</span>
+      <span>${fmtStat(s.k, s.v)}</span></div>`;
+  }).join("");
+  const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l}`
     + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""}` : "")
     + (m.cl ? " · ⚠ set/primary clash" : "") + ` · potential ${m.pot}`;
-  return `<div class="mtile ${b}${m.cl?" clash":""}" title="${esc(title)}">
-    <div class="mtop"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
-      <span class="mspd${m.sp?"":" zero"}">${spd}</span></div>
-    <div><span class="mset">${SET_ABBR[m.set]}</span> <span class="mpr">${esc(m.pr.replace(" %","%"))}</span></div>
+  return `<div class="mcard ${b}${m.cl?" clash":""}" title="${esc(title)}">
+    <div class="mcHead"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
+      <span class="mcSet">${m.setN}</span><span class="mcBadge">${badge}</span></div>
+    <div class="mcSub"><span class="pips">${pips}</span><span>Lvl ${m.l}${m.cal?` · cal ${m.cal}`:""}</span></div>
+    <div class="mcPrim"><span class="pl">${esc(m.pr)}</span><b>${fmtStat(m.pr, m.pv)}</b></div>
+    <div class="mcSecs">${secs}</div>
   </div>`;
 }
 
