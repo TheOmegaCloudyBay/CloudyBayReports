@@ -93,6 +93,31 @@
   .ptotal{margin-top:16px;border:1px solid var(--accent);border-radius:11px;background:rgba(225,29,51,.06);padding:12px 14px}
   .ptotal .ttitle{font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
   .ptotal .tsum{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;font-weight:400}
+  /* mods */
+  .mrow{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 14px}
+  .mkpi{font-size:13px;color:var(--dim)} .mkpi b{color:var(--txt);font-variant-numeric:tabular-nums}
+  .mtag{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:2px 8px;border-radius:20px;border:1px solid var(--line)}
+  .mtag.work{color:#e0b53d;border-color:#6b571d;background:rgba(224,181,61,.1)}
+  .mtag.del{color:#f3868f;border-color:#63232a;background:rgba(225,29,51,.09)}
+  .mtag.done{color:#5bc46f;border-color:#2c5233;background:rgba(76,175,80,.1)}
+  .munit{border:1px solid var(--line);border-radius:9px;background:var(--card);padding:9px 12px;margin:0 0 7px}
+  .mhead{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;margin-bottom:8px}
+  .mhead .mn{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mhead .mmeta{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .mhead .mcnt{font-size:12px;white-space:nowrap}
+  .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:6px}
+  .mtile{position:relative;border:1px solid var(--line);border-left-width:4px;border-radius:7px;background:#0c1017;
+    padding:5px 7px;font-size:11.5px;line-height:1.35;cursor:default}
+  @media (prefers-color-scheme: light){.mtile{background:#f3f5f8}}
+  .mtile .mtop{display:flex;justify-content:space-between;align-items:center;gap:4px}
+  .mtile .msym{font-size:13px} .mtile .mset{font-weight:600} .mtile .mpr{color:var(--dim)}
+  .mtile .mspd{font-weight:700;font-variant-numeric:tabular-nums}
+  .mtile .mspd.zero{color:var(--dim);font-weight:400}
+  .mtile.work{border-left-color:#e0b53d} .mtile.del{border-left-color:#e11d33}
+  .mtile.done{border-left-color:#4caf50} .mtile.keep{border-left-color:var(--line)}
+  .mtile.clash{outline:1px dashed #e11d33;outline-offset:-4px}
+  .mpool{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:6px;margin:6px 0 4px}
+  .mpoolhdr{font-size:13px;font-weight:600;margin:14px 0 2px;display:flex;gap:8px;align-items:center}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -185,9 +210,11 @@ async function player(code){
     </section>
     <section><h2>Relic levels</h2><div class="dist">${relRows}</div></section>
     <section><h2>Gear levels</h2><div class="dist">${gRows}</div></section>
-    <section id="planner"><h2>Gear planner</h2><div class="sub">Loading gear data…</div></section>`;
+    <section id="planner"><h2>Gear planner</h2><div class="sub">Loading gear data…</div></section>
+    <section id="mods"><h2>Mods</h2><div class="sub">Loading mods…</div></section>`;
 
   renderPlanner(chars, d.code);
+  renderMods(d.code);
 }
 
 // ---- gear planner (client-side, uses shared game-data assets) --------------
@@ -369,6 +396,88 @@ async function renderPlanner(chars, code){
   if (invEl) invEl.onchange = drawTotal;
   searchEl.oninput = drawUnits;
   drawUnits(); drawTotal();
+}
+
+// ---- mods (client-side, reads the C# ModReport payload) --------------------
+const SET_ABBR = {1:"HP",2:"OFF",3:"DEF",4:"CC",5:"CD",6:"POT",7:"TEN",8:"SPD"};
+const SLOT_SYM = {1:"■",2:"➤",3:"◆",4:"▲",5:"●",6:"✚"};
+const MC_HEX  = {1:"#8a94a3",2:"#4caf50",3:"#3d7bd6",4:"#a259e6",5:"#e0b53d"};
+const MC_NAME = {1:"Gray",2:"Green",3:"Blue",4:"Purple",5:"Gold"};
+
+function modTile(m){
+  const b = m.b || "keep";
+  const spd = m.sp > 0 ? `+${m.sp}` : "—";
+  const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l} · ${m.pr} primary`
+    + (m.sp ? ` · +${m.sp} speed (${m.sr} roll${m.sr!==1?"s":""})` : " · no speed secondary")
+    + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""}` : "")
+    + (m.cl ? " · ⚠ set/primary clash" : "") + ` · potential ${m.pot}`;
+  return `<div class="mtile ${b}${m.cl?" clash":""}" title="${esc(title)}">
+    <div class="mtop"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
+      <span class="mspd${m.sp?"":" zero"}">${spd}</span></div>
+    <div><span class="mset">${SET_ABBR[m.set]}</span> <span class="mpr">${esc(m.pr.replace(" %","%"))}</span></div>
+  </div>`;
+}
+
+async function renderMods(code){
+  const host = document.getElementById("mods");
+  let d;
+  try { d = await getJSON(`players/${code}-mods.json`); }
+  catch { host.innerHTML = '<h2>Mods</h2><div class="sub">Mod analysis appears after the next full sweep.</div>'; return; }
+  const s = d.summary, uq = s.unequipped, hasUq = s.hasUnequipped;
+
+  host.innerHTML = `<h2>Mods</h2>
+    <div class="mrow">
+      <span class="mkpi"><b>${fmt(s.mods)}</b> equipped mods</span>
+      <span class="mkpi"><b>${fmt(s.speed)}</b> secondary speed</span>
+      <span class="mkpi"><b>${s.sixDot}</b> six-dot</span>
+      ${hasUq ? `<span class="mkpi"><b>${fmt(uq.mods)}</b> unequipped</span>` : ""}
+    </div>
+    <div class="sub" style="margin:-6px 0 10px">
+      <span class="mtag work">⭐ work on</span> best speed for its color/level ·
+      <span class="mtag del">🔴 delete</span> below the speed floor or set/primary clash ·
+      <span class="mtag done">🟢 done</span> finished 6-dot.
+      On <em>equipped</em> mods these are informational — junk is often deliberate (ship pilots, non-speed toons).
+    </div>
+    <div class="pcontrols">
+      <label class="invtog"><input type="checkbox" id="mReq" checked> Relic'd toons only</label>
+      ${hasUq ? `<label class="invtog"><input type="checkbox" id="mEq"> Equipped only</label>` : ""}
+    </div>
+    <div id="mUnits"></div>
+    <div id="mPool"></div>`;
+
+  const reqEl = document.getElementById("mReq"), eqEl = document.getElementById("mEq"),
+        unitsHost = document.getElementById("mUnits"), poolHost = document.getElementById("mPool");
+
+  function drawUnits(){
+    const list = d.units.filter(u => !reqEl.checked || u.rt >= 1);
+    unitsHost.innerHTML = list.map(u => {
+      const c = u.counts;
+      const cnt = [c.work?`<span class="mtag work">⭐${c.work}</span>`:"",
+                   c.del?`<span class="mtag del">🔴${c.del}</span>`:"",
+                   c.done?`<span class="mtag done">🟢${c.done}</span>`:""].join(" ");
+      const mods = [...u.mods].sort((a,b)=>a.sl-b.sl).map(modTile).join("");
+      return `<div class="munit"><div class="mhead">
+          <span class="mn">${esc(u.n)}</span>
+          <span class="mmeta">${u.r}★ G${u.g}${u.rt?" R"+u.rt:""}</span>
+          <span class="mcnt">${cnt}</span></div>
+        <div class="mgrid">${mods}</div></div>`;
+    }).join("") || '<div class="sub">No modded units at this filter.</div>';
+  }
+
+  function drawPool(){
+    if (!hasUq || (eqEl && eqEl.checked)) { poolHost.innerHTML = ""; return; }
+    const groups = [["work","⭐ Work on"],["del","🔴 Delete candidates"],["done","🟢 Done"],["keep","Keep / other"]];
+    poolHost.innerHTML = `<h2 style="margin-top:22px">Unequipped pool</h2>` + groups.map(([k,label]) => {
+      const items = d.unequipped.filter(m => (m.b||"keep") === k);
+      if (!items.length) return "";
+      return `<div class="mpoolhdr">${label} <span class="sub" style="font-weight:400">(${items.length})</span></div>
+        <div class="mpool">${items.map(modTile).join("")}</div>`;
+    }).join("");
+  }
+
+  reqEl.onchange = drawUnits;
+  if (eqEl) eqEl.onchange = drawPool;
+  drawUnits(); drawPool();
 }
 
 const code = new URLSearchParams(location.search).get("ally");
