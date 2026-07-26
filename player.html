@@ -169,6 +169,7 @@
     color:var(--dim);font-weight:700;margin-bottom:5px}
   .jnone{color:#5bc46f;font-size:12px}
   .mcWhy{color:#f3868f;font-size:10px;margin-top:5px;line-height:1.3}
+  .mcSpot{color:#7fd4ff;font-size:10.5px;margin-top:5px;font-variant-numeric:tabular-nums}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
     :root{--bg:#eef1f5;--card:#fff;--line:#d3dae4;--txt:#18202c;--dim:#5a6576}
@@ -497,38 +498,53 @@ const MC_HEX  = {1:"#8a94a3",2:"#4caf50",3:"#3d7bd6",4:"#a259e6",5:"#e0b53d"};
 const MC_NAME = {1:"Gray",2:"Green",3:"Blue",4:"Purple",5:"Gold"};
 
 const fmtStat = (label, v) => label.includes("%") ? `${v}%` : `+${v}`;
-const SPEED_FLOOR = {1:3,2:5,3:8,4:10,5:12};
 const OFF_SETS = new Set([2,4,5,6]);   // Offense, Crit Chance, Crit Damage, Potency
-// why a mod is a delete candidate (clash beats low-speed). Square/diamond/circle have fixed
-// primaries so they never clash — they can only be flagged for low speed.
+const isDefStat = k => /Defense|Health|Protection|Tenacity/.test(k);
+const isOffStat = k => /Offense|Crit|Potency/.test(k);
+// why a mod is a delete candidate
 function delReason(m){
   if (m.cl) return OFF_SETS.has(m.set) ? "offense set · defensive primary" : "defense set · offensive primary";
-  return `speed ${m.sp} < ${SPEED_FLOOR[m.c]} floor (${MC_NAME[m.c]})`;
+  if (m.sr === 0 && (m.ss||[]).length >= 4) return "no speed — secondaries full";
+  return `low odds · ${m.spot}% to reach 4 speed rolls`;
+}
+// best stat to calibrate a speed roll away from: a non-speed secondary with >=2 rolls, preferring
+// the off-theme one (the roll you least want), then the one with the most rolls.
+function calibrateDonor(m){
+  const c = (m.ss||[]).filter(x => x.k !== "Speed" && x.r >= 2);
+  if (!c.length) return null;
+  const off = OFF_SETS.has(m.set);
+  c.sort((a,b) => (off?(isDefStat(a.k)?0:1):(isOffStat(a.k)?0:1)) - (off?(isDefStat(b.k)?0:1):(isOffStat(b.k)?0:1)) || b.r - a.r);
+  return c[0];
 }
 function modTile(m){
   const b = m.b || "keep";
+  const speedPrimary = m.pr === "Speed";
   const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
   const pips = Array.from({length: m.d}, () => `<i style="background:${MC_HEX[m.c]}"></i>`).join("");
-  // Worth calibrating for speed: 6-dot with a speed secondary not yet maxed on rolls (<5), still in
-  // the cheap calibration range (>3 of the 6 remaining, i.e. fewer than 3 used — they get pricey after the 3rd).
-  const calAvail = m.d === 6 && m.sp > 0 && m.sr < 5 && m.cal < 3;
+  // Worth calibrating for speed: 6-dot, speed not maxed on rolls (<5), still cheap (<3 used), and a donor exists.
+  const donor = m.d === 6 && m.sr < 5 && m.cal < 3 ? calibrateDonor(m) : null;
   const secs = (m.ss || []).map(s => {
     const isSpd = s.k === "Speed";
     return `<div class="mcSec${isSpd?" spd":""}">
       <span class="sl">${esc(s.k)}${s.r?` <span class="rr">(${s.r})</span>`:""}</span>
       <span>${fmtStat(s.k, s.v)}</span></div>`;
   }).join("");
+  // speed-potential line: shown for non-done, non-del secondary-speed mods (not speed arrows)
+  const showSpot = !speedPrimary && b !== "done" && b !== "del";
   const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l}`
+    + (m.sr ? ` · ${m.sr} speed roll${m.sr!==1?"s":""}` : "")
     + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""} used` : "")
-    + (calAvail ? ` · worth calibrating speed (${6-m.cal} cheap calibrations left)` : "")
-    + (m.cl ? " · ⚠ set/primary clash" : "") + ` · potential ${m.pot}`;
+    + (donor ? ` · calibrate a speed roll from ${donor.k} (${6-m.cal} cheap left)` : "")
+    + (speedPrimary ? "" : ` · ${m.spot}% to reach 4 speed rolls`)
+    + (m.cl ? " · ⚠ set/primary clash" : "");
   return `<div class="mcard mc${m.c}${m.cl?" clash":""}" title="${esc(title)}">
     <div class="mcHead"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
       <span class="mcSet">${m.setN}</span><span class="mcBadge">${badge}</span></div>
     <div class="mcSub"><span class="pips">${pips}</span><span>Lvl ${m.l}${m.cal?` · cal ${m.cal}`:""}</span>
-      ${calAvail?'<span class="calAv">⚙ calibrate</span>':""}</div>
+      ${donor?`<span class="calAv">⚙ from ${esc(donor.k.replace(" %","%"))}</span>`:""}</div>
     <div class="mcPrim"><span class="pl">${esc(m.pr)}</span><b>${fmtStat(m.pr, m.pv)}</b></div>
     <div class="mcSecs">${secs}</div>
+    ${showSpot?`<div class="mcSpot">⚡ ${m.spot}% → 4-speed</div>`:""}
     ${b==="del"?`<div class="mcWhy">🔴 ${esc(delReason(m))}</div>`:""}
   </div>`;
 }
@@ -548,9 +564,10 @@ async function renderMods(code){
       ${hasUq ? `<span class="mkpi"><b>${fmt(uq.mods)}</b> unequipped</span>` : ""}
     </div>
     <div class="sub" style="margin:-6px 0 10px">
-      <span class="mtag work">⭐ work on</span> best speed for its color/level ·
-      <span class="mtag del">🔴 delete</span> below the speed floor or set/primary clash ·
-      <span class="mtag done">🟢 done</span> finished 6-dot.
+      Buckets are by odds of reaching <b>4 speed rolls</b> (⚡ shows each mod's %):
+      <span class="mtag work">⭐ work on</span> good odds (≥25%) ·
+      <span class="mtag del">🔴 delete</span> no speed possible, unlikely to get there, or set/primary clash ·
+      <span class="mtag done">🟢 done</span> already 4+ speed rolls.
       On <em>equipped</em> mods these are informational — junk is often deliberate (ship pilots, non-speed toons).
     </div>
     <div class="pcontrols">
