@@ -110,20 +110,24 @@
   .mcard{position:relative;border:1px solid var(--line);border-top-width:3px;border-radius:9px;
     background:#0c1017;padding:8px 10px;font-size:12px}
   @media (prefers-color-scheme: light){.mcard{background:#f3f5f8}}
-  .mcard.work{border-top-color:#e0b53d} .mcard.del{border-top-color:#e11d33}
-  .mcard.done{border-top-color:#4caf50} .mcard.keep{border-top-color:var(--line)}
+  .mcard.mc1{border-color:#8a94a3} .mcard.mc2{border-color:#4caf50} .mcard.mc3{border-color:#3d7bd6}
+  .mcard.mc4{border-color:#a259e6} .mcard.mc5{border-color:#e0b53d}
+  .mcard.mc2{background:rgba(76,175,80,.06)} .mcard.mc3{background:rgba(61,123,214,.07)}
+  .mcard.mc4{background:rgba(162,89,230,.08)} .mcard.mc5{background:rgba(224,181,61,.08)}
   .mcard.clash{box-shadow:inset 0 0 0 1px #e11d33}
   .mcHead{display:flex;align-items:center;gap:6px;margin-bottom:5px}
   .mcHead .msym{font-size:15px;line-height:1} .mcHead .mcSet{font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mcHead .mcBadge{font-size:11px}
   .mcSub{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--dim);
-    font-variant-numeric:tabular-nums;margin-bottom:5px}
+    font-variant-numeric:tabular-nums;margin-bottom:5px;flex-wrap:wrap}
+  .calAv{color:#e0b53d;border:1px solid #6b571d;background:rgba(224,181,61,.12);
+    border-radius:10px;padding:0 6px;font-size:10px;white-space:nowrap}
   .pips{display:inline-flex;gap:2px} .pips i{width:5px;height:5px;border-radius:50%;display:inline-block}
   .mcPrim{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line);margin-bottom:3px}
   .mcPrim .pl{color:var(--dim)} .mcPrim b{font-variant-numeric:tabular-nums}
   .mcSec{display:flex;justify-content:space-between;gap:8px;line-height:1.5;font-variant-numeric:tabular-nums}
   .mcSec .sl{color:var(--dim)} .mcSec.spd{color:#7fd4ff;font-weight:600}
-  .mcSec .rr{color:var(--dim);font-size:9px;letter-spacing:1px}
+  .mcSec .rr{color:var(--dim);font-size:10px}
   .mpoolhdr{font-size:13px;font-weight:600;margin:14px 0 4px;display:flex;gap:8px;align-items:center}
   /* tabs */
   .tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);margin:18px 0 16px}
@@ -448,8 +452,8 @@ async function renderPlanner(chars, code){
 }
 
 // ---- mods (client-side, reads the C# ModReport payload) --------------------
-const SET_ABBR = {1:"HP",2:"OFF",3:"DEF",4:"CC",5:"CD",6:"POT",7:"TEN",8:"SPD"};
 const SLOT_SYM = {1:"■",2:"➤",3:"◆",4:"▲",5:"●",6:"✚"};
+const SLOT_ORDER = [2,1,4,3,6,5];   // arrow, square, triangle, diamond, cross, circle
 const MC_HEX  = {1:"#8a94a3",2:"#4caf50",3:"#3d7bd6",4:"#a259e6",5:"#e0b53d"};
 const MC_NAME = {1:"Gray",2:"Green",3:"Blue",4:"Purple",5:"Gold"};
 
@@ -458,19 +462,23 @@ function modTile(m){
   const b = m.b || "keep";
   const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
   const pips = Array.from({length: m.d}, () => `<i style="background:${MC_HEX[m.c]}"></i>`).join("");
+  // 6-dot mod with a speed secondary and calibrations left can still be calibrated up for speed
+  const calAvail = m.d === 6 && m.sp > 0 && m.cal < 6;
   const secs = (m.ss || []).map(s => {
     const isSpd = s.k === "Speed";
     return `<div class="mcSec${isSpd?" spd":""}">
-      <span class="sl">${esc(s.k)}${s.r?` <span class="rr">${"•".repeat(s.r)}</span>`:""}</span>
+      <span class="sl">${esc(s.k)}${s.r?` <span class="rr">(${s.r})</span>`:""}</span>
       <span>${fmtStat(s.k, s.v)}</span></div>`;
   }).join("");
   const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l}`
-    + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""}` : "")
+    + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""} used` : "")
+    + (calAvail ? ` · can calibrate speed (${6-m.cal} left)` : "")
     + (m.cl ? " · ⚠ set/primary clash" : "") + ` · potential ${m.pot}`;
-  return `<div class="mcard ${b}${m.cl?" clash":""}" title="${esc(title)}">
+  return `<div class="mcard mc${m.c}${m.cl?" clash":""}" title="${esc(title)}">
     <div class="mcHead"><span class="msym" style="color:${MC_HEX[m.c]}">${SLOT_SYM[m.sl]}</span>
       <span class="mcSet">${m.setN}</span><span class="mcBadge">${badge}</span></div>
-    <div class="mcSub"><span class="pips">${pips}</span><span>Lvl ${m.l}${m.cal?` · cal ${m.cal}`:""}</span></div>
+    <div class="mcSub"><span class="pips">${pips}</span><span>Lvl ${m.l}${m.cal?` · cal ${m.cal}`:""}</span>
+      ${calAvail?'<span class="calAv">⚙ calibrate</span>':""}</div>
     <div class="mcPrim"><span class="pl">${esc(m.pr)}</span><b>${fmtStat(m.pr, m.pv)}</b></div>
     <div class="mcSecs">${secs}</div>
   </div>`;
@@ -513,7 +521,7 @@ async function renderMods(code){
       const cnt = [c.work?`<span class="mtag work">⭐${c.work}</span>`:"",
                    c.del?`<span class="mtag del">🔴${c.del}</span>`:"",
                    c.done?`<span class="mtag done">🟢${c.done}</span>`:""].join(" ");
-      const mods = [...u.mods].sort((a,b)=>a.sl-b.sl).map(modTile).join("");
+      const mods = [...u.mods].sort((a,b)=>SLOT_ORDER.indexOf(a.sl)-SLOT_ORDER.indexOf(b.sl)).map(modTile).join("");
       return `<div class="munit"><div class="mhead">
           <span class="mn">${esc(u.n)}</span>
           <span class="mmeta">${u.r}★ G${u.g}${u.rt?" R"+u.rt:""}</span>
