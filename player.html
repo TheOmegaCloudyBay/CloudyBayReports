@@ -258,17 +258,17 @@ async function player(code){
     </div>
 
     <div class="tabs">
-      <button data-pane="journey" class="on">Journey</button>
-      <button data-pane="chars">Characters</button>
+      <button data-pane="chars" class="on">Characters</button>
       <button data-pane="ships">Ships</button>
       <button data-pane="mods">Mods</button>
+      <button data-pane="journey">Journey</button>
     </div>
 
-    <div class="pane on" id="pane-journey">
+    <div class="pane" id="pane-journey">
       <section id="jrn"><h2>Journey / GL readiness</h2><div class="sub">Loading…</div></section>
     </div>
 
-    <div class="pane" id="pane-chars">
+    <div class="pane on" id="pane-chars">
       <section>
         <div class="cards">
           <div class="card"><div class="k">Characters</div><div class="v">${chars.length}</div></div>
@@ -298,12 +298,13 @@ async function player(code){
       <section id="mods"><h2>Mods</h2><div class="sub">Loading mods…</div></section>
     </div>`;
 
+  let journeyLoaded = false;
   out.querySelectorAll(".tabs button").forEach(btn => btn.onclick = () => {
     out.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("on", x === btn));
     out.querySelectorAll(".pane").forEach(p => p.classList.toggle("on", p.id === "pane-" + btn.dataset.pane));
+    if (btn.dataset.pane === "journey" && !journeyLoaded) { journeyLoaded = true; renderJourney(d.code); }
   });
 
-  renderJourney(d.code);
   renderPlanner(chars, d.code);
   renderMods(d.code);
 }
