@@ -100,6 +100,7 @@
   .mtag.work{color:#e0b53d;border-color:#6b571d;background:rgba(224,181,61,.1)}
   .mtag.del{color:#f3868f;border-color:#63232a;background:rgba(225,29,51,.09)}
   .mtag.done{color:#5bc46f;border-color:#2c5233;background:rgba(76,175,80,.1)}
+  .mtag.swing{color:#e0b53d;border-color:#6b571d;background:rgba(224,181,61,.1)}
   .munit{border:1px solid var(--line);border-radius:9px;background:var(--card);padding:9px 12px;margin:0 0 7px}
   .mhead{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;margin-bottom:8px}
   .mhead .mn{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -169,6 +170,7 @@
     color:var(--dim);font-weight:700;margin-bottom:5px}
   .jnone{color:#5bc46f;font-size:12px}
   .mcWhy{color:#f3868f;font-size:10px;margin-top:5px;line-height:1.3}
+  .mcSwing{color:#e0b53d;font-size:10px;margin-top:5px;line-height:1.3}
   .mcSpot{color:#7fd4ff;font-size:10.5px;margin-top:5px;font-variant-numeric:tabular-nums}
   footer{margin-top:34px;color:#5c6674;font-size:12px}
   @media (prefers-color-scheme: light){
@@ -519,7 +521,7 @@ function calibrateDonor(m){
 function modTile(m){
   const b = m.b || "keep";
   const speedPrimary = m.pr === "Speed";
-  const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : "";
+  const badge = b === "work" ? "⭐" : b === "del" ? "🔴" : b === "done" ? "🟢" : b === "swing" ? "🟡" : "";
   const pips = Array.from({length: m.d}, () => `<i style="background:${MC_HEX[m.c]}"></i>`).join("");
   // Worth calibrating for speed: 6-dot, speed not maxed on rolls (<5), still cheap (<3 used), and a donor exists.
   const donor = m.d === 6 && m.sr < 5 && m.cal < 3 ? calibrateDonor(m) : null;
@@ -529,8 +531,8 @@ function modTile(m){
       <span class="sl">${esc(s.k)}${s.r?` <span class="rr">(${s.r})</span>`:""}</span>
       <span>${fmtStat(s.k, s.v)}</span></div>`;
   }).join("");
-  // speed-potential line: shown for non-done, non-del secondary-speed mods (not speed arrows)
-  const showSpot = !speedPrimary && b !== "done" && b !== "del";
+  // speed-potential line: shown for on/above-pace secondary-speed mods (not speed arrows)
+  const showSpot = !speedPrimary && b === "work";
   const title = `${MC_NAME[m.c]} ${m.setN} ${m.slN} · lvl ${m.l}`
     + (m.sr ? ` · ${m.sr} speed roll${m.sr!==1?"s":""}` : "")
     + (m.cal ? ` · ${m.cal} calibration${m.cal!==1?"s":""} used` : "")
@@ -545,6 +547,7 @@ function modTile(m){
     <div class="mcPrim"><span class="pl">${esc(m.pr)}</span><b>${fmtStat(m.pr, m.pv)}</b></div>
     <div class="mcSecs">${secs}</div>
     ${showSpot?`<div class="mcSpot">⚡ ${m.spot}% → 5-speed</div>`:""}
+    ${b==="swing"?`<div class="mcSwing">🟡 swing · ${m.spot}% now — one speed roll from par</div>`:""}
     ${b==="del"?`<div class="mcWhy">🔴 ${esc(delReason(m))}</div>`:""}
   </div>`;
 }
@@ -565,8 +568,9 @@ async function renderMods(code){
     </div>
     <div class="sub" style="margin:-6px 0 10px">
       Odds of reaching <b>5 speed rolls</b> (max) via leveling/slicing — a fresh 1-speed mod's baseline is <b>11%</b> (⚡ = each mod's %):
-      <span class="mtag work">⭐ work on</span> revealed, speed-capable, on/above pace (≥11%) — needs work + luck ·
-      <span class="mtag del">🔴 delete</span> behind pace (&lt;11%), no speed possible, or set/primary clash ·
+      <span class="mtag work">⭐ work on</span> on/above pace (≥11%) — needs work + luck ·
+      <span class="mtag swing">🟡 swing</span> behind, but one speed roll gets it back to par — gamble or sell ·
+      <span class="mtag del">🔴 delete</span> needs 2+ to catch up, no speed possible, or clash ·
       <span class="mtag done">🟢 done</span> already 4-5 speed rolls.
       Calibration (⚙) is a separate lever, not counted in the odds. On <em>equipped</em> mods these are informational — junk is often deliberate (ship pilots, non-speed toons).
     </div>
@@ -585,6 +589,7 @@ async function renderMods(code){
     unitsHost.innerHTML = list.map(u => {
       const c = u.counts;
       const cnt = [c.work?`<span class="mtag work">⭐${c.work}</span>`:"",
+                   c.swing?`<span class="mtag swing">🟡${c.swing}</span>`:"",
                    c.del?`<span class="mtag del">🔴${c.del}</span>`:"",
                    c.done?`<span class="mtag done">🟢${c.done}</span>`:""].join(" ");
       const mods = [...u.mods].sort((a,b)=>SLOT_ORDER.indexOf(a.sl)-SLOT_ORDER.indexOf(b.sl)).map(modTile).join("");
@@ -598,7 +603,7 @@ async function renderMods(code){
 
   function drawPool(){
     if (!hasUq || (eqEl && eqEl.checked)) { poolHost.innerHTML = ""; return; }
-    const groups = [["work","⭐ Work on"],["del","🔴 Delete candidates"],["done","🟢 Done"],["keep","Keep / other"]];
+    const groups = [["work","⭐ Work on"],["swing","🟡 Swing — one roll from par"],["del","🔴 Delete candidates"],["done","🟢 Done"],["keep","Keep / other"]];
     poolHost.innerHTML = `<h2 style="margin-top:22px">Unequipped pool</h2>` + groups.map(([k,label]) => {
       const items = d.unequipped.filter(m => (m.b||"keep") === k);
       if (!items.length) return "";
