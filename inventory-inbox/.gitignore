@@ -1,0 +1,3 @@
+# Raw C-3PO exports are private — never publish them. Only the trimmed
+# players/<ally>-inv.json (owned gear + relic-mat counts) gets committed.
+*-inventory.json
