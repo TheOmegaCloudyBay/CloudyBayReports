@@ -8,7 +8,7 @@
       pages:[
         { href:'guild-stats.html#tb', title:'Latest results', desc:'Guild stars per TB and every member’s banners and GP deployed' },
         { href:'rote-platoons.html', title:'Platoons', desc:'Platoon fill by planet, assignments, and who’s closest' },
-        { title:'Required toons', desc:'Units we’re missing for more platoons — and who’s closest to them', soon:true },
+        { href:'tb-required.html', title:'Required toons', desc:'Units we’re missing for more platoons — and who’s closest to them', tag:'Farm' },
         { href:'reva-readiness.html', title:'Reva', desc:'Who can field the Inquisitor team for the Reva special mission', tag:'Farm' },
       ]},
     { id:'tw', href:'tw.html', label:'TW', title:'Territory War',
@@ -41,7 +41,7 @@
       ]},
   ];
   // Which topic a non-hub page belongs to (guild-stats is split by tab, see topicOf).
-  const PARENT = { 'rote-platoons.html':'tb', 'reva-readiness.html':'tb', 'player.html':'members' };
+  const PARENT = { 'rote-platoons.html':'tb', 'tb-required.html':'tb','reva-readiness.html':'tb', 'player.html':'members' };
   const GS_TAB = { tb:'tb', tw:'tw', raids:'raid', tickets:'daily' };
 
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Required toons — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1000px;
+    padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
+  h1{font-size:26px;margin:4px 0 4px}
+  .lede{color:var(--cb-dim);margin:0 0 18px;max-width:760px}
+  .dim{color:var(--cb-dim)}
+  .routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:0 0 26px}
+  .route{padding:14px 16px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
+  .route .rl{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .route.ds .rl{color:#e0524a} .route.mx .rl{color:#d9a521} .route.ls .rl{color:#2bb6c4}
+  .route h3{margin:2px 0 0;font-size:20px}
+  .route .meta{font-size:13px;color:var(--cb-dim)}
+  .pips{display:flex;gap:5px;margin:10px 0 6px}
+  .pips i{flex:1;height:8px;border-radius:4px;background:var(--cb-line)}
+  .pips i.on{background:#37b24d}
+  .route .done{font-size:12px;color:var(--cb-dim);margin-top:6px}
+  .route.complete h3{color:#37b24d}
+
+  section.planet{margin:0 0 30px}
+  section.planet h2{font-size:18px;margin:0 0 4px}
+  section.planet h2 small{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:6px}
+  .plats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+  .plats span{font-size:12px;padding:3px 8px;border-radius:12px;border:1px solid var(--cb-line);color:var(--cb-dim)}
+  .plats span.full{border-color:#37b24d;color:#37b24d}
+  .plats span.near{border-color:#f0a020;color:#f0a020}
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 9px;border-bottom:1px solid var(--cb-line);text-align:left;vertical-align:top}
+  th{color:var(--cb-dim);font-weight:600;white-space:nowrap}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td.unit b{display:block}
+  td.unit span{font-size:12px;color:var(--cb-dim)}
+  .who{display:flex;flex-wrap:wrap;gap:5px}
+  .who span{white-space:nowrap;padding:2px 8px;border-radius:12px;background:var(--cb-bg);border:1px solid var(--cb-line);font-size:12px}
+  .who span em{font-style:normal;color:var(--cb-dim);margin-left:4px}
+  .who span.g1 em{color:#37b24d} .who span.g2 em{color:#d9a521}
+  .none{color:var(--cb-dim);font-size:12px;font-style:italic}
+  .ally{color:var(--cb-dim);font-size:11px;margin-left:4px;display:none}
+  body.show-ally .ally{display:inline}
+  .note{font-size:12px;color:var(--cb-dim);margin-top:26px;max-width:760px}
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+<script src="platoon-solver.js"></script>
+</head>
+<body>
+  <h1>Required toons</h1>
+  <p class="lede">We fill all 6 platoons on a route’s planet before moving on to the next one. For each route this
+    shows the planet we’re working on, the toons we can’t place yet, and the members closest to them.
+    Farm these to get more platoons.</p>
+  <div class="routes" id="routes"></div>
+  <div id="planets"><p class="dim">Loading…</p></div>
+  <p class="note" id="note"></p>
+
+<script>
+(async function(){
+  let DATA;
+  try { DATA = await (await fetch('rote-platoons-data.json?_=' + Date.now(), {cache:'no-store'})).json(); }
+  catch { document.getElementById('planets').innerHTML = '<p class="dim">Could not load platoon data — refresh to try again.</p>'; return; }
+
+  const S = window.PlatoonSolver, CAP = DATA.cap, MEM = DATA.members;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const acode = n => { const s = String(n || ''); return s.length === 9 ? `${s.slice(0,3)}-${s.slice(3,6)}-${s.slice(6)}` : s; };
+  const nm = i => `${esc(MEM[i]?.name ?? '?')}${MEM[i]?.ally ? `<span class="ally">#${acode(MEM[i].ally)}</span>` : ''}`;
+  const relicReq = z => (DATA.relicByZone[z] ?? DATA.relicByZone[String(z)] ?? 9);
+
+  const ALL = [];
+  DATA.zones.forEach(z => z.planets.forEach(p => ALL.push(Object.assign({}, p, { zone: z.zone }))));
+  const ROUTES = [
+    { key:'DS', label:'Dark Side',  cls:'ds', match:a => /dark/i.test(a) },
+    { key:'MX', label:'Mixed',      cls:'mx', match:a => /mixed/i.test(a) },
+    { key:'LS', label:'Light Side', cls:'ls', match:a => /light/i.test(a) },
+  ];
+  ROUTES.forEach(r => r.planets = ALL.filter(p => r.match(p.align)).sort((a, b) => a.zone - b.zone));
+  ALL.forEach(p => S.applyGate(p, relicReq(p.zone)));
+
+  const fullCount = (p, asn) => p.platoons.filter(pl =>
+    pl.slots.every((s, si) => asn.has(S.skey(p.planet, pl.platoon, si)))).length;
+
+  // Walk each route forward: a planet with all its platoons fillable is "done", so that route moves
+  // on to its next planet. The current planets of the three routes are solved together (they're
+  // fought on the same days, so a unit copy can only go to one of them). Repeat until nothing moves.
+  const idx = { DS:0, MX:0, LS:0 };
+  let res, frontier;
+  for (;;){
+    frontier = ROUTES.map(r => ({ r, p: r.planets[idx[r.key]] })).filter(x => x.p);
+    // lower phase first, then route order — the same priority the Platoons page uses by default
+    const order = [...frontier].sort((a, b) => a.p.zone - b.p.zone).map(x => x.p);
+    res = S.solve(order, CAP);
+    let moved = false;
+    for (const x of frontier){
+      if (fullCount(x.p, res.asn) === x.p.platoons.length){ idx[x.r.key]++; moved = true; }
+    }
+    if (!moved) break;
+  }
+
+  // ---- route cards ----
+  document.getElementById('routes').innerHTML = ROUTES.map(r => {
+    const p = r.planets[idx[r.key]];
+    const done = r.planets.slice(0, idx[r.key]).map(x => esc(x.planet));
+    if (!p) return `<div class="route ${r.cls} complete"><div class="rl">${r.label}</div><h3>All planets fillable</h3>
+      <div class="meta">Every platoon on this route can be filled.</div></div>`;
+    const n = fullCount(p, res.asn), tot = p.platoons.length;
+    return `<div class="route ${r.cls}"><div class="rl">${r.label}</div><h3>${esc(p.planet)}</h3>
+      <div class="meta">Phase ${p.zone} · relic ${relicReq(p.zone)}+ for characters</div>
+      <div class="pips">${Array.from({ length: tot }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="meta"><b style="color:var(--cb-txt)">${n}/${tot}</b> platoons fillable</div>
+      ${done.length ? `<div class="done">Done: ${done.join(' · ')} ✓</div>` : ''}</div>`;
+  }).join('');
+
+  // ---- per planet: what's missing, and who's closest ----
+  const sections = [];
+  for (const { r, p } of frontier){
+    const req = relicReq(p.zone);
+    const unfilled = p.platoons.filter(pl => !pl.slots.every((s, si) => res.asn.has(S.skey(p.planet, pl.platoon, si))));
+    if (!unfilled.length) continue;
+
+    // For each unfilled platoon: the best partial fill given what's already committed, and the slots
+    // nobody can take. Each platoon is checked on its own (as if it were the next one we fill).
+    const units = new Map();   // baseId -> {slot, copies, plats:Set}
+    const platInfo = [];
+    for (const pl of unfilled){
+      const open = pl.slots.map((s, si) => ({ key: S.skey(p.planet, pl.platoon, si), baseId: s.baseId, cand: s.cand, slot: s }));
+      const { missing } = S.tryComplete(open, p.planet, res.remGet, res.used, true);
+      platInfo.push({ n: pl.platoon, missing: missing.length });
+      const byUnit = new Map();
+      for (const key of missing){
+        const s = open.find(o => o.key === key).slot;
+        byUnit.set(s.baseId, (byUnit.get(s.baseId) || { slot: s, copies: 0 }));
+        byUnit.get(s.baseId).copies++;
+      }
+      for (const [b, v] of byUnit){
+        const u = units.get(b) || { slot: v.slot, copies: 0, plats: [] };
+        u.copies += v.copies; u.plats.push({ n: pl.platoon, left: missing.length });
+        units.set(b, u);
+      }
+    }
+
+    // Closest = members who own the unit but aren't eligible yet, ranked by relic distance (G13 first,
+    // then by gear tier). Members already at the 10-unit cap on this planet can't donate, so they're out.
+    const closest = (u) => {
+      if (u.slot.kind === 'ship') return [];
+      return (u.slot.own || [])
+        .filter(o => o.r < req && res.remGet(p.planet, o.m) > 0)
+        .map(o => ({ m: o.m, g: o.g, r: o.r, gap: o.g >= 13 ? req - o.r : 100 + (13 - o.g) }))
+        .sort((a, b) => a.gap - b.gap)
+        .slice(0, 6);
+    };
+    const whoHtml = (u) => {
+      const list = closest(u);
+      if (!list.length){
+        const owners = (u.slot.own || []).length;
+        return `<span class="none">${u.slot.kind === 'ship' ? (owners ? 'All owners are already placing it or at the cap' : 'Nobody owns it yet')
+          : owners ? 'Everyone who has it is at R' + req + '+ already or at the cap' : 'Nobody owns it yet'}</span>`;
+      }
+      return `<div class="who">${list.map(c => {
+        const lvl = c.g >= 13 ? `R${c.r} · ${req - c.r} to go` : `G${c.g}`;
+        const cls = c.g >= 13 && req - c.r <= 1 ? 'g1' : c.g >= 13 && req - c.r <= 2 ? 'g2' : '';
+        return `<span class="${cls}">${nm(c.m)}<em>${lvl}</em></span>`; }).join('')}</div>`;
+    };
+
+    // Units that unblock platoons closest to completion first, then those blocking the most platoons.
+    const rows = [...units.values()].sort((a, b) =>
+      Math.min(...a.plats.map(x => x.left)) - Math.min(...b.plats.map(x => x.left)) ||
+      b.plats.length - a.plats.length || b.copies - a.copies);
+
+    const n = p.platoons.length - unfilled.length;
+    sections.push(`<section class="planet"><h2>${esc(p.planet)}<small>${r.label} · phase ${p.zone} · R${req}+</small></h2>
+      <div class="plats">${p.platoons.map(pl => {
+        const pi = platInfo.find(x => x.n === pl.platoon);
+        return !pi ? `<span class="full">Platoon ${pl.platoon} ✓</span>`
+                   : `<span class="${pi.missing <= 2 ? 'near' : ''}">Platoon ${pl.platoon} · ${pi.missing} missing</span>`; }).join('')}</div>
+      <div class="tblwrap"><table><thead><tr><th>Toon</th><th class="num">Needed</th><th>Platoons</th><th>Closest members</th></tr></thead><tbody>
+      ${rows.map(u => `<tr><td class="unit"><b>${esc(u.slot.name)}</b><span>${u.slot.kind === 'ship' ? 'Ship' : 'R' + req + '+'}</span></td>
+        <td class="num">${u.copies}</td>
+        <td>${u.plats.map(x => '#' + x.n).join(', ')}</td>
+        <td>${whoHtml(u)}</td></tr>`).join('')}
+      </tbody></table></div></section>`);
+  }
+  document.getElementById('planets').innerHTML = sections.join('') ||
+    '<p class="dim">Every route’s current planet can be filled — nothing missing.</p>';
+
+  document.getElementById('note').innerHTML =
+    `How this works: platoon assignments use the same rules as the <a href="rote-platoons.html" style="color:inherit">Platoons</a> page — ` +
+    `each member places at most ${CAP} units per planet, each copy of a unit counts once, and a platoon only counts when every slot is filled. ` +
+    `“Needed” is how many more copies the guild needs at the required relic. “Closest” lists members who own the toon but aren’t there yet ` +
+    `(relic levels to go, or their gear level if not yet G13), leaving out anyone already placing ${CAP} units on that planet. Updated with every refresh.`;
+})();
+</script>
+</body>
+</html>
