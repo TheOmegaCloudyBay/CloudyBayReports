@@ -1,0 +1,49 @@
+/* Shared frame for every Cloudy Bay page: top bar (brand, topic nav, last-updated, ally-code
+   toggle) + the topic hub pages. Variables are cb-prefixed so they never clash with a page's own. */
+:root{--cb-bg:#0f141c;--cb-card:#161d28;--cb-line:#2a3442;--cb-txt:#e6e9ef;--cb-dim:#9aa4b2;--cb-accent:#e11d33}
+@media (prefers-color-scheme: light){
+  :root{--cb-bg:#eef1f5;--cb-card:#fff;--cb-line:#d3dae4;--cb-txt:#18202c;--cb-dim:#5a6576}
+}
+
+/* The old per-page "← Cloudy Bay reports" link is replaced by the top bar. */
+.homelink{display:none !important}
+
+.cb-bar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;
+  margin:-8px 0 18px;padding:8px 0;background:var(--cb-bg);border-bottom:1px solid var(--cb-line);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.4}
+.cb-brand{font-weight:700;color:var(--cb-txt);text-decoration:none;white-space:nowrap}
+.cb-brand::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--cb-accent);margin-right:7px;vertical-align:middle}
+.cb-nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}
+.cb-nav::-webkit-scrollbar{display:none}
+.cb-nav a{color:var(--cb-dim);text-decoration:none;padding:5px 9px;border-radius:6px;white-space:nowrap}
+.cb-nav a:hover{color:var(--cb-txt);background:var(--cb-card)}
+.cb-nav a.on{color:var(--cb-txt);box-shadow:inset 0 -2px 0 var(--cb-accent)}
+.cb-tools{display:flex;align-items:center;gap:12px;color:var(--cb-dim);font-size:12px;white-space:nowrap}
+.cb-tools label{display:inline-flex;align-items:center;gap:5px;cursor:pointer;user-select:none;margin:0}
+.cb-bar input.cb-ally{appearance:auto;width:13px;height:13px;margin:0;padding:0;border:0;flex:none}
+/* Pages that pad an inner wrapper rather than <body> (platoons, reva) — site.js adds this class. */
+.cb-bar.cb-pad{padding-left:18px;padding-right:18px;margin-top:0}
+.cb-upd.stale{color:#f0a020}
+
+/* Topic hub pages (tb.html, tw.html, ...) and the landing page's topic grid. */
+.cb-hub h1{font-size:26px;margin:4px 0 4px}
+.cb-hub .cb-lede{color:var(--cb-dim);margin:0 0 20px}
+.cb-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.cb-card{display:block;padding:14px 16px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card);
+  color:var(--cb-txt);text-decoration:none}
+a.cb-card:hover{border-color:var(--cb-accent)}
+.cb-card b{display:block;font-size:16px}
+.cb-card span{display:block;font-size:13px;color:var(--cb-dim);margin-top:3px}
+.cb-card.soon{opacity:.55;border-style:dashed}
+/* Page title + the topic's sub-page links beside it (built by site.js). */
+.cb-titlerow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:10px 0 6px}
+.cb-titlerow > h1{margin-top:0 !important;margin-bottom:0 !important}
+.cb-sub{display:flex;flex-wrap:wrap;gap:2px;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:14px;line-height:1.4;font-weight:400;letter-spacing:0;text-transform:none}
+.cb-sub a{color:var(--cb-dim);text-decoration:none;padding:5px 9px;border-radius:6px;white-space:nowrap}
+.cb-sub a:hover{color:var(--cb-txt);background:var(--cb-card)}
+.cb-sub a.on{color:var(--cb-txt);box-shadow:inset 0 -2px 0 var(--cb-accent)}
+.cb-empty{color:var(--cb-dim);padding:18px;border:1px dashed var(--cb-line);border-radius:10px;margin:0}
+.cb-card .cb-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--cb-dim);border:1px solid var(--cb-line);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:2px}
