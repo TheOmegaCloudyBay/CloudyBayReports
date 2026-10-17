@@ -1,6 +1,12 @@
 [
   {
     "date": "2026-10-17",
+    "title": "Members overview: the guild roster",
+    "text": "Every member with their role, join date and assessment score, best first. Click a name for their full roster.",
+    "link": "members.html"
+  },
+  {
+    "date": "2026-10-17",
     "title": "Reva is a required TB farm",
     "text": "Our first required farm: the Inquisitor team for the Reva special mission (any 5 of 7 at R7). See who's ready and who's close.",
     "link": "tb-farms.html"

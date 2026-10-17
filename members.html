@@ -8,11 +8,90 @@
   *{box-sizing:border-box}
   body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1000px;
     padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
+  h1{font-size:26px}
+  .lede{color:var(--cb-dim);margin:0 0 16px;font-size:14px}
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--cb-line);text-align:left;white-space:nowrap}
+  th{color:var(--cb-dim);font-weight:600;font-size:13px}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  td.rank{color:var(--cb-dim);width:1%;font-variant-numeric:tabular-nums}
+  td.who a{color:var(--cb-txt);text-decoration:none;font-weight:600}
+  td.who a:hover{color:var(--cb-accent)}
+  .ally{color:var(--cb-dim);font-size:11px;margin-left:5px;display:none;font-weight:400}
+  body.show-ally .ally{display:inline}
+  .role{font-size:12px;padding:1px 7px;border-radius:10px;border:1px solid var(--cb-line);color:var(--cb-dim)}
+  .role.Leader{color:var(--cb-txt);border-color:var(--cb-accent)}
+  .role.Officer{color:var(--cb-txt)}
+  .since{color:var(--cb-dim);font-size:12px;margin-left:6px}
+  .score{display:inline-block;min-width:46px;text-align:center;font-weight:700;border-radius:6px;padding:2px 8px;
+    color:#0f141c;background:var(--cb-line)}
+  .sub{color:var(--cb-dim);font-size:12px}
+  tr.shade td:first-child{box-shadow:inset 4px 0 0 var(--shade)}
+  .prelim{font-size:11px;color:var(--cb-dim);margin-left:6px}
+  .note{font-size:12px;color:var(--cb-dim);margin-top:18px;max-width:760px}
 </style>
 <link rel="stylesheet" href="site.css">
 <script src="site.js" defer></script>
 </head>
 <body data-topic="members">
-<main></main>
+  <h1>Members</h1>
+  <p class="lede" id="lede">Loading…</p>
+  <div class="tblwrap"><table id="roster"></table></div>
+  <p class="note" id="note"></p>
+  <div id="cb-links"></div>
+
+<script>
+(async function(){
+  // Score colors: green (top of the guild) → less green → yellowish green (bottom). Never red.
+  // Set to false to drop the colors.
+  const SHADE = true;
+
+  let D;
+  try { D = await (await fetch('members-data.json?_=' + Date.now(), { cache:'no-store' })).json(); }
+  catch { document.getElementById('lede').textContent = 'Could not load member data — refresh to try again.'; return; }
+
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const acode = n => { const s = String(n || ''); return s.length === 9 ? `${s.slice(0,3)}-${s.slice(3,6)}-${s.slice(6)}` : s; };
+  const ROLE_ORDER = { Leader:0, Officer:1, Member:2 };
+
+  const rows = [...D.rows].sort((a, b) => b.o - a.o);
+  const hi = Math.max(...rows.map(r => r.o)), lo = Math.min(...rows.map(r => r.o));
+  // Hue 135 (green) at the top score → 75 (yellowish green) at the bottom, by position in the guild's range.
+  const shade = o => { const t = hi > lo ? (o - lo) / (hi - lo) : 1; return `hsl(${75 + 60 * t} 55% 52%)`; };
+
+  const joined = ts => {
+    if (!ts) return '—';
+    const d = new Date(ts * 1000), days = Math.floor((Date.now() - d) / 864e5);
+    const since = days < 60 ? `${days}d` : days < 730 ? `${Math.round(days / 30.4)}mo` : `${(days / 365).toFixed(1)}y`;
+    return `${d.toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}<span class="since">${since}</span>`;
+  };
+
+  const counts = Object.values(D.roles).reduce((a, r) => (a[r] = (a[r] || 0) + 1, a), {});
+  document.getElementById('lede').textContent =
+    `${rows.length} members · ${counts.Leader || 0} leader · ${counts.Officer || 0} officers. Ordered by assessment score.`;
+
+  document.getElementById('roster').innerHTML =
+    `<thead><tr><th>#</th><th>Member</th><th>Role</th><th>Joined</th><th class="num">Score</th>` +
+    `<th class="num">Participation</th><th class="num">Worth</th></tr></thead><tbody>` +
+    rows.map((r, i) => {
+      const role = D.roles[r.id] || 'Member';
+      const col = SHADE ? shade(r.o) : null;
+      return `<tr class="${SHADE ? 'shade' : ''}" style="${col ? `--shade:${col}` : ''}">
+        <td class="rank">${i + 1}</td>
+        <td class="who"><a href="player.html?ally=${esc(r.ally)}">${esc(r.name)}</a>${r.ally ? `<span class="ally">#${acode(r.ally)}</span>` : ''}${r.prelim ? '<span class="prelim">new</span>' : ''}</td>
+        <td><span class="role ${role}">${role}</span></td>
+        <td>${joined(r.joinTs)}</td>
+        <td class="num"><span class="score" style="${col ? `background:${col}` : ''}">${r.o.toFixed(1)}</span></td>
+        <td class="num sub">${r.p.toFixed(1)}</td>
+        <td class="num sub">${r.w.toFixed(1)}</td></tr>`;
+    }).join('') + '</tbody>';
+
+  document.getElementById('note').innerHTML =
+    `<b>Score</b> = the average of <b>Participation</b> (35% raid tickets, 30% TB deployment, 20% raid turnout, 15% Reva readiness, ` +
+    `plus a small bonus for an improving raid score) and <b>Worth</b> (40% raid score, 30% TB GP deployed, 30% GP — higher for strong ` +
+    `accounts by design). Members in their first two weeks are marked <i>new</i>: raids and TBs from before they joined count as zero for now.`;
+})();
+</script>
 </body>
 </html>
