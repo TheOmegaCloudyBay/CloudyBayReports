@@ -57,16 +57,13 @@
     <img src="banner.jpg" alt="Cloudy Bay">
     <div class="cap">
       <h1>Welcome to Cloudy Bay</h1>
-      <p>A Star Wars: Galaxy of Heroes guild — friendly, organized, improving all the time.</p>
     </div>
   </div>
 
-  <p>Cloudy Bay is a SWGoH guild of up to 50 players. We fight the <b>Rise of the Empire</b> Territory Battle,
-    go to war in <b>Territory Wars</b> and run guild <b>raids</b> together, and we plan it all on our Discord.
-    If you’re active and like playing as a team, you’ll find a home here.</p>
-  <p class="dim">This site is the guild’s notice board. It’s built from public game data and refreshed every few
-    hours: our latest results, every member’s contribution, and what we’re farming next. Members can use it to
-    check their own progress and plan their own farming.</p>
+  <p>Cloudy Bay is a free-to-play guild — a mixture of F2P players and various types of fish — but spending will
+    never be a requirement.</p>
+  <p id="results">We currently run <b>Rise of the Empire</b> and do <b>Order 66</b>.</p>
+  <p>We’re looking for active, friendly members to join us on our quest for glory and credits.</p>
 
   <div class="glance" id="glance" hidden></div>
 
@@ -78,11 +75,11 @@
 
   <h2>What we expect</h2>
   <ul class="rules">
-    <li><b>4M+ Galactic Power</b> to join.</li>
-    <li><b>600 raid tickets every day.</b> They fuel our raids — it’s the one daily thing everyone can do.</li>
+    <li><b id="mingp">5M+ Galactic Power</b> to join.</li>
+    <li><b>600 raid tickets every day.</b> They fuel our raids.</li>
     <li><b>Territory Battle:</b> deploy every phase, do your combat missions, and fill platoons when asked.</li>
-    <li><b>Territory War:</b> sign up, set your defense and use your attacks.</li>
-    <li><b>Raids:</b> attack in every raid, even with a small score.</li>
+    <li><b>Territory War:</b> mandatory participation when signing up.</li>
+    <li><b>Raids:</b> mandatory participation, minimum score of 600k.</li>
     <li><b>Farm with the guild.</b> Check the farming targets in each topic — mandatory ones first.</li>
     <li><b>Going away?</b> Tell an officer on Discord. Inactive members without notice are removed.</li>
     <li><b>Leaving and coming back is tracked.</b> A third return isn’t accepted.</li>
@@ -128,6 +125,22 @@
     meta.then(m => {
       if (!m) return;
       const gp = n => (n/1e6).toFixed(0) + 'M';
+      const mil = n => (n/1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+
+      // Live results line: latest TB stars, latest raid score + crate reached.
+      const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
+      const parts = [];
+      if (m.tbStars) parts.push(`We currently run <b>Rise of the Empire</b> with <b>${m.tbStars} stars</b>`);
+      if (m.raid && m.raid.score){
+        const crate = m.raid.crate ? `, reaching <b>crate ${m.raid.crate}</b> of ${m.raid.crates}` : '';
+        parts.push(`do <b>${esc(RAIDS[m.raid.id] || m.raid.id)}</b> with a score of <b>${mil(m.raid.score)}</b>${crate}`);
+      }
+      if (parts.length) document.getElementById('results').innerHTML = parts.join(', and ') + '.';
+
+      // Join requirement: 80% of the guild's average GP, rounded down to the nearest 500k.
+      const minGp = Math.floor(m.gp / Math.max(1, m.members) * 0.8 / 5e5) * 5e5;
+      if (minGp > 0) document.getElementById('mingp').textContent = mil(minGp) + '+ Galactic Power';
+
       const el = document.getElementById('glance');
       el.innerHTML =
         `<div><b>${m.members}/${m.memberMax}</b><span>Members</span></div>` +

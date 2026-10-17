@@ -36,5 +36,7 @@ a.cb-card:hover{border-color:var(--cb-accent)}
 .cb-card b{display:block;font-size:16px}
 .cb-card span{display:block;font-size:13px;color:var(--cb-dim);margin-top:3px}
 .cb-card.soon{opacity:.55;border-style:dashed}
+.cb-more{font-size:18px;margin:34px 0 12px}
+.cb-empty{color:var(--cb-dim);padding:18px;border:1px dashed var(--cb-line);border-radius:10px;margin:0}
 .cb-card .cb-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
   color:var(--cb-dim);border:1px solid var(--cb-line);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:2px}
