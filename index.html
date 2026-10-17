@@ -45,6 +45,18 @@
   a.dcard .join{flex:0 0 auto;background:#fff;color:#4752c4;font-weight:700;font-size:14px;
     padding:9px 15px;border-radius:9px;display:flex;align-items:center;gap:7px;white-space:nowrap}
   a.dcard .join svg{width:18px;height:18px;fill:#4752c4}
+  .news{list-style:none;margin:0;padding:0}
+  .news li{padding:12px 0;border-bottom:1px solid var(--cb-line)}
+  .news li:last-child{border-bottom:0}
+  .news li.old{display:none} .news.all li.old{display:block}
+  .news time{display:block;font-size:12px;color:var(--cb-dim);font-variant-numeric:tabular-nums}
+  .news a{color:var(--cb-txt);font-weight:600;text-decoration:none;font-size:16px}
+  .news a:hover{color:var(--cb-accent)}
+  .news a::after{content:" →";color:var(--cb-accent)}
+  .news p{margin:2px 0 0;color:var(--cb-dim);font-size:14px}
+  .more{margin-top:8px;background:none;border:1px solid var(--cb-line);border-radius:8px;color:var(--cb-dim);
+    padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+  .more:hover{color:var(--cb-txt);border-color:var(--cb-accent)}
   footer{margin-top:34px;color:var(--cb-dim);font-size:12px}
 </style>
 <link rel="stylesheet" href="site.css">
@@ -84,6 +96,10 @@
   </ul>
 
 
+  <h2>Guild announcements</h2>
+  <ul class="news" id="news"><li class="dim">Loading…</li></ul>
+  <button class="more" id="news-more" hidden>Show older announcements</button>
+
   <footer>Public game data. Reports are snapshots, refreshed periodically.</footer>
 
   <script>
@@ -116,6 +132,18 @@
   // Results line + guild-at-a-glance from the shared site.js meta (loaded deferred, so wait for it).
   document.addEventListener('DOMContentLoaded', () => {
     const { meta, esc } = window.CB;
+
+    // Guild announcements — hand-edited announcements.json (newest first; 5 shown, the rest behind a button).
+    fetch('announcements.json?_=' + Date.now(), { cache:'no-store' }).then(r => r.json()).then(list => {
+      list.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      const day = d => new Date(d + 'T12:00:00').toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' });
+      const ul = document.getElementById('news');
+      ul.innerHTML = list.map((n, i) => `<li class="${i >= 5 ? 'old' : ''}"><time>${esc(day(n.date))}</time>` +
+        (n.link ? `<a href="${esc(n.link)}">${esc(n.title)}</a>` : `<b>${esc(n.title)}</b>`) +
+        (n.text ? `<p>${esc(n.text)}</p>` : '') + `</li>`).join('') || '<li class="dim">No announcements yet.</li>';
+      const more = document.getElementById('news-more');
+      if (list.length > 5){ more.hidden = false; more.onclick = () => { ul.classList.add('all'); more.hidden = true; }; }
+    }).catch(() => { document.getElementById('news').innerHTML = '<li class="dim">No announcements yet.</li>'; });
     meta.then(m => {
       if (!m) return;
       const gp = n => (n/1e6).toFixed(0) + 'M';
