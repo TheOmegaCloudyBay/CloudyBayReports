@@ -31,8 +31,6 @@
   .rules li::before{content:"";position:absolute;left:4px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--cb-accent)}
   .rules b{font-weight:600}
 
-  .topics .cb-card{height:100%}
-  .topics .cb-card b{font-size:17px}
 
   a.dcard{display:flex;align-items:center;gap:14px;margin:0 0 6px;padding:14px 16px;
     border-radius:14px;background:#5865f2;color:#fff;text-decoration:none;box-shadow:0 6px 20px rgba(88,101,242,.38)}
@@ -85,8 +83,6 @@
     <li><b>Leaving and coming back is tracked.</b> A third return isn’t accepted.</li>
   </ul>
 
-  <h2>Explore</h2>
-  <ul class="cb-cards topics" id="topics"></ul>
 
   <footer>Public game data. Reports are snapshots, refreshed periodically.</footer>
 
@@ -117,11 +113,9 @@
       .catch(plain);
   })();
 
-  // Topic grid + guild-at-a-glance, both from the shared site.js (loaded deferred, so wait for it).
+  // Results line + guild-at-a-glance from the shared site.js meta (loaded deferred, so wait for it).
   document.addEventListener('DOMContentLoaded', () => {
-    const { TOPICS, meta, esc } = window.CB;
-    document.getElementById('topics').innerHTML = TOPICS.map(t =>
-      `<li><a class="cb-card" href="${t.href}"><b>${esc(t.title)}</b><span>${esc(t.lede)}</span></a></li>`).join('');
+    const { meta, esc } = window.CB;
     meta.then(m => {
       if (!m) return;
       const gp = n => (n/1e6).toFixed(0) + 'M';
