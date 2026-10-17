@@ -2,7 +2,7 @@
   {
     "date": "2026-10-17",
     "title": "Members overview: the guild roster",
-    "text": "Every member with their role, join date and assessment score, best first. Click a name for their full roster.",
+    "text": "Every member with role, join date and GP. Names are colored by assessment rank — hover one for the breakdown. Newly joined and returning members are marked.",
     "link": "members.html"
   },
   {

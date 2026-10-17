@@ -16,22 +16,25 @@
   th{color:var(--cb-dim);font-weight:600;font-size:13px}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   td.rank{color:var(--cb-dim);width:1%;font-variant-numeric:tabular-nums}
-  td.who a{color:var(--cb-txt);text-decoration:none;font-weight:600}
-  td.who a:hover{color:var(--cb-accent)}
+  /* Columns hug their content; the last one (Returns) takes the spare width. */
+  th.last,td.last{width:100%;padding-left:24px}
+  td.who a{color:var(--name, var(--cb-txt));text-decoration:none;font-weight:600}
+  td.who a:hover{text-decoration:underline}
   .ally{color:var(--cb-dim);font-size:11px;margin-left:5px;display:none;font-weight:400}
   body.show-ally .ally{display:inline}
   .role{font-size:12px;padding:1px 7px;border-radius:10px;border:1px solid var(--cb-line);color:var(--cb-dim)}
   .role.Leader{color:#f2c94c;border-color:#d4a72c;background:rgba(242,201,76,.12);font-weight:600}
   .role.Officer{color:#37b24d;border-color:rgba(55,178,77,.5)}
   .since{color:var(--cb-dim);font-size:12px;margin-left:6px}
-  .score{display:inline-block;min-width:46px;text-align:center;font-weight:700;border-radius:6px;padding:2px 8px;
-    color:#0f141c;background:var(--cb-line);border:0;font:inherit;font-weight:700;cursor:help}
-  .score:focus-visible{outline:2px solid var(--cb-txt);outline-offset:2px}
-  tr.shade td:first-child{box-shadow:inset 4px 0 0 var(--shade)}
   .newbie{font-size:11px;font-weight:600;color:#2bb6c4;border:1px solid rgba(43,182,196,.5);border-radius:4px;
     padding:0 5px;margin-left:7px;vertical-align:1px}
+  /* Return marks: once, twice, kick on sight. */
+  .mark{font-size:12px;font-weight:600;padding:1px 7px;border-radius:10px;white-space:nowrap}
+  .mark.m1{color:#e3b341;border:1px solid rgba(227,179,65,.5)}
+  .mark.m2{color:#f08c20;border:1px solid rgba(240,140,32,.6);background:rgba(240,140,32,.1)}
+  .mark.kos{color:#fff;background:#c92a2a}
 
-  /* Score breakdown card (one floating element, positioned by script). */
+  /* Assessment breakdown card (one floating element, positioned by script). */
   #tip{position:fixed;z-index:100;width:310px;max-width:calc(100vw - 24px);padding:12px 14px;border-radius:10px;
     background:var(--cb-card);border:1px solid var(--cb-line);box-shadow:0 10px 30px rgba(0,0,0,.45);
     font-size:13px;line-height:1.45;pointer-events:none;display:none}
@@ -58,23 +61,26 @@
 
 <script>
 (async function(){
-  // Score colors: green (top of the guild) → less green → yellowish green (bottom). Never red.
+  // Name colors by assessment rank: deep green (best) → yellowish green (lowest). Never red.
   // Set to false to drop the colors.
   const SHADE = true;
 
-  let D;
+  let D, MARKS = {};
   try { D = await (await fetch('members-data.json?_=' + Date.now(), { cache:'no-store' })).json(); }
   catch { document.getElementById('lede').textContent = 'Could not load member data — refresh to try again.'; return; }
+  try { MARKS = await (await fetch('member-marks.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
 
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const acode = n => { const s = String(n || ''); return s.length === 9 ? `${s.slice(0,3)}-${s.slice(3,6)}-${s.slice(6)}` : s; };
-  const ROLE_ORDER = { Leader:0, Officer:1, Member:2 };
+  const mil = n => n == null ? '—' : n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(Math.round(n));
+  const daysIn = r => r.joinTs ? Math.floor((Date.now() / 1000 - r.joinTs) / 86400) : 9999;
 
-  const rows = [...D.rows].sort((a, b) => b.o - a.o);
-  // Deep green for 1st → yellow-green for last, stepped evenly by RANK (by raw score, a couple of
-  // outliers would squash everyone else into one shade). Hue 145 → 58, saturation/lightness shift too.
-  const shade = i => { const t = rows.length > 1 ? 1 - i / (rows.length - 1) : 1;
-    return `hsl(${58 + 87 * t} ${78 - 18 * t}% ${60 - 18 * t}%)`; };
+  // Assessment rank (by score) drives the name color; the table itself is ordered by GP.
+  const byScore = [...D.rows].sort((a, b) => b.o - a.o);
+  const aRank = new Map(byScore.map((r, i) => [r.id, i]));
+  const n = byScore.length;
+  const shade = i => { const t = n > 1 ? 1 - i / (n - 1) : 1; return `hsl(${55 + 90 * t} ${80 - 15 * t}% ${62 - 6 * t}%)`; };
+  const rows = [...D.rows].sort((a, b) => (b.gp || 0) - (a.gp || 0));
 
   const joined = ts => {
     if (!ts) return '—';
@@ -82,40 +88,44 @@
     const since = days < 60 ? `${days}d` : days < 730 ? `${Math.round(days / 30.4)}mo` : `${(days / 365).toFixed(1)}y`;
     return `${d.toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}<span class="since">${since}</span>`;
   };
+  // Return marks: each return earns a mark live for a month; 3 live marks = kick on sight (permanent).
+  const markHtml = id => {
+    const m = MARKS[id]; if (!m) return '';
+    if (m.kos) return '<span class="mark kos" title="Reached 3 returns">Kick on sight</span>';
+    if (m.marks >= 2) return `<span class="mark m2" title="Returned twice within a month">Returned twice</span>`;
+    if (m.marks === 1) return `<span class="mark m1" title="Rejoined after leaving — mark lasts a month">Returned</span>`;
+    return '';
+  };
 
   const counts = Object.values(D.roles).reduce((a, r) => (a[r] = (a[r] || 0) + 1, a), {});
   document.getElementById('lede').textContent =
-    `${rows.length} members · ${counts.Leader || 0} leader · ${counts.Officer || 0} officers. Ordered by assessment score.`;
-
-  // Members in their first month are tagged "newly joined" (the score is also marked preliminary
-  // for the first two weeks, inside the breakdown).
-  const daysIn = r => r.joinTs ? Math.floor((Date.now() / 1000 - r.joinTs) / 86400) : 9999;
+    `${rows.length} members · ${counts.Leader || 0} leader · ${counts.Officer || 0} officers. Ordered by Galactic Power.`;
 
   document.getElementById('roster').innerHTML =
-    `<thead><tr><th>#</th><th>Member</th><th>Role</th><th>Joined</th><th class="num">Score</th></tr></thead><tbody>` +
+    `<thead><tr><th>#</th><th>Member</th><th>Role</th><th>Joined</th><th class="num">GP</th><th class="last">Returns</th></tr></thead><tbody>` +
     rows.map((r, i) => {
       const role = D.roles[r.id] || 'Member';
-      const col = SHADE ? shade(i) : null;
-      return `<tr class="${SHADE ? 'shade' : ''}" style="${col ? `--shade:${col}` : ''}">
+      const col = SHADE ? shade(aRank.get(r.id)) : null;
+      return `<tr>
         <td class="rank">${i + 1}</td>
-        <td class="who"><a href="player.html?ally=${esc(r.ally)}">${esc(r.name)}</a>${r.ally ? `<span class="ally">#${acode(r.ally)}</span>` : ''}${daysIn(r) < 30 ? '<span class="newbie">Newly joined</span>' : ''}</td>
+        <td class="who"><a href="player.html?ally=${esc(r.ally)}" data-id="${esc(r.id)}" style="${col ? `--name:${col}` : ''}">${esc(r.name)}</a>${r.ally ? `<span class="ally">#${acode(r.ally)}</span>` : ''}${daysIn(r) < 30 ? '<span class="newbie">Newly joined</span>' : ''}</td>
         <td><span class="role ${role}">${role}</span></td>
         <td>${joined(r.joinTs)}</td>
-        <td class="num"><button type="button" class="score" data-i="${i}" aria-describedby="tip" style="${col ? `background:${col}` : ''}">${r.o.toFixed(1)}</button></td></tr>`;
+        <td class="num">${mil(r.gp)}</td>
+        <td class="last">${markHtml(r.id)}</td></tr>`;
     }).join('') + '</tbody>';
 
-  // ---- score breakdown card ----
-  const mil = n => n == null ? '—' : n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(Math.round(n));
-  const pct = n => n == null ? '—' : Math.round(n) + '%';
+  // ---- assessment breakdown card, on hovering (or focusing) a name ----
+  const pct = v => v == null ? '—' : Math.round(v) + '%';
   const ln = (k, v) => `<div class="ln"><span>${k}</span><b>${v}</b></div>`;
-  function tipHtml(r, i){
-    const d = daysIn(r);
-    return `<div class="hd"><b>${esc(r.name)} · ${r.o.toFixed(1)}</b><span>rank ${i + 1} of ${rows.length}</span></div>` +
+  function tipHtml(r){
+    const d = daysIn(r), rk = aRank.get(r.id);
+    return `<div class="hd"><b>${esc(r.name)} · ${r.o.toFixed(1)}</b><span>assessment rank ${rk + 1} of ${n}</span></div>` +
       (r.prelim ? `<div class="pre"><b>Preliminary</b> — joined ${d === 0 ? 'today' : d === 1 ? 'yesterday' : d + ' days ago'}. Raids and TBs from before they joined count as zero, so this score will rise.</div>` : '') +
       `<div class="grp"><span>Participation</span><span>${r.p.toFixed(1)}</span></div>` +
       ln('Raid tickets (35%)', `${pct(r.pt)} · ${r.tix == null ? '—' : Math.round(r.tix)}/day`) +
       ln('TB deployment (30%)', `${pct(r.pTb)} · ${r.dep == null ? '—' : r.dep.toFixed(1) + '× GP'}`) +
-      ln(`Raid turnout (20%)`, `${pct(r.pR)} of ${D.raidCount} raids`) +
+      ln('Raid turnout (20%)', `${pct(r.pR)} of ${D.raidCount} raids`) +
       ln('Reva readiness (15%)', r.reva == null ? '—' : `${r.reva}${r.revaTier && r.revaTier !== 'NONE' ? ' · ' + r.revaTier.toLowerCase() : ''}`) +
       (r.pTr > 0 ? ln('Improving raid score', '+' + r.pTr.toFixed(1)) : '') +
       `<div class="grp"><span>Worth</span><span>${r.w.toFixed(1)}</span></div>` +
@@ -123,35 +133,30 @@
       ln('TB GP deployed (30%)', `${pct(r.wD)} · ${mil(r.deployGp)}`) +
       ln('Galactic Power (30%)', `${pct(r.wG)} · ${mil(r.gp)}`);
   }
+  const byId = new Map(D.rows.map(r => [r.id, r]));
   const tip = document.getElementById('tip');
-  let pinned = null;
-  function show(btn){
-    const i = +btn.dataset.i;
-    tip.innerHTML = tipHtml(rows[i], i);
+  function show(a){
+    tip.innerHTML = tipHtml(byId.get(a.dataset.id));
     tip.classList.add('on');
-    const b = btn.getBoundingClientRect(), t = tip.getBoundingClientRect();
-    let x = b.right - t.width, y = b.bottom + 6;
+    const b = a.getBoundingClientRect(), t = tip.getBoundingClientRect();
+    let x = b.left, y = b.bottom + 6;
+    if (x + t.width > innerWidth - 8) x = innerWidth - t.width - 8;
     if (y + t.height > innerHeight - 8) y = b.top - t.height - 6;     // flip above near the bottom
     tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px';
   }
-  const hide = () => { if (!pinned) tip.classList.remove('on'); };
+  const hide = () => tip.classList.remove('on');
   const roster = document.getElementById('roster');
-  roster.addEventListener('mouseover', e => { const b = e.target.closest('.score'); if (b) show(b); });
-  roster.addEventListener('mouseout', e => { if (e.target.closest('.score')) hide(); });
-  roster.addEventListener('focusin', e => { const b = e.target.closest('.score'); if (b) show(b); });
-  roster.addEventListener('focusout', () => { pinned = null; hide(); });
-  // Tap / click pins it open (phones have no hover); tapping elsewhere closes it.
-  document.addEventListener('click', e => {
-    const b = e.target.closest('.score');
-    if (b){ pinned = pinned === b ? null : b; pinned ? show(b) : (tip.classList.remove('on')); return; }
-    pinned = null; tip.classList.remove('on');
-  });
-  addEventListener('scroll', () => { pinned = null; tip.classList.remove('on'); }, { passive:true });
+  roster.addEventListener('mouseover', e => { const a = e.target.closest('td.who a'); if (a) show(a); });
+  roster.addEventListener('mouseout', e => { if (e.target.closest('td.who a')) hide(); });
+  roster.addEventListener('focusin', e => { const a = e.target.closest('td.who a'); if (a) show(a); });
+  roster.addEventListener('focusout', hide);
+  addEventListener('scroll', hide, { passive:true });
 
   document.getElementById('note').innerHTML =
-    `Hover (or tap) a score for its breakdown. <b>Score</b> = the average of <b>Participation</b> (raid tickets, TB deployment, ` +
-    `raid turnout, Reva readiness, plus a small bonus for an improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP — ` +
-    `higher for strong accounts by design). Members in their first month are tagged <i>newly joined</i>.`;
+    `Names are colored by assessment rank — deep green for the top, yellowish green further down. Hover a name for the breakdown: ` +
+    `the score averages <b>Participation</b> (raid tickets, TB deployment, raid turnout, Reva readiness, plus a small bonus for an ` +
+    `improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP). Members in their first month are tagged <i>newly joined</i>. ` +
+    `<b>Returns</b>: members who rejoined after leaving get a mark that lasts a month; three marks means kick on sight.`;
 })();
 </script>
 </body>
