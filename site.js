@@ -109,17 +109,28 @@
     });
   }
 
-  // Topic links: under the results on a generated topic page (#cb-links), or as the whole page on a
-  // static hub (members.html: <body data-topic> with a <main>).
+  // Sub-page links: a small nav row next to the page title, on every page of a topic — the topic's
+  // results page first, then its pages. Styled like the top bar; the current page is underlined.
+  const SUB_PARENT = { 'reva-readiness.html':'tb-farms.html' };   // pages reached through a list page
+  function renderSubNav(){
+    const t = TOPICS.find(x => x.id === topicOf()); if (!t) return;
+    const items = [{ href:t.href, title: t.id === 'members' ? 'Overview' : 'Results' }, ...t.pages.filter(p => p.href && !p.soon)];
+    if (items.length < 2) return;
+    const h1 = [...document.querySelectorAll('h1')].find(h => !h.closest('.cb-bar')); if (!h1) return;
+    if (h1.parentElement.classList.contains('cb-titlerow')) return;   // already done
+    const cur = SUB_PARENT[file] || file;
+    const row = document.createElement('div');
+    row.className = 'cb-titlerow';
+    h1.replaceWith(row);
+    row.append(h1);
+    row.insertAdjacentHTML('beforeend', `<nav class="cb-sub">${items.map(p =>
+      `<a href="${esc(p.href)}"${p.href.toLowerCase() === cur ? ' class="on"' : ''}>${esc(p.title)}</a>`).join('')}</nav>`);
+  }
+
+  // A static topic hub (members.html: <body data-topic> with a <main>) lists its pages as cards.
   function renderTopicLinks(){
     const t = TOPICS.find(x => x.id === document.body.dataset.topic); if (!t) return;
-    const slot = document.getElementById('cb-links');
-    if (slot){
-      if (!t.pages.length) return;
-      slot.classList.add('cb-hub');
-      slot.innerHTML = `<h2 class="cb-more">More in ${esc(t.label)}</h2><ul class="cb-cards">${t.pages.map(cardHtml).join('')}</ul>`;
-      return;
-    }
+    if (document.getElementById('cb-links')) return;   // generated results page: links are in the sub-nav
     const main = document.querySelector('main') || document.body;
     main.classList.add('cb-hub');
     main.insertAdjacentHTML('beforeend',
@@ -142,6 +153,14 @@
     renderBar();
     if (document.body.dataset.topic) renderTopicLinks();
     if (document.body.dataset.list) renderList(document.body.dataset.list);
+    renderSubNav();
+    // Some pages draw (and redraw) their title after loading data, e.g. the Players page switching
+    // between the directory and a member — re-attach the sub-links whenever a new title appears.
+    let queued = false;
+    new MutationObserver(() => {
+      if (queued) return; queued = true;
+      queueMicrotask(() => { queued = false; renderSubNav(); });
+    }).observe(document.body, { childList:true, subtree:true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
