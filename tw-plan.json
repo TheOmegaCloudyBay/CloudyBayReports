@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-18T06:35:37.781Z",
+  "generated": "2026-10-18T10:36:17.343Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -501,7 +501,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 2721690
+          "score": 2727700
         },
         {
           "team": "Home One",
@@ -931,12 +931,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2721690
+          "score": 2727700
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2721690
+          "score": 2727700
         },
         {
           "team": "Chimaera",
@@ -1034,7 +1034,7 @@
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Carth with Zaalbar Omicron",
           "player": "R0ttin",
           "weak": true
         },
@@ -1159,13 +1159,13 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "R0ttin",
+          "team": "Great Mothers",
+          "player": "4L1V3 2 THR1V3",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "4L1V3 2 THR1V3",
+          "team": "Nightsisters",
+          "player": "R0ttin",
           "weak": true
         },
         {
