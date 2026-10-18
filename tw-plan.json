@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-18T14:36:02.207Z",
+  "generated": "2026-10-18T18:36:15.479Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -476,7 +476,7 @@
         {
           "team": "Home One",
           "player": "морфей",
-          "score": 3910566
+          "score": 3910991
         },
         {
           "team": "Home One",
@@ -511,7 +511,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2658094
+          "score": 2663817
         },
         {
           "team": "Home One",
@@ -536,7 +536,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2343737
+          "score": 2344046
         },
         {
           "team": "Home One",
@@ -881,12 +881,12 @@
         {
           "team": "Chimaera",
           "player": "морфей",
-          "score": 3910566
+          "score": 3910991
         },
         {
           "team": "Endurance",
           "player": "морфей",
-          "score": 3910566
+          "score": 3910991
         },
         {
           "team": "Chimaera",
@@ -951,7 +951,7 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2658094
+          "score": 2663817
         }
       ],
       "note": ""
@@ -1044,11 +1044,6 @@
           "weak": true
         },
         {
-          "team": "Bo Katan (Mand'alor)",
-          "player": "original name",
-          "weak": true
-        },
-        {
           "team": "Tuskens",
           "player": "Ven of Thila",
           "weak": true
@@ -1081,6 +1076,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "EW",
           "filler": true
         }
       ],
@@ -1174,19 +1174,9 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "original name",
-          "weak": true
-        },
-        {
           "team": "Carth with Zaalbar Omicron",
           "player": "Theduke321",
           "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "EW",
-          "filler": true
         },
         {
           "team": "Sith Triumvirate",
@@ -1211,6 +1201,16 @@
         {
           "team": "Sith Triumvirate",
           "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Забулдыга",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DAVE115",
           "filler": true
         }
       ],
