@@ -53,6 +53,31 @@
     .zc .code{font-size:52px} .zc .kind,.zc .slots,.zc ul,.zc .more,.zc .empty{display:none} .zc .cnt{display:block;font-size:44px}
     .plist{display:block} .detail{display:none}
   }
+  .zc .who,.detail .who,.plist .who{color:var(--cb-dim);font-weight:400}
+  .dteams{margin-top:30px}
+  .dhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+  .dhead h2{margin:0;font-size:20px}
+  .dhead label{font-size:13px;color:var(--cb-dim)}
+  .dhead select{margin-left:6px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:6px;padding:3px 6px;font:inherit}
+  .credit{font-size:12px;color:var(--cb-dim);margin:4px 0 12px}
+  .credit a{color:inherit}
+  .dlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+  .tcard{padding:12px 14px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
+  .tcard .th{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .tcard .th b{font-size:15px}
+  .tcard .gr{font-size:12px;white-space:nowrap;color:var(--cb-dim)}
+  .tcard .gr .d{font-weight:700;color:var(--cb-txt);font-size:14px}
+  .tcard .tier{font-size:11px;color:var(--cb-dim);text-transform:uppercase;letter-spacing:.05em}
+  .tcard .lu{font-size:12px;color:var(--cb-dim);margin:4px 0 6px}
+  .tcard .lu .new{color:#f0a020}
+  .tcard .nt{font-size:12px;color:#f0a020;margin:0 0 6px}
+  .tcard .pl{display:flex;flex-wrap:wrap;gap:4px}
+  .tcard .pl span{font-size:12px;padding:1px 7px;border-radius:10px;background:var(--cb-bg);border:1px solid var(--cb-line);white-space:nowrap}
+  .tcard .pl span em{font-style:normal;color:var(--cb-dim);margin-left:4px}
+  .tcard .cnt2{font-size:12px;color:var(--cb-dim);margin:0 0 4px}
+  .tcard .none{font-size:12px;color:var(--cb-dim);font-style:italic}
+  .ally{color:var(--cb-dim);font-size:11px;margin-left:3px;display:none}
+  body.show-ally .ally{display:inline}
   .legend{display:flex;gap:16px;font-size:13px;color:var(--cb-dim);margin:10px 4px 0;flex-wrap:wrap}
   .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 </style>
@@ -68,6 +93,23 @@
   <div class="detail" id="detail" hidden></div>
   <div class="plist" id="plist"></div>
 
+  <section class="dteams" id="dteams" hidden>
+    <div class="dhead">
+      <h2>Defense teams</h2>
+      <label>Show members with every unit at
+        <select id="minLvl">
+          <option value="0">any level (owns all)</option>
+          <option value="12">G12+</option>
+          <option value="18" selected>R5+</option>
+          <option value="20">R7+</option>
+          <option value="22">R9+</option>
+        </select>
+      </label>
+    </div>
+    <p class="credit" id="credit"></p>
+    <div class="dlist" id="dlist"></div>
+  </section>
+
 <script>
 (async function(){
   // Our side of the board, front (nearest the enemy) on the right — as in game.
@@ -78,12 +120,15 @@
     { x0: 508, x1: 742, zones: [['mft','Middle front top','sq'], ['mfb','Middle front bottom','sq']] },
     { x0: 752, x1: 988, zones: [['ft','Front top','sq'], ['fb','Front bottom','sq']] },
   ];
-  // The table: a wide rounded rectangle (round-table look, but the corner zones keep usable space).
-  const T = { x: 6, y: 6, w: 988, h: 688, r: 210 }, GAP = 10;
+  // The board: a rectangle with slightly rounded corners.
+  const T = { x: 6, y: 6, w: 988, h: 688, r: 28 }, GAP = 10;
 
   let PLAN = { slots: 0, zones: {} };
   try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  // A plan entry is a team name, or { "team": "...", "player": "..." } to say whose team it is.
+  const entry = u => typeof u === 'string' ? esc(u)
+    : esc(u.team || '') + (u.player ? ` <span class="who">— ${esc(u.player)}</span>` : '');
 
   // Is a point inside the rounded table?
   function inTable(x, y){
@@ -129,7 +174,7 @@
           `<div class="top"><span class="code">${id.toUpperCase()}</span><span class="kind">${kind === 'fl' ? 'Fleet' : 'Squads'}</span>` +
           (PLAN.slots ? `<span class="slots">${PLAN.slots} slots</span>` : '') + `</div>` +
           `<div class="cnt">${units.length ? units.length + (units.length === 1 ? ' team' : ' teams') : '—'}</div>` +
-          (units.length ? `<ul>${shown.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` +
+          (units.length ? `<ul>${shown.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` +
                           (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more</div>` : '')
                         : `<div class="empty">Not assigned yet</div>`) +
         `</div></foreignObject></g>`;
@@ -142,7 +187,7 @@
   const ORDER = ['ft','fb','mft','mfb','mbf','mbt','mbb','bf','bt','bb'];
   document.getElementById('plist').innerHTML = ORDER.map(id => zones.find(z => z.id === id)).filter(Boolean).map(z =>
     `<section id="z-${z.id}"><h3>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h3>` +
-    (z.units.length ? `<ul>${z.units.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+    (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
     (z.note ? `<p>${esc(z.note)}</p>` : '') + `</section>`).join('');
   if (PLAN.slots) document.getElementById('slotsNote').textContent = `${PLAN.slots} slots per zone this war`;
   if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
@@ -154,7 +199,7 @@
     const z = zones.find(x => x.id === id); if (!z) return;
     detail.hidden = false;
     detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}${PLAN.slots ? ' · ' + PLAN.slots + ' slots' : ''}</small></h2>` +
-      (z.units.length ? `<ul>${z.units.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+      (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
       (z.note ? `<p>${esc(z.note)}</p>` : '');
     history.replaceState(null, '', '#' + id);
     if (matchMedia('(max-width:640px)').matches) document.getElementById('z-' + id)?.scrollIntoView({ behavior:'smooth', block:'start' });
@@ -162,6 +207,43 @@
   map.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
   map.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); pick(g.dataset.id); } });
   if (location.hash) pick(location.hash.slice(1));
+})();
+</script>
+<script>
+// Defense teams: AhnaldT101's Grand Arena list (graded on offense/defense) × the members who own the
+// whole lineup, with their weakest unit's level. Monthly snapshot, written by the publish run.
+(async function(){
+  let D;
+  try { D = await (await fetch('tw-teams.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch { return; }
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const acode = n => { const s = String(n || ''); return s.length === 9 ? `${s.slice(0,3)}-${s.slice(3,6)}-${s.slice(6)}` : s; };
+  const lvl = v => v >= 13 ? 'R' + (v - 13) : 'G' + v;
+  const grade = v => v == null ? '—' : Number(v).toFixed(1);
+
+  document.getElementById('credit').innerHTML =
+    `Team list and grades by <a href="${esc(D.source)}" target="_blank" rel="noopener">${esc(D.author)}</a> ` +
+    `(Grand Arena 5v5 — the defense grade is the closest guide for TW), snapshot ${new Date(D.fetched).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}. ` +
+    `Members listed own the whole lineup; the level shown is their weakest unit. Toons marked “not in game yet” aren’t counted.`;
+
+  // Best defense first; teams the author says not to use on defense go last.
+  const teams = [...D.teams].sort((a, b) => (b.defense ?? -1) - (a.defense ?? -1) || (b.overall ?? 0) - (a.overall ?? 0));
+  const sel = document.getElementById('minLvl');
+  function draw(){
+    const min = +sel.value;
+    document.getElementById('dlist').innerHTML = teams.map(t => {
+      const ps = t.players.filter(p => p.min >= min);
+      const lineup = t.units.map(u => u.id === 'flex' ? 'Flex slot' : u.id ? esc(u.name) : `<span class="new">${esc(u.name)} (not in game yet)</span>`).join(', ');
+      return `<div class="tcard"><div class="th"><b>${esc(t.name)}</b><span class="gr">DEF <span class="d">${grade(t.defense)}</span> · OFF ${grade(t.offense)}</span></div>
+        <div class="tier">${esc(t.tier)}</div>
+        <div class="lu">${lineup}</div>${t.note ? `<p class="nt">${esc(t.note)}</p>` : ''}
+        <p class="cnt2">${ps.length} member${ps.length === 1 ? '' : 's'}</p>
+        ${ps.length ? `<div class="pl">${ps.map(p => `<span>${esc(p.name)}${p.ally ? `<span class="ally">#${acode(p.ally)}</span>` : ''}<em>${lvl(p.min)}</em></span>`).join('')}</div>`
+                     : '<span class="none">Nobody at this level yet</span>'}</div>`;
+    }).join('');
+  }
+  sel.onchange = draw;
+  draw();
+  document.getElementById('dteams').hidden = false;
 })();
 </script>
 </body>
