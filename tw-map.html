@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TW map — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1500px;
+    padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
+  h1{font-size:26px}
+  .lede{color:var(--cb-dim);margin:0 0 14px;font-size:14px;max-width:760px}
+  :root{--sq:#2b8fd6;--fl:#9b6bdf}
+
+  .board{position:relative}
+  .board svg{display:block;width:100%;height:auto}
+  .dir{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--cb-dim);margin:0 6px 6px}
+  .dir .enemy{color:#e0524a}
+
+  .table-rim{fill:none;stroke:var(--cb-line);stroke-width:10}
+  .zone rect{fill:color-mix(in srgb, var(--z) 16%, var(--cb-bg));stroke:color-mix(in srgb, var(--z) 70%, transparent);
+    stroke-width:2;cursor:pointer;transition:fill .15s}
+  .zone:hover rect,.zone.on rect{fill:color-mix(in srgb, var(--z) 32%, var(--cb-bg))}
+  .zone.on rect{stroke:var(--cb-txt);stroke-width:3}
+  .zone:focus{outline:none} .zone:focus-visible rect{stroke:var(--cb-txt);stroke-width:3}
+  .zone.sq{--z:var(--sq)} .zone.fl{--z:var(--fl)}
+
+  /* Zone content (HTML inside the SVG so lists wrap and scale with the map). */
+  .zc{height:100%;display:flex;flex-direction:column;gap:3px;overflow:hidden;font-family:"Segoe UI",system-ui,sans-serif;
+    color:var(--cb-txt);pointer-events:none}
+  .zc .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .zc .code{font-size:22px;font-weight:800;letter-spacing:.02em}
+  .zc .kind{font-size:12px;font-weight:600;color:var(--z);text-transform:uppercase;letter-spacing:.06em}
+  .zc ul{margin:2px 0 0;padding:0;list-style:none;font-size:14px;line-height:1.35}
+  .zc li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .zc li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--z);margin-right:6px;vertical-align:2px}
+  .zc .empty{font-size:13px;color:var(--cb-dim);font-style:italic}
+  .zc .more{font-size:12px;color:var(--cb-dim)}
+
+  .detail{margin-top:18px;padding:14px 16px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
+  .detail h2{margin:0;font-size:18px}
+  .detail h2 small{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:8px}
+  .detail ul{margin:8px 0 0;padding-left:20px;columns:2 220px}
+  .detail p{margin:6px 0 0;color:var(--cb-dim);font-size:14px}
+  .zc .cnt{display:none;font-size:30px;font-weight:700;color:var(--z)}
+  .plist{display:none;margin-top:14px}
+  .plist section{padding:10px 12px;border:1px solid var(--cb-line);border-radius:8px;background:var(--cb-card);margin:0 0 8px}
+  .plist h3{margin:0;font-size:15px} .plist h3 small{font-weight:400;color:var(--cb-dim);font-size:12px;margin-left:6px}
+  .plist ul{margin:4px 0 0;padding-left:18px;font-size:14px} .plist p{margin:4px 0 0;font-size:13px;color:var(--cb-dim)}
+  @media (max-width:640px){
+    .zc .code{font-size:52px} .zc .kind,.zc ul,.zc .more,.zc .empty{display:none} .zc .cnt{display:block;font-size:44px}
+    .plist{display:block} .detail{display:none}
+  }
+  .zc .who,.detail .who,.plist .who{color:var(--cb-dim);font-weight:400}
+  .dteams{margin-top:30px}
+  .dhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
+  .dhead h2{margin:0;font-size:20px}
+  .dhead label{font-size:13px;color:var(--cb-dim)}
+  .dhead select{margin-left:6px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:6px;padding:3px 6px;font:inherit}
+  .credit{font-size:12px;color:var(--cb-dim);margin:4px 0 12px}
+  .credit a{color:inherit}
+  .grp-h{font-size:16px;margin:22px 0 0} .grp-h span{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:4px}
+  .grp-s{font-size:12px;color:var(--cb-dim);margin:2px 0 10px}
+  .grp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+  .tcard.def{border-left:3px solid #37b24d}
+  .tcard.off{opacity:.75}
+  .tcard .gp{color:#37b24d;font-weight:600}
+  .tcard{padding:12px 14px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
+  .tcard .th{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .tcard .th b{font-size:15px}
+  .tcard .gr{font-size:12px;white-space:nowrap;color:var(--cb-dim)}
+  .tcard .gr .d{font-weight:700;color:var(--cb-txt);font-size:14px}
+  .tcard .tier{font-size:11px;color:var(--cb-dim);text-transform:uppercase;letter-spacing:.05em}
+  .tcard .lu{font-size:12px;color:var(--cb-dim);margin:4px 0 6px}
+  .tcard .lu .new{color:#f0a020}
+  .tcard .nt{font-size:12px;color:#f0a020;margin:0 0 6px}
+  .tcard .pl{display:flex;flex-wrap:wrap;gap:4px}
+  .tcard .pl span{font-size:12px;padding:1px 7px;border-radius:10px;background:var(--cb-bg);border:1px solid var(--cb-line);white-space:nowrap}
+  .tcard .pl span em{font-style:normal;color:var(--cb-dim);margin-left:4px}
+  .tcard .cnt2{font-size:12px;color:var(--cb-dim);margin:0 0 4px}
+  .tcard .none{font-size:12px;color:var(--cb-dim);font-style:italic}
+  .ally{color:var(--cb-dim);font-size:11px;margin-left:3px;display:none}
+  body.show-ally .ally{display:inline}
+  .weak{font-size:10px;font-weight:600;color:#f0a020;border:1px solid rgba(240,160,32,.5);border-radius:4px;padding:0 4px;white-space:nowrap}
+  .zc .fill{font-size:12px;color:var(--cb-dim);margin-left:auto;font-variant-numeric:tabular-nums}
+  .pinfo{font-size:13px;color:var(--cb-dim);margin:0 0 10px;max-width:900px} .pinfo .warn{color:#f0a020}
+  .finder{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 6px}
+  .finder label{font-size:14px;font-weight:600}
+  .finder input{min-width:240px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:8px;padding:7px 10px;font:inherit}
+  .finder input:focus{outline:none;border-color:var(--cb-accent)}
+  .finder button{background:none;border:1px solid var(--cb-line);border-radius:8px;color:var(--cb-dim);padding:6px 10px;font:inherit;cursor:pointer}
+  .whores{margin:0 0 10px;padding:10px 12px;border-radius:8px;background:var(--cb-card);border:1px solid var(--cb-accent);font-size:14px;line-height:1.7}
+  .whores .wn{font-weight:700;margin-right:6px}
+  .wk{color:#f0a020 !important}
+  a.tl{color:inherit;text-decoration:none;pointer-events:auto} a.tl:hover{color:var(--cb-accent);text-decoration:underline}
+  .zc ul{pointer-events:auto}
+  li.fil{font-style:italic;opacity:.72} .filx{font-style:italic;opacity:.8}
+  .fl-tag{font-size:10px;font-weight:600;font-style:normal;color:var(--cb-dim);border:1px solid var(--cb-line);border-radius:4px;padding:0 4px}
+  body.filtering li.fil.hit{opacity:1}
+  body.filtering li[data-p]{opacity:.22}
+  body.filtering li[data-p].hit{opacity:1;font-weight:700}
+  body.filtering li[data-p].hit .who{color:var(--cb-txt)}
+  .zone.hit rect{stroke:var(--cb-accent);stroke-width:4}
+  .legend{display:flex;gap:16px;font-size:13px;color:var(--cb-dim);margin:10px 4px 0;flex-wrap:wrap}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body>
+  <h1>TW map</h1>
+  <p class="lede" id="lede">Where each team goes on defense. Click a zone for its full list.</p>
+  <div class="finder">
+    <label for="who">Find a member</label>
+    <input id="who" list="whoList" placeholder="Type a name…" autocomplete="off">
+    <datalist id="whoList"></datalist>
+    <button type="button" id="whoClear" hidden>Clear</button>
+  </div>
+  <p class="whores" id="whoRes" hidden></p>
+  <p class="pinfo" id="planInfo"></p>
+  <div class="dir"><span>Back</span><span class="enemy">Front · enemy →</span></div>
+  <div class="board" id="board"><svg id="map" viewBox="0 0 1400 700" role="img" aria-label="Territory War map"></svg></div>
+  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span><i class="filx">Grey italic</i> = filler (lower grade or relics, to fill every slot)</span><span><b class="wk">Orange name</b> = best available team (the member has nothing graded 4+ on defense at R5+)</span></div>
+  <div class="detail" id="detail" hidden></div>
+  <div class="plist" id="plist"></div>
+
+  <p class="pinfo" style="margin-top:22px">Which teams we can field, and how they rank: <a href="tw-teams.html" style="color:inherit">TW teams →</a></p>
+
+<script>
+(async function(){
+  let PLAN = { zones: {} };
+  try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const mil = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : Math.round(n / 1e3) + 'k';
+  // Team name → its card on our Teams page (listed and guild-added teams alike).
+  const slug = n => String(n).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const tname = n => n ? `<a class="tl" href="tw-teams.html#team-${slug(n)}" title="See this team on the Teams page">${esc(n)}</a>` : '';
+  // A plan entry is a team name, or { team, player, score?, weak? }.
+  const entry = (u, full) => typeof u === 'string' ? esc(u)
+    : tname(u.team || '') + (u.player ? ` <span class="who${u.weak ? ' wk' : ''}">— <bdi>${esc(u.player)}</bdi>${u.score ? ' · ' + mil(u.score) : ''}</span>` : '')
+      + (u.weak && full ? ' <span class="weak">best available</span>' : '');
+  const li = (u, full) => `<li data-p="${esc((u.player || '').toLowerCase())}"${u.filler ? ' class="fil"' : ''}>${entry(u, full)}${u.filler && full ? ' <span class="fl-tag">filler</span>' : ''}</li>`;
+
+  // Our side of the board, front (nearest the enemy) on the right — as in game.
+  //   back: bf/bt/bb · middle back: mbf/mbt/mbb · middle front: mft/mfb · front: ft/fb
+  const DEF = [
+    [['bf','Back fleet','fl'], ['bt','Back top','sq'], ['bb','Back bottom','sq']],
+    [['mbf','Middle back fleet','fl'], ['mbt','Middle back top','sq'], ['mbb','Middle back bottom','sq']],
+    [['mft','Middle front top','sq'], ['mfb','Middle front bottom','sq']],
+    [['ft','Front top','sq'], ['fb','Front bottom','sq']],
+  ];
+  // Size the board to the fullest zone (up to 40 names), so every name is visible.
+  const W = 1400, GAP = 12, PAD = 8, LINE = 19, HEAD = 50, MAXN = 40;
+  const n = id => Math.min(MAXN, (PLAN.zones?.[id]?.units || []).length);
+  const need = col => col.reduce((s, [id]) => s + HEAD + Math.max(3, n(id)) * LINE + 20, 0) + GAP * (col.length - 1);
+  const H = Math.max(700, ...DEF.map(need)) + 2 * PAD;
+  const T = { x: 6, y: 6, w: W - 12, h: H - 12, r: 28 };
+  const colW = (T.w - 2 * PAD - GAP * 3) / 4;
+  const map = document.getElementById('map');
+  map.setAttribute('viewBox', `0 0 ${W} ${H}`);
+
+  const zones = [];
+  const tableRect = `x="${T.x}" y="${T.y}" width="${T.w}" height="${T.h}" rx="${T.r}"`;
+  let svg = `<defs><clipPath id="table"><rect ${tableRect}/></clipPath></defs><g clip-path="url(#table)">`;
+  DEF.forEach((col, ci) => {
+    const x0 = T.x + PAD + ci * (colW + GAP), x1 = x0 + colW;
+    // Zones in a column share its height in proportion to what they hold (but never below a minimum).
+    const want = col.map(([id]) => HEAD + Math.max(3, n(id)) * LINE + 20);
+    const avail = T.h - 2 * PAD - GAP * (col.length - 1), sum = want.reduce((a, b) => a + b, 0);
+    let y = T.y + PAD;
+    col.forEach(([id, name, kind], i) => {
+      const h = want[i] / sum * avail, y0 = y, y1 = y + h; y = y1 + GAP;
+      const z = PLAN.zones?.[id] || {}, units = z.units || [];
+      const fit = Math.max(1, Math.floor((h - HEAD - 16) / LINE));
+      const shown = units.length > fit ? units.slice(0, fit - 1) : units;
+      zones.push({ id, name, kind, units, note: z.note || '' });
+      svg += `<g class="zone ${kind}" data-id="${id}" tabindex="0" role="button" aria-label="${esc(name)}">` +
+        `<rect x="${x0}" y="${y0}" width="${colW}" height="${h}" rx="14"/>` +
+        `<foreignObject x="${x0 + 14}" y="${y0 + 12}" width="${colW - 28}" height="${h - 24}"><div xmlns="http://www.w3.org/1999/xhtml" class="zc">` +
+          `<div class="top"><span class="code">${id.toUpperCase()}</span><span class="kind">${kind === 'fl' ? 'Fleet' : 'Squads'}</span>` +
+          (PLAN.slots ? `<span class="fill">${units.length} / ${PLAN.slots}</span>` : `<span class="fill">${units.length}</span>`) + `</div>` +
+          `<div class="cnt">${units.length ? units.length + (units.length === 1 ? ' team' : ' teams') : '—'}</div>` +
+          (units.length ? `<ul>${shown.map(u => li(u)).join('')}</ul>` +
+                          (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more — click the zone</div>` : '')
+                        : `<div class="empty">Not assigned yet</div>`) +
+        `</div></foreignObject></g>`;
+    });
+  });
+  svg += `</g><rect class="table-rim" ${tableRect}/>`;
+  map.innerHTML = svg;
+
+  const ORDER = ['ft','fb','mft','mfb','mbf','mbt','mbb','bf','bt','bb'];
+  const byId = id => zones.find(z => z.id === id);
+  document.getElementById('plist').innerHTML = ORDER.map(byId).filter(Boolean).map(z =>
+    `<section id="z-${z.id}"><h3>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h3>` +
+    (z.units.length ? `<ul>${z.units.map(u => li(u, true)).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+    (z.note ? `<p>${esc(z.note)}</p>` : '') + `</section>`).join('');
+
+  if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
+  const info = [];
+  info.push(PLAN.slots ? `<b>${PLAN.slots}</b> slots per zone this war.` : 'Slots per zone not set yet — set when the war starts.');
+  if (PLAN.absent?.length) info.push(`Not participating: ${PLAN.absent.map(esc).join(', ')}.`);
+  if (PLAN.short?.length) info.push(`<span class="warn">Fewer than 2 squads: ${PLAN.short.map(m => esc(m.name) + ' (' + m.squads + ')').join(', ')}.</span>`);
+  document.getElementById('planInfo').innerHTML = info.join(' ');
+
+  // ---- click a zone: its full list below the map ----
+  const detail = document.getElementById('detail');
+  function pick(id){
+    map.querySelectorAll('.zone').forEach(g => g.classList.toggle('on', g.dataset.id === id));
+    const z = byId(id); if (!z) return;
+    detail.hidden = false;
+    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'} · ${z.units.length}</small></h2>` +
+      (z.units.length ? `<ul>${z.units.map(u => li(u, true)).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+      (z.note ? `<p>${esc(z.note)}</p>` : '');
+    applyFilter();
+    if (matchMedia('(max-width:640px)').matches) document.getElementById('z-' + id)?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+  map.addEventListener('click', e => { if (e.target.closest('a')) return; const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
+  map.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); pick(g.dataset.id); } });
+
+  // ---- find a member: highlight their squads, fade the rest, list their placements ----
+  const who = document.getElementById('who'), res = document.getElementById('whoRes'), clr = document.getElementById('whoClear');
+  const board = document.getElementById('board');
+  const players = [...new Set(zones.flatMap(z => z.units.map(u => u.player).filter(Boolean)))].sort((a, b) => a.localeCompare(b));
+  document.getElementById('whoList').innerHTML = players.map(p => `<option value="${esc(p)}">`).join('');
+  function applyFilter(){
+    const q = who.value.trim().toLowerCase();
+    document.body.classList.toggle('filtering', !!q);
+    document.querySelectorAll('li[data-p]').forEach(el => el.classList.toggle('hit', !!q && el.dataset.p.includes(q)));
+    map.querySelectorAll('.zone').forEach(g => g.classList.toggle('hit', !!q && !!g.querySelector('li.hit')));
+    clr.hidden = !q;
+    if (!q){ res.hidden = true; return; }
+    // Exact name first; otherwise everyone whose name contains the text.
+    const exact = players.filter(p => p.toLowerCase() === q);
+    const names = exact.length ? exact : players.filter(p => p.toLowerCase().includes(q));
+    res.hidden = false;
+    res.innerHTML = names.length ? names.slice(0, 6).map(p => {
+      const where = ORDER.map(byId).filter(Boolean).map(z => {
+        const mine = z.units.filter(u => u.player === p);
+        return mine.length ? `<b>${z.id.toUpperCase()}</b> ${mine.map(u => esc(u.team) + (u.weak ? ' <span class="weak">best available</span>' : '')).join(', ')}` : '';
+      }).filter(Boolean);
+      return `<span class="wn">${esc(p)}</span> ${where.join(' · ') || 'not placed'}`;
+    }).join('<br>') + (names.length > 6 ? `<br>…and ${names.length - 6} more — type more of the name` : '')
+      : 'No member by that name in the plan.';
+  }
+  const syncUrl = () => { const u = new URL(location); who.value ? u.searchParams.set('who', who.value) : u.searchParams.delete('who'); history.replaceState(null, '', u); };
+  who.addEventListener('input', () => { applyFilter(); syncUrl(); });
+  clr.onclick = () => { who.value = ''; applyFilter(); syncUrl(); who.focus(); };
+  const initial = new URL(location).searchParams.get('who');
+  if (initial){ who.value = initial; applyFilter(); }
+  if (location.hash) pick(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>
