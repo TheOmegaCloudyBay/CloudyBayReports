@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-18T10:36:17.343Z",
+  "generated": "2026-10-18T14:36:02.207Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -530,6 +530,11 @@
         },
         {
           "team": "Home One",
+          "player": "Bliss",
+          "score": 2385026
+        },
+        {
+          "team": "Home One",
           "player": "Тай",
           "score": 2343737
         },
@@ -537,11 +542,6 @@
           "team": "Home One",
           "player": "NeonZombie",
           "score": 2334626
-        },
-        {
-          "team": "Home One",
-          "player": "Bliss",
-          "score": 2300191
         },
         {
           "team": "Home One",
@@ -980,17 +980,17 @@
         },
         {
           "team": "Great Mothers",
-          "player": "DarthMalgus",
+          "player": "Bliss",
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "General Skywalker 501st",
+          "player": "Jerome Willem",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
           "player": "Yarael Poof",
-          "weak": true
-        },
-        {
-          "team": "Zorii Resistance",
-          "player": "יול ילט",
           "weak": true
         },
         {
@@ -1109,18 +1109,18 @@
           "weak": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Jerome Willem",
+          "team": "Great Mothers",
+          "player": "DarthMalgus",
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Commander Luke Skywalker",
           "player": "Yarael Poof",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Bliss",
+          "team": "Zorii Resistance",
+          "player": "יול ילט",
           "weak": true
         },
         {
