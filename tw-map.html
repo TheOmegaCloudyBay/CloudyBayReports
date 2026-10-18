@@ -60,7 +60,12 @@
   .dhead select{margin-left:6px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:6px;padding:3px 6px;font:inherit}
   .credit{font-size:12px;color:var(--cb-dim);margin:4px 0 12px}
   .credit a{color:inherit}
-  .dlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+  .grp-h{font-size:16px;margin:22px 0 0} .grp-h span{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:4px}
+  .grp-s{font-size:12px;color:var(--cb-dim);margin:2px 0 10px}
+  .grp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+  .tcard.def{border-left:3px solid #37b24d}
+  .tcard.off{opacity:.75}
+  .tcard .gp{color:#37b24d;font-weight:600}
   .tcard{padding:12px 14px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
   .tcard .th{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
   .tcard .th b{font-size:15px}
@@ -225,20 +230,38 @@
     `(Grand Arena 5v5 — the defense grade is the closest guide for TW), snapshot ${new Date(D.fetched).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}. ` +
     `Members listed own the whole lineup; the level shown is their weakest unit. Toons marked “not in game yet” aren’t counted.`;
 
-  // Best defense first; teams the author says not to use on defense go last.
-  const teams = [...D.teams].sort((a, b) => (b.defense ?? -1) - (a.defense ?? -1) || (b.overall ?? 0) - (a.overall ?? 0));
+  // Guild rules: offense 10 = keep for offense; defense > offense = a defense team; plus the teams the
+  // guild picks for defense (tw-plan.json "defenseTeams"). Ungraded teams get their own group.
+  let picks = [];
+  try { picks = (await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json()).defenseTeams || []; } catch {}
+  const pick = new Set(picks.map(n => n.toLowerCase()));
+  const role = t => pick.has(t.name.toLowerCase()) ? 'def'
+    : t.defense == null || t.offense == null ? 'none'
+    : t.offense >= 10 ? 'off'
+    : t.defense > t.offense && t.defense >= 4 ? 'def' : 'either';
+  const GROUPS = [
+    ['def', 'Defense teams', 'Guild picks, and teams graded higher on defense than offense (defense 4+).'],
+    ['either', 'Either', 'Graded the same or better on offense — fine on defense if needed.'],
+    ['off', 'Keep for offense', 'Offense 10 — save these for attacking.'],
+    ['none', 'Ungraded', 'Not graded yet on the list.'],
+  ];
+  const byDef = (a, b) => (b.defense ?? -1) - (a.defense ?? -1) || (b.overall ?? 0) - (a.overall ?? 0) || a.name.localeCompare(b.name);
   const sel = document.getElementById('minLvl');
   function draw(){
     const min = +sel.value;
-    document.getElementById('dlist').innerHTML = teams.map(t => {
+    document.getElementById('dlist').innerHTML = GROUPS.map(([key, title, sub]) => {
+      const ts = D.teams.filter(t => role(t) === key).sort(byDef);
+      if (!ts.length) return '';
+      return `<h3 class="grp-h">${title} <span>${ts.length}</span></h3><p class="grp-s">${sub}</p><div class="grp-g">` + ts.map(t => {
       const ps = t.players.filter(p => p.min >= min);
       const lineup = t.units.map(u => u.id === 'flex' ? 'Flex slot' : u.id ? esc(u.name) : `<span class="new">${esc(u.name)} (not in game yet)</span>`).join(', ');
-      return `<div class="tcard"><div class="th"><b>${esc(t.name)}</b><span class="gr">DEF <span class="d">${grade(t.defense)}</span> · OFF ${grade(t.offense)}</span></div>
-        <div class="tier">${esc(t.tier)}</div>
+      return `<div class="tcard ${key}"><div class="th"><b>${esc(t.name)}</b><span class="gr">DEF <span class="d">${grade(t.defense)}</span> · OFF ${grade(t.offense)}</span></div>
+        <div class="tier">${esc(t.tier)}${pick.has(t.name.toLowerCase()) ? ' · <span class="gp">guild pick</span>' : ''}</div>
         <div class="lu">${lineup}</div>${t.note ? `<p class="nt">${esc(t.note)}</p>` : ''}
         <p class="cnt2">${ps.length} member${ps.length === 1 ? '' : 's'}</p>
         ${ps.length ? `<div class="pl">${ps.map(p => `<span>${esc(p.name)}${p.ally ? `<span class="ally">#${acode(p.ally)}</span>` : ''}<em>${lvl(p.min)}</em></span>`).join('')}</div>`
                      : '<span class="none">Nobody at this level yet</span>'}</div>`;
+      }).join('') + '</div>';
     }).join('');
   }
   sel.onchange = draw;

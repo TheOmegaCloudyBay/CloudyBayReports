@@ -1,4 +1,10 @@
 {
+  "defenseTeams": [
+    "Jabba the Hutt",
+    "Rey",
+    "Jedi Master Kenobi",
+    "Sith Eternal Emperor"
+  ],
   "note": "",
   "zones": {
     "ft": {
