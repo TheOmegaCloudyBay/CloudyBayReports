@@ -32,7 +32,6 @@
   .zc .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
   .zc .code{font-size:22px;font-weight:800;letter-spacing:.02em}
   .zc .kind{font-size:12px;font-weight:600;color:var(--z);text-transform:uppercase;letter-spacing:.06em}
-  .zc .slots{font-size:12px;color:var(--cb-dim);margin-left:auto}
   .zc ul{margin:2px 0 0;padding:0;list-style:none;font-size:14px;line-height:1.35}
   .zc li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .zc li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--z);margin-right:6px;vertical-align:2px}
@@ -50,7 +49,7 @@
   .plist h3{margin:0;font-size:15px} .plist h3 small{font-weight:400;color:var(--cb-dim);font-size:12px;margin-left:6px}
   .plist ul{margin:4px 0 0;padding-left:18px;font-size:14px} .plist p{margin:4px 0 0;font-size:13px;color:var(--cb-dim)}
   @media (max-width:640px){
-    .zc .code{font-size:52px} .zc .kind,.zc .slots,.zc ul,.zc .more,.zc .empty{display:none} .zc .cnt{display:block;font-size:44px}
+    .zc .code{font-size:52px} .zc .kind,.zc ul,.zc .more,.zc .empty{display:none} .zc .cnt{display:block;font-size:44px}
     .plist{display:block} .detail{display:none}
   }
   .zc .who,.detail .who,.plist .who{color:var(--cb-dim);font-weight:400}
@@ -89,7 +88,7 @@
   <p class="lede" id="lede">Where each team goes on defense. Click a zone for its full list.</p>
   <div class="dir"><span>Back</span><span class="enemy">Front · enemy →</span></div>
   <div class="board"><svg id="map" viewBox="0 0 1000 700" role="img" aria-label="Territory War map"></svg></div>
-  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span id="slotsNote"></span></div>
+  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span></div>
   <div class="detail" id="detail" hidden></div>
   <div class="plist" id="plist"></div>
 
@@ -100,6 +99,8 @@
         <select id="minLvl">
           <option value="0">any level (owns all)</option>
           <option value="12">G12+</option>
+          <option value="14">R1+</option>
+          <option value="16">R3+</option>
           <option value="18" selected>R5+</option>
           <option value="20">R7+</option>
           <option value="22">R9+</option>
@@ -123,7 +124,7 @@
   // The board: a rectangle with slightly rounded corners.
   const T = { x: 6, y: 6, w: 988, h: 688, r: 28 }, GAP = 10;
 
-  let PLAN = { slots: 0, zones: {} };
+  let PLAN = { zones: {} };
   try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   // A plan entry is a team name, or { "team": "...", "player": "..." } to say whose team it is.
@@ -172,7 +173,7 @@
         `<rect x="${c.x0}" y="${y0}" width="${c.x1 - c.x0}" height="${h}" rx="14"/>` +
         `<foreignObject x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}"><div xmlns="http://www.w3.org/1999/xhtml" class="zc">` +
           `<div class="top"><span class="code">${id.toUpperCase()}</span><span class="kind">${kind === 'fl' ? 'Fleet' : 'Squads'}</span>` +
-          (PLAN.slots ? `<span class="slots">${PLAN.slots} slots</span>` : '') + `</div>` +
+          `</div>` +
           `<div class="cnt">${units.length ? units.length + (units.length === 1 ? ' team' : ' teams') : '—'}</div>` +
           (units.length ? `<ul>${shown.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` +
                           (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more</div>` : '')
@@ -189,7 +190,6 @@
     `<section id="z-${z.id}"><h3>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h3>` +
     (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
     (z.note ? `<p>${esc(z.note)}</p>` : '') + `</section>`).join('');
-  if (PLAN.slots) document.getElementById('slotsNote').textContent = `${PLAN.slots} slots per zone this war`;
   if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
 
   // Click (or Enter) a zone: highlight it and show its full list below the map.
@@ -198,7 +198,7 @@
     map.querySelectorAll('.zone').forEach(g => g.classList.toggle('on', g.dataset.id === id));
     const z = zones.find(x => x.id === id); if (!z) return;
     detail.hidden = false;
-    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}${PLAN.slots ? ' · ' + PLAN.slots + ' slots' : ''}</small></h2>` +
+    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h2>` +
       (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
       (z.note ? `<p>${esc(z.note)}</p>` : '');
     history.replaceState(null, '', '#' + id);

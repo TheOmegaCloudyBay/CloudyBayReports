@@ -1,16 +1,45 @@
 {
-  "slots": 22,
   "note": "",
   "zones": {
-    "ft":  { "units": [], "note": "" },
-    "fb":  { "units": [], "note": "" },
-    "mft": { "units": [], "note": "" },
-    "mfb": { "units": [], "note": "" },
-    "mbf": { "units": [], "note": "" },
-    "mbt": { "units": [], "note": "" },
-    "mbb": { "units": [], "note": "" },
-    "bf":  { "units": [], "note": "" },
-    "bt":  { "units": [], "note": "" },
-    "bb":  { "units": [], "note": "" }
+    "ft": {
+      "units": [],
+      "note": ""
+    },
+    "fb": {
+      "units": [],
+      "note": ""
+    },
+    "mft": {
+      "units": [],
+      "note": ""
+    },
+    "mfb": {
+      "units": [],
+      "note": ""
+    },
+    "mbf": {
+      "units": [],
+      "note": ""
+    },
+    "mbt": {
+      "units": [],
+      "note": ""
+    },
+    "mbb": {
+      "units": [],
+      "note": ""
+    },
+    "bf": {
+      "units": [],
+      "note": ""
+    },
+    "bt": {
+      "units": [],
+      "note": ""
+    },
+    "bb": {
+      "units": [],
+      "note": ""
+    }
   }
 }
