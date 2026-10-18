@@ -3,48 +3,430 @@
     "Jabba the Hutt",
     "Rey",
     "Jedi Master Kenobi",
-    "Sith Eternal Emperor"
+    "Sith Eternal Emperor",
+    "Lord Vader (DS Clones)"
   ],
-  "note": "",
+  "note": "Draft plan — Galactic Legends split between the front zones, then our best defense teams spread evenly, best in front.",
   "zones": {
     "ft": {
-      "units": [],
-      "note": ""
+      "units": [
+        {
+          "team": "Jabba the Hutt",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Jabba the Hutt",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Jabba the Hutt",
+          "player": "Vibara"
+        },
+        {
+          "team": "Jabba the Hutt",
+          "player": "alfa"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "Vibara"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "EW"
+        },
+        {
+          "team": "Rey",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Rey",
+          "player": "Vibara"
+        },
+        {
+          "team": "Rey",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "Rey",
+          "player": "ogi 1"
+        }
+      ],
+      "note": "GLs: Jabba the Hutt (4), Jedi Master Kenobi (5), Rey (4)"
     },
     "fb": {
-      "units": [],
-      "note": ""
+      "units": [
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "NeonZombie"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Myers324"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Vibara"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "MO0855"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "EW"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "Vibara"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "жало"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "Jchiodo"
+        }
+      ],
+      "note": "GLs: Lord Vader (DS Clones) (6), Sith Eternal Emperor (8)"
     },
     "mft": {
-      "units": [],
+      "units": [
+        {
+          "team": "Queen Amidala",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Queen Amidala",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "Tuskens",
+          "player": "Тай"
+        },
+        {
+          "team": "Tuskens",
+          "player": "Jchiodo"
+        },
+        {
+          "team": "Reva Inquisitors",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Reva Inquisitors",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Baylan Skoll",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "DAVE115"
+        },
+        {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "FF"
+        },
+        {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "Chewwy29"
+        }
+      ],
       "note": ""
     },
     "mfb": {
-      "units": [],
+      "units": [
+        {
+          "team": "Gungans",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Gungans",
+          "player": "somo4"
+        },
+        {
+          "team": "Darth Malgus",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Darth Malgus",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "יול ילט"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "RoastMyChestnuts"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Myers324"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Matt The Radar Technician"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Henry"
+        }
+      ],
       "note": ""
     },
     "mbf": {
-      "units": [],
+      "units": [
+        "Home One — 50 owners (48 at 7★)",
+        "Executrix — 50 owners (47 at 7★)",
+        "Finalizer — 32 owners (24 at 7★)",
+        "Raddus — 17 owners (15 at 7★)",
+        "Executor — 11 owners (5 at 7★)",
+        "Profundity — 2 owners (1 at 7★)"
+      ],
       "note": ""
     },
     "mbt": {
-      "units": [],
+      "units": [
+        {
+          "team": "Great Mothers",
+          "player": "somo4"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Myers324"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Henry"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "4L1V3 2 THR1V3"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Ven of Thila"
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Nexzos"
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "ogi 1"
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "NeonZombie"
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Myers324"
+        }
+      ],
       "note": ""
     },
     "mbb": {
-      "units": [],
+      "units": [
+        {
+          "team": "General Skywalker 501st",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "MO0855"
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "somo4"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Vibara"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "ogi 1"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "DarthMalgus"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "alfa"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Eytanobi"
+        }
+      ],
       "note": ""
     },
     "bf": {
-      "units": [],
+      "units": [
+        "Endurance — 50 owners (48 at 7★)",
+        "Chimaera — 47 owners (44 at 7★)",
+        "Negotiator — 25 owners (20 at 7★)",
+        "Malevolence — 16 owners (10 at 7★)",
+        "Leviathan — 2 owners (2 at 7★)"
+      ],
       "note": ""
     },
     "bt": {
-      "units": [],
+      "units": [
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "EW"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "NeonZombie"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Seamus dono"
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "MO0855"
+        },
+        {
+          "team": "Iden Versio Special Forces",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Rogue One",
+          "player": "Тай"
+        },
+        {
+          "team": "Rogue One",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Rogue One",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "Bad Batch V2",
+          "player": "Nexzos"
+        }
+      ],
       "note": ""
     },
     "bb": {
-      "units": [],
+      "units": [
+        {
+          "team": "Bad Batch V2",
+          "player": "Jerome Willem"
+        },
+        {
+          "team": "Qui-Gon Jinn",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Qui-Gon Jinn",
+          "player": "Jchiodo"
+        },
+        {
+          "team": "Zorii Resistance",
+          "player": "Nexzos"
+        },
+        {
+          "team": "Zorii Resistance",
+          "player": "Myers324"
+        },
+        {
+          "team": "Captain Rex Phoenix",
+          "player": "Тай"
+        },
+        {
+          "team": "Captain Rex Phoenix",
+          "player": "Nightfury2714"
+        },
+        {
+          "team": "Captain Rex Phoenix",
+          "player": "somo4"
+        },
+        {
+          "team": "General Grievous",
+          "player": "Nexzos"
+        },
+        {
+          "team": "General Grievous",
+          "player": "FF"
+        }
+      ],
       "note": ""
     }
   }
