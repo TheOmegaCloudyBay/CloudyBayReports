@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TW map — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1100px;
+    padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
+  h1{font-size:26px}
+  .lede{color:var(--cb-dim);margin:0 0 14px;font-size:14px;max-width:760px}
+  :root{--sq:#2b8fd6;--fl:#9b6bdf}
+
+  .board{position:relative}
+  .board svg{display:block;width:100%;height:auto}
+  .dir{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--cb-dim);margin:0 6px 6px}
+  .dir .enemy{color:#e0524a}
+
+  .table-rim{fill:none;stroke:var(--cb-line);stroke-width:10}
+  .zone rect{fill:color-mix(in srgb, var(--z) 16%, var(--cb-bg));stroke:color-mix(in srgb, var(--z) 70%, transparent);
+    stroke-width:2;cursor:pointer;transition:fill .15s}
+  .zone:hover rect,.zone.on rect{fill:color-mix(in srgb, var(--z) 32%, var(--cb-bg))}
+  .zone.on rect{stroke:var(--cb-txt);stroke-width:3}
+  .zone:focus{outline:none} .zone:focus-visible rect{stroke:var(--cb-txt);stroke-width:3}
+  .zone.sq{--z:var(--sq)} .zone.fl{--z:var(--fl)}
+
+  /* Zone content (HTML inside the SVG so lists wrap and scale with the map). */
+  .zc{height:100%;display:flex;flex-direction:column;gap:3px;overflow:hidden;font-family:"Segoe UI",system-ui,sans-serif;
+    color:var(--cb-txt);pointer-events:none}
+  .zc .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .zc .code{font-size:22px;font-weight:800;letter-spacing:.02em}
+  .zc .kind{font-size:12px;font-weight:600;color:var(--z);text-transform:uppercase;letter-spacing:.06em}
+  .zc .slots{font-size:12px;color:var(--cb-dim);margin-left:auto}
+  .zc ul{margin:2px 0 0;padding:0;list-style:none;font-size:14px;line-height:1.35}
+  .zc li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .zc li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--z);margin-right:6px;vertical-align:2px}
+  .zc .empty{font-size:13px;color:var(--cb-dim);font-style:italic}
+  .zc .more{font-size:12px;color:var(--cb-dim)}
+
+  .detail{margin-top:18px;padding:14px 16px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
+  .detail h2{margin:0;font-size:18px}
+  .detail h2 small{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:8px}
+  .detail ul{margin:8px 0 0;padding-left:20px;columns:2 220px}
+  .detail p{margin:6px 0 0;color:var(--cb-dim);font-size:14px}
+  .zc .cnt{display:none;font-size:30px;font-weight:700;color:var(--z)}
+  .plist{display:none;margin-top:14px}
+  .plist section{padding:10px 12px;border:1px solid var(--cb-line);border-radius:8px;background:var(--cb-card);margin:0 0 8px}
+  .plist h3{margin:0;font-size:15px} .plist h3 small{font-weight:400;color:var(--cb-dim);font-size:12px;margin-left:6px}
+  .plist ul{margin:4px 0 0;padding-left:18px;font-size:14px} .plist p{margin:4px 0 0;font-size:13px;color:var(--cb-dim)}
+  @media (max-width:640px){
+    .zc .code{font-size:52px} .zc .kind,.zc .slots,.zc ul,.zc .more,.zc .empty{display:none} .zc .cnt{display:block;font-size:44px}
+    .plist{display:block} .detail{display:none}
+  }
+  .legend{display:flex;gap:16px;font-size:13px;color:var(--cb-dim);margin:10px 4px 0;flex-wrap:wrap}
+  .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body>
+  <h1>TW map</h1>
+  <p class="lede" id="lede">Where each team goes on defense. Click a zone for its full list.</p>
+  <div class="dir"><span>Back</span><span class="enemy">Front · enemy →</span></div>
+  <div class="board"><svg id="map" viewBox="0 0 1000 700" role="img" aria-label="Territory War map"></svg></div>
+  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span id="slotsNote"></span></div>
+  <div class="detail" id="detail" hidden></div>
+  <div class="plist" id="plist"></div>
+
+<script>
+(async function(){
+  // Our side of the board, front (nearest the enemy) on the right — as in game.
+  //   back: bf/bt/bb · middle back: mbf/mbt/mbb · middle front: mft/mfb · front: ft/fb
+  const COLS = [
+    { x0: 12,  x1: 248, zones: [['bf','Back fleet','fl'], ['bt','Back top','sq'], ['bb','Back bottom','sq']] },
+    { x0: 258, x1: 498, zones: [['mbf','Middle back fleet','fl'], ['mbt','Middle back top','sq'], ['mbb','Middle back bottom','sq']] },
+    { x0: 508, x1: 742, zones: [['mft','Middle front top','sq'], ['mfb','Middle front bottom','sq']] },
+    { x0: 752, x1: 988, zones: [['ft','Front top','sq'], ['fb','Front bottom','sq']] },
+  ];
+  // The table: a wide rounded rectangle (round-table look, but the corner zones keep usable space).
+  const T = { x: 6, y: 6, w: 988, h: 688, r: 210 }, GAP = 10;
+
+  let PLAN = { slots: 0, zones: {} };
+  try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // Is a point inside the rounded table?
+  function inTable(x, y){
+    const { x: tx, y: ty, w, h, r } = T;
+    if (x < tx || x > tx + w || y < ty || y > ty + h) return false;
+    const cx = x < tx + r ? tx + r : x > tx + w - r ? tx + w - r : x;
+    const cy = y < ty + r ? ty + r : y > ty + h - r ? ty + h - r : y;
+    return (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
+  }
+  // Text box for a zone: start from the zone (inset), then pull in any corner the table's rim cuts
+  // off — only the cut corner's edges move, so zones away from the rim keep their full size.
+  function inner(x0, y0, x1, y1){
+    let a = x0 + 14, b = y0 + 12, c = x1 - 14, d = y1 - 12;
+    for (let k = 0; k < 80; k++){
+      let moved = false;
+      if (!inTable(a, b)){ a += 4; b += 3; moved = true; }
+      if (!inTable(c, b)){ c -= 4; b += 3; moved = true; }
+      if (!inTable(a, d)){ a += 4; d -= 3; moved = true; }
+      if (!inTable(c, d)){ c -= 4; d -= 3; moved = true; }
+      if (!moved) break;
+    }
+    return { x: a, y: b, w: Math.max(60, c - a), h: Math.max(40, d - b) };
+  }
+
+  const zones = [];
+  const tableRect = `x="${T.x}" y="${T.y}" width="${T.w}" height="${T.h}" rx="${T.r}"`;
+  let svg = `<defs><clipPath id="table"><rect ${tableRect}/></clipPath></defs>` +
+            `<g clip-path="url(#table)">`;
+  for (const c of COLS){
+    const n = c.zones.length, top = T.y, h = (T.h - GAP * (n - 1)) / n;
+    c.zones.forEach(([id, name, kind], i) => {
+      const y0 = top + i * (h + GAP), y1 = y0 + h;
+      const z = PLAN.zones?.[id] || {};
+      const units = z.units || [];
+      const box = inner(c.x0, y0, c.x1, y1);
+      // Roughly how many list lines fit in this zone; the rest go behind "+N more".
+      const fit = Math.max(1, Math.floor((box.h - 34) / 19));
+      const shown = units.length > fit ? units.slice(0, fit - 1) : units;
+      zones.push({ id, name, kind, units, note: z.note || '' });
+      svg += `<g class="zone ${kind}" data-id="${id}" tabindex="0" role="button" aria-label="${esc(name)}">` +
+        `<rect x="${c.x0}" y="${y0}" width="${c.x1 - c.x0}" height="${h}" rx="14"/>` +
+        `<foreignObject x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}"><div xmlns="http://www.w3.org/1999/xhtml" class="zc">` +
+          `<div class="top"><span class="code">${id.toUpperCase()}</span><span class="kind">${kind === 'fl' ? 'Fleet' : 'Squads'}</span>` +
+          (PLAN.slots ? `<span class="slots">${PLAN.slots} slots</span>` : '') + `</div>` +
+          `<div class="cnt">${units.length ? units.length + (units.length === 1 ? ' team' : ' teams') : '—'}</div>` +
+          (units.length ? `<ul>${shown.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` +
+                          (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more</div>` : '')
+                        : `<div class="empty">Not assigned yet</div>`) +
+        `</div></foreignObject></g>`;
+    });
+  }
+  svg += `</g><rect class="table-rim" ${tableRect}/>`;
+  const map = document.getElementById('map');
+  map.innerHTML = svg;
+
+  const ORDER = ['ft','fb','mft','mfb','mbf','mbt','mbb','bf','bt','bb'];
+  document.getElementById('plist').innerHTML = ORDER.map(id => zones.find(z => z.id === id)).filter(Boolean).map(z =>
+    `<section id="z-${z.id}"><h3>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h3>` +
+    (z.units.length ? `<ul>${z.units.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+    (z.note ? `<p>${esc(z.note)}</p>` : '') + `</section>`).join('');
+  if (PLAN.slots) document.getElementById('slotsNote').textContent = `${PLAN.slots} slots per zone this war`;
+  if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
+
+  // Click (or Enter) a zone: highlight it and show its full list below the map.
+  const detail = document.getElementById('detail');
+  function pick(id){
+    map.querySelectorAll('.zone').forEach(g => g.classList.toggle('on', g.dataset.id === id));
+    const z = zones.find(x => x.id === id); if (!z) return;
+    detail.hidden = false;
+    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}${PLAN.slots ? ' · ' + PLAN.slots + ' slots' : ''}</small></h2>` +
+      (z.units.length ? `<ul>${z.units.map(u => `<li>${esc(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+      (z.note ? `<p>${esc(z.note)}</p>` : '');
+    history.replaceState(null, '', '#' + id);
+    if (matchMedia('(max-width:640px)').matches) document.getElementById('z-' + id)?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+  map.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
+  map.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); pick(g.dataset.id); } });
+  if (location.hash) pick(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>

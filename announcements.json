@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-10-18",
+    "title": "New: TW map",
+    "text": "Our Territory War board with every zone (FT, FB, MFT, MFB, MBF, MBT, MBB, BF, BT, BB) and which teams go where on defense.",
+    "link": "tw-map.html"
+  },
+  {
     "date": "2026-10-17",
     "title": "Members overview: the guild roster",
     "text": "Every member with role, join date and GP. Names are colored by assessment rank — hover one for the breakdown. Newly joined and returning members are marked.",
