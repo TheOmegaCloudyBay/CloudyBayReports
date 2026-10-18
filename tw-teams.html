@@ -9,42 +9,47 @@
   body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1300px;
     padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
   h1{font-size:26px}
-  .dteams{margin-top:30px}
-  .dhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px}
-  .dhead h2{margin:0;font-size:20px}
+  .dhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin:6px 0 0}
   .dhead label{font-size:13px;color:var(--cb-dim)}
   .dhead select{margin-left:6px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:6px;padding:3px 6px;font:inherit}
-  .credit{font-size:12px;color:var(--cb-dim);margin:4px 0 12px}
+  .credit{font-size:12px;color:var(--cb-dim);margin:6px 0 4px;max-width:900px}
   .credit a{color:inherit}
-  .grp-h{font-size:16px;margin:22px 0 0} .grp-h span{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:4px}
-  .grp-s{font-size:12px;color:var(--cb-dim);margin:2px 0 10px}
-  .grp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
-  .tcard.def{border-left:3px solid #37b24d}
-  .tcard.off{opacity:.75}
-  .tcard .gp{color:#37b24d;font-weight:600}
-  .tcard{padding:12px 14px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card)}
-  .tcard .th{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
-  .tcard .th b{font-size:15px}
-  .tcard .gr{font-size:12px;white-space:nowrap;color:var(--cb-dim)}
-  .tcard .gr .d{font-weight:700;color:var(--cb-txt);font-size:14px}
-  .tcard .tier{font-size:11px;color:var(--cb-dim);text-transform:uppercase;letter-spacing:.05em}
-  .tcard .lu{font-size:12px;color:var(--cb-dim);margin:4px 0 6px}
-  .tcard .lu .new{color:#f0a020}
-  .tcard .nt{font-size:12px;color:#f0a020;margin:0 0 6px}
-  .tcard .pl{display:flex;flex-wrap:wrap;gap:4px}
-  .tcard .pl span{font-size:12px;padding:1px 7px;border-radius:10px;background:var(--cb-bg);border:1px solid var(--cb-line);white-space:nowrap}
-  .tcard .pl span em{font-style:normal;color:var(--cb-dim);margin-left:4px}
-  .tcard .cnt2{font-size:12px;color:var(--cb-dim);margin:0 0 4px}
-  .tcard .none{font-size:12px;color:var(--cb-dim);font-style:italic}
-  .grp-h{font-size:16px;margin:22px 0 0} .grp-h span{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:4px}
-  .grp-s{font-size:12px;color:var(--cb-dim);margin:2px 0 10px}
-  .grp-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
-  .tcard.def{border-left:3px solid #37b24d}
-  .tcard.off{opacity:.75}
-  .tcard .gp{color:#37b24d;font-weight:600}
-  .tcard.focus{border-color:var(--cb-accent);box-shadow:0 0 0 2px var(--cb-accent)}
-  .tcard .gt{color:#2bb6c4;font-weight:600}
-  .tcard a.tl{color:var(--cb-txt);text-decoration:none} .tcard a.tl:hover{color:var(--cb-accent);text-decoration:underline}
+
+  .grp-h{font-size:16px;margin:24px 0 0} .grp-h span{font-weight:400;color:var(--cb-dim);font-size:13px;margin-left:4px}
+  .grp-s{font-size:12px;color:var(--cb-dim);margin:2px 0 8px}
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:7px 10px;border-bottom:1px solid var(--cb-line);text-align:left;vertical-align:top}
+  th{color:var(--cb-dim);font-weight:600;font-size:12px;white-space:nowrap}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td.team{white-space:nowrap}
+  td.team b{font-size:14px}
+  td.team .tags{display:block;font-size:11px;color:var(--cb-dim);text-transform:uppercase;letter-spacing:.04em}
+  td.squad{color:var(--cb-dim);min-width:280px}
+  td.squad .new{color:#f0a020}
+  td.squad .nt{display:block;color:#f0a020;font-size:12px}
+  td.d{font-weight:700;font-size:14px}
+  tr.def td:first-child{box-shadow:inset 3px 0 0 #37b24d}
+  tr.off{opacity:.7}
+  tr.focus td{background:color-mix(in srgb, var(--cb-accent) 14%, transparent)}
+  .gp{color:#37b24d;font-weight:600} .gt{color:#2bb6c4;font-weight:600}
+  a.tl{color:var(--cb-txt);text-decoration:none} a.tl:hover{color:var(--cb-accent);text-decoration:underline}
+  button.mem{background:var(--cb-card);border:1px solid var(--cb-line);border-radius:12px;color:var(--cb-txt);
+    font:inherit;font-weight:600;padding:1px 10px;cursor:help;min-width:42px}
+  button.mem.zero{color:var(--cb-dim);font-weight:400;cursor:default}
+  button.mem:focus-visible{outline:2px solid var(--cb-txt);outline-offset:2px}
+
+  /* Members card (one floating element, positioned by script). */
+  #tip{position:fixed;z-index:100;width:380px;max-width:calc(100vw - 24px);max-height:70vh;overflow:auto;padding:10px 12px;
+    border-radius:10px;background:var(--cb-card);border:1px solid var(--cb-line);box-shadow:0 10px 30px rgba(0,0,0,.45);
+    font-size:13px;display:none}
+  #tip.on{display:block}
+  #tip h4{margin:0 0 6px;font-size:13px}
+  #tip h4 span{color:var(--cb-dim);font-weight:400}
+  #tip ul{margin:0;padding:0;list-style:none;columns:2;column-gap:14px}
+  #tip li{display:flex;justify-content:space-between;gap:6px;break-inside:avoid;white-space:nowrap}
+  #tip li > span{overflow:hidden;text-overflow:ellipsis;min-width:0}
+  #tip li em{font-style:normal;color:var(--cb-dim);font-variant-numeric:tabular-nums}
   .ally{color:var(--cb-dim);font-size:11px;margin-left:3px;display:none}
   body.show-ally .ally{display:inline}
   .howto{font-size:12px;color:var(--cb-dim);margin-top:26px;max-width:820px}
@@ -54,31 +59,31 @@
 <script src="site.js" defer></script>
 </head>
 <body>
-  <section class="dteams" id="dteams">
-    <div class="dhead">
-      <h1>TW teams</h1>
-      <label>Show members with every unit at
-        <select id="minLvl">
-          <option value="0">any level (owns all)</option>
-          <option value="12">G12+</option>
-          <option value="14">R1+</option>
-          <option value="16">R3+</option>
-          <option value="18" selected>R5+</option>
-          <option value="20">R7+</option>
-          <option value="22">R9+</option>
-        </select>
-      </label>
-    </div>
-    <p class="credit" id="credit"></p>
-    <div class="dlist" id="dlist"></div>
-  </section>
+  <h1>TW teams</h1>
+  <div class="dhead">
+    <label>Count members with every unit at
+      <select id="minLvl">
+        <option value="0">any level (owns all)</option>
+        <option value="12">G12+</option>
+        <option value="14">R1+</option>
+        <option value="16">R3+</option>
+        <option value="18" selected>R5+</option>
+        <option value="20">R7+</option>
+        <option value="22">R9+</option>
+      </select>
+    </label>
+  </div>
+  <p class="credit" id="credit"></p>
+  <div id="dlist"></div>
+  <div id="tip" role="tooltip"></div>
 
   <p class="howto">Teams are grouped by the guild’s rules: offense 10 = keep for offense; graded higher on defense than offense (4+) = a defense team;
     plus the teams the guild picks for defense. The guild can add its own teams too (<code>tw-custom-teams.json</code>) — they show as
-    <i>added by the guild</i>. Click a team name to open it on AhnaldT101’s site.</p>
+    <i>added by the guild</i>. Hover (or tap) a member count to see who can field the team; ↗ opens a team on AhnaldT101’s site.</p>
+
 <script>
-// Defense teams: AhnaldT101's Grand Arena list (graded on offense/defense) × the members who own the
-// whole lineup, with their weakest unit's level. Monthly snapshot, written by the publish run.
+// TW teams: AhnaldT101's Grand Arena list (graded on offense/defense) plus guild-added teams, each with the
+// members who own the whole lineup (level = their weakest unit). Written by the publish run.
 (async function(){
   let D;
   try { D = await (await fetch('tw-teams.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch { return; }
@@ -91,10 +96,9 @@
   document.getElementById('credit').innerHTML =
     `Team list and grades by <a href="${esc(D.source)}" target="_blank" rel="noopener">${esc(D.author)}</a> ` +
     `(Grand Arena 5v5 — the defense grade is the closest guide for TW), snapshot ${new Date(D.fetched).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}. ` +
-    `Members listed own the whole lineup; the level shown is their weakest unit. Toons marked “not in game yet” aren’t counted.`;
+    `Members counted own the whole lineup; toons marked “not in game yet” aren’t counted.`;
 
-  // Guild rules: offense 10 = keep for offense; defense > offense = a defense team; plus the teams the
-  // guild picks for defense (tw-plan.json "defenseTeams"). Ungraded teams get their own group.
+  // Guild rules: offense 10 = keep for offense; defense > offense (4+) = defense team; plus guild picks.
   let picks = [];
   try { picks = (await (await fetch('tw-settings.json?_=' + Date.now(), { cache:'no-store' })).json()).defenseTeams || []; } catch {}
   const pick = new Set(picks.map(n => n.toLowerCase()));
@@ -110,31 +114,65 @@
   ];
   const byDef = (a, b) => (b.defense ?? -1) - (a.defense ?? -1) || (b.overall ?? 0) - (a.overall ?? 0) || a.name.localeCompare(b.name);
   const sel = document.getElementById('minLvl');
+  const teamByKey = new Map(D.teams.map(t => [slug(t.name), t]));
+
   function draw(){
     const min = +sel.value;
     document.getElementById('dlist').innerHTML = GROUPS.map(([key, title, sub]) => {
       const ts = D.teams.filter(t => role(t) === key).sort(byDef);
       if (!ts.length) return '';
-      return `<h3 class="grp-h">${title} <span>${ts.length}</span></h3><p class="grp-s">${sub}</p><div class="grp-g">` + ts.map(t => {
-      const ps = t.players.filter(p => p.min >= min);
-      const lineup = t.units.map(u => u.id === 'flex' ? 'Flex slot' : u.id ? esc(u.name) : `<span class="new">${esc(u.name)} (not in game yet)</span>`).join(', ');
-      return `<div class="tcard ${key}" id="team-${slug(t.name)}"><div class="th"><b>${t.url ? `<a class="tl" href="${esc(t.url)}" target="_blank" rel="noopener" title="Open on AhnaldT101's site">${esc(t.name)} ↗</a>` : esc(t.name)}</b><span class="gr">DEF <span class="d">${grade(t.defense)}</span> · OFF ${grade(t.offense)}</span></div>
-        <div class="tier">${esc(t.tier)}${pick.has(t.name.toLowerCase()) ? ' · <span class="gp">guild pick</span>' : ''}${t.source === 'guild' ? ' · <span class="gt">added by the guild</span>' : ''}</div>
-        <div class="lu">${lineup}</div>${t.note ? `<p class="nt">${esc(t.note)}</p>` : ''}
-        <p class="cnt2">${ps.length} member${ps.length === 1 ? '' : 's'}</p>
-        ${ps.length ? `<div class="pl">${ps.map(p => `<span>${esc(p.name)}${p.ally ? `<span class="ally">#${acode(p.ally)}</span>` : ''}<em>${lvl(p.min)}</em></span>`).join('')}</div>`
-                     : '<span class="none">Nobody at this level yet</span>'}</div>`;
-      }).join('') + '</div>';
+      return `<h3 class="grp-h">${title} <span>${ts.length}</span></h3><p class="grp-s">${sub}</p>` +
+        `<div class="tblwrap"><table><thead><tr><th>Team</th><th>Squad</th><th class="num">DEF</th><th class="num">OFF</th><th class="num">Members</th></tr></thead><tbody>` +
+        ts.map(t => {
+          const n = t.players.filter(p => p.min >= min).length;
+          const tags = [esc(t.tier),
+            pick.has(t.name.toLowerCase()) ? '<span class="gp">guild pick</span>' : '',
+            t.source === 'guild' ? '<span class="gt">added by the guild</span>' : ''].filter(Boolean).join(' · ');
+          const squad = t.units.map(u => u.id === 'flex' ? 'Flex slot' : u.id ? esc(u.name) : `<span class="new">${esc(u.name)} (not in game yet)</span>`).join(', ');
+          return `<tr class="${key}" id="team-${slug(t.name)}">
+            <td class="team"><b>${t.url ? `<a class="tl" href="${esc(t.url)}" target="_blank" rel="noopener" title="Open on AhnaldT101's site">${esc(t.name)} ↗</a>` : esc(t.name)}</b><span class="tags">${tags}</span></td>
+            <td class="squad">${squad}${t.note ? `<span class="nt">${esc(t.note)}</span>` : ''}</td>
+            <td class="num d">${grade(t.defense)}</td><td class="num">${grade(t.offense)}</td>
+            <td class="num"><button type="button" class="mem${n ? '' : ' zero'}" data-k="${slug(t.name)}">${n}</button></td></tr>`;
+        }).join('') + '</tbody></table></div>';
     }).join('');
   }
+
+  // ---- who can field it: card on hover / focus / tap ----
+  const tip = document.getElementById('tip');
+  let pinned = null;
+  function show(btn){
+    const t = teamByKey.get(btn.dataset.k); if (!t) return;
+    const ps = t.players.filter(p => p.min >= +sel.value);
+    if (!ps.length){ tip.classList.remove('on'); return; }
+    tip.innerHTML = `<h4>${esc(t.name)} <span>· ${ps.length} member${ps.length === 1 ? '' : 's'}, weakest unit</span></h4>` +
+      `<ul>${ps.map(p => `<li><span>${esc(p.name)}${p.ally ? `<span class="ally">#${acode(p.ally)}</span>` : ''}</span><em>${lvl(p.min)}</em></li>`).join('')}</ul>`;
+    tip.classList.add('on');
+    const b = btn.getBoundingClientRect(), r = tip.getBoundingClientRect();
+    let x = b.right - r.width, y = b.bottom + 6;
+    if (y + r.height > innerHeight - 8) y = b.top - r.height - 6;
+    tip.style.left = Math.max(8, x) + 'px'; tip.style.top = Math.max(8, y) + 'px';
+  }
+  const hide = () => { if (!pinned) tip.classList.remove('on'); };
+  const list = document.getElementById('dlist');
+  list.addEventListener('mouseover', e => { const b = e.target.closest('button.mem'); if (b) show(b); });
+  list.addEventListener('mouseout', e => { if (e.target.closest('button.mem')) hide(); });
+  list.addEventListener('focusin', e => { const b = e.target.closest('button.mem'); if (b) show(b); });
+  list.addEventListener('focusout', () => { pinned = null; hide(); });
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button.mem');
+    if (b){ pinned = pinned === b ? null : b; pinned ? show(b) : tip.classList.remove('on'); return; }
+    if (!e.target.closest('#tip')){ pinned = null; tip.classList.remove('on'); }
+  });
+  addEventListener('scroll', () => { pinned = null; tip.classList.remove('on'); }, { passive:true });
+
   sel.onchange = draw;
   draw();
-  // Arriving from the map (tw-teams.html#team-...): scroll to that team and highlight it.
+  // Arriving from the map (tw-teams.html#team-...): scroll to that team and highlight its line.
   const focus = () => { const el = location.hash && document.getElementById(location.hash.slice(1));
-    document.querySelectorAll('.tcard.focus').forEach(x => x.classList.remove('focus'));
+    document.querySelectorAll('tr.focus').forEach(x => x.classList.remove('focus'));
     if (el){ el.classList.add('focus'); el.scrollIntoView({ block:'center' }); } };
   addEventListener('hashchange', focus);
-  document.getElementById('dteams').hidden = false;
   focus();
 })();
 </script>
