@@ -1,0 +1,21 @@
+{
+  "slots": null,
+  "absent": [],
+  "defenseTeams": [
+    "Jabba the Hutt",
+    "Rey",
+    "Jedi Master Kenobi",
+    "Sith Eternal Emperor",
+    "Lord Vader (DS Clones)"
+  ],
+  "fleets": {
+    "front": [
+      "Home One",
+      "Profundity"
+    ],
+    "back": [
+      "Chimaera",
+      "Endurance"
+    ]
+  }
+}

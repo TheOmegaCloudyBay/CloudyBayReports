@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   *{box-sizing:border-box}
-  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1100px;
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:1500px;
     padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
   h1{font-size:26px}
   .lede{color:var(--cb-dim);margin:0 0 14px;font-size:14px;max-width:760px}
@@ -82,6 +82,21 @@
   .tcard .none{font-size:12px;color:var(--cb-dim);font-style:italic}
   .ally{color:var(--cb-dim);font-size:11px;margin-left:3px;display:none}
   body.show-ally .ally{display:inline}
+  .weak{font-size:10px;font-weight:600;color:#f0a020;border:1px solid rgba(240,160,32,.5);border-radius:4px;padding:0 4px;white-space:nowrap}
+  .zc .fill{font-size:12px;color:var(--cb-dim);margin-left:auto;font-variant-numeric:tabular-nums}
+  .pinfo{font-size:13px;color:var(--cb-dim);margin:0 0 10px;max-width:900px} .pinfo .warn{color:#f0a020}
+  .finder{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 6px}
+  .finder label{font-size:14px;font-weight:600}
+  .finder input{min-width:240px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);border-radius:8px;padding:7px 10px;font:inherit}
+  .finder input:focus{outline:none;border-color:var(--cb-accent)}
+  .finder button{background:none;border:1px solid var(--cb-line);border-radius:8px;color:var(--cb-dim);padding:6px 10px;font:inherit;cursor:pointer}
+  .whores{margin:0 0 10px;padding:10px 12px;border-radius:8px;background:var(--cb-card);border:1px solid var(--cb-accent);font-size:14px;line-height:1.7}
+  .whores .wn{font-weight:700;margin-right:6px}
+  .wk{color:#f0a020 !important}
+  body.filtering li[data-p]{opacity:.22}
+  body.filtering li[data-p].hit{opacity:1;font-weight:700}
+  body.filtering li[data-p].hit .who{color:var(--cb-txt)}
+  .zone.hit rect{stroke:var(--cb-accent);stroke-width:4}
   .legend{display:flex;gap:16px;font-size:13px;color:var(--cb-dim);margin:10px 4px 0;flex-wrap:wrap}
   .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 </style>
@@ -91,9 +106,17 @@
 <body>
   <h1>TW map</h1>
   <p class="lede" id="lede">Where each team goes on defense. Click a zone for its full list.</p>
+  <div class="finder">
+    <label for="who">Find a member</label>
+    <input id="who" list="whoList" placeholder="Type a name…" autocomplete="off">
+    <datalist id="whoList"></datalist>
+    <button type="button" id="whoClear" hidden>Clear</button>
+  </div>
+  <p class="whores" id="whoRes" hidden></p>
+  <p class="pinfo" id="planInfo"></p>
   <div class="dir"><span>Back</span><span class="enemy">Front · enemy →</span></div>
-  <div class="board"><svg id="map" viewBox="0 0 1000 700" role="img" aria-label="Territory War map"></svg></div>
-  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span></div>
+  <div class="board" id="board"><svg id="map" viewBox="0 0 1400 700" role="img" aria-label="Territory War map"></svg></div>
+  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span><b class="wk">Orange name</b> = best available team (the member has nothing graded 4+ on defense at R5+)</span></div>
   <div class="detail" id="detail" hidden></div>
   <div class="plist" id="plist"></div>
 
@@ -118,99 +141,123 @@
 
 <script>
 (async function(){
-  // Our side of the board, front (nearest the enemy) on the right — as in game.
-  //   back: bf/bt/bb · middle back: mbf/mbt/mbb · middle front: mft/mfb · front: ft/fb
-  const COLS = [
-    { x0: 12,  x1: 248, zones: [['bf','Back fleet','fl'], ['bt','Back top','sq'], ['bb','Back bottom','sq']] },
-    { x0: 258, x1: 498, zones: [['mbf','Middle back fleet','fl'], ['mbt','Middle back top','sq'], ['mbb','Middle back bottom','sq']] },
-    { x0: 508, x1: 742, zones: [['mft','Middle front top','sq'], ['mfb','Middle front bottom','sq']] },
-    { x0: 752, x1: 988, zones: [['ft','Front top','sq'], ['fb','Front bottom','sq']] },
-  ];
-  // The board: a rectangle with slightly rounded corners.
-  const T = { x: 6, y: 6, w: 988, h: 688, r: 28 }, GAP = 10;
-
   let PLAN = { zones: {} };
   try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  // A plan entry is a team name, or { "team": "...", "player": "..." } to say whose team it is.
-  const entry = u => typeof u === 'string' ? esc(u)
-    : esc(u.team || '') + (u.player ? ` <span class="who">— ${esc(u.player)}</span>` : '');
+  const mil = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : Math.round(n / 1e3) + 'k';
+  // A plan entry is a team name, or { team, player, score?, weak? }.
+  const entry = (u, full) => typeof u === 'string' ? esc(u)
+    : esc(u.team || '') + (u.player ? ` <span class="who${u.weak ? ' wk' : ''}">— <bdi>${esc(u.player)}</bdi>${u.score ? ' · ' + mil(u.score) : ''}</span>` : '')
+      + (u.weak && full ? ' <span class="weak">best available</span>' : '');
+  const li = (u, full) => `<li data-p="${esc((u.player || '').toLowerCase())}">${entry(u, full)}</li>`;
 
-  // Is a point inside the rounded table?
-  function inTable(x, y){
-    const { x: tx, y: ty, w, h, r } = T;
-    if (x < tx || x > tx + w || y < ty || y > ty + h) return false;
-    const cx = x < tx + r ? tx + r : x > tx + w - r ? tx + w - r : x;
-    const cy = y < ty + r ? ty + r : y > ty + h - r ? ty + h - r : y;
-    return (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
-  }
-  // Text box for a zone: start from the zone (inset), then pull in any corner the table's rim cuts
-  // off — only the cut corner's edges move, so zones away from the rim keep their full size.
-  function inner(x0, y0, x1, y1){
-    let a = x0 + 14, b = y0 + 12, c = x1 - 14, d = y1 - 12;
-    for (let k = 0; k < 80; k++){
-      let moved = false;
-      if (!inTable(a, b)){ a += 4; b += 3; moved = true; }
-      if (!inTable(c, b)){ c -= 4; b += 3; moved = true; }
-      if (!inTable(a, d)){ a += 4; d -= 3; moved = true; }
-      if (!inTable(c, d)){ c -= 4; d -= 3; moved = true; }
-      if (!moved) break;
-    }
-    return { x: a, y: b, w: Math.max(60, c - a), h: Math.max(40, d - b) };
-  }
+  // Our side of the board, front (nearest the enemy) on the right — as in game.
+  //   back: bf/bt/bb · middle back: mbf/mbt/mbb · middle front: mft/mfb · front: ft/fb
+  const DEF = [
+    [['bf','Back fleet','fl'], ['bt','Back top','sq'], ['bb','Back bottom','sq']],
+    [['mbf','Middle back fleet','fl'], ['mbt','Middle back top','sq'], ['mbb','Middle back bottom','sq']],
+    [['mft','Middle front top','sq'], ['mfb','Middle front bottom','sq']],
+    [['ft','Front top','sq'], ['fb','Front bottom','sq']],
+  ];
+  // Size the board to the fullest zone (up to 40 names), so every name is visible.
+  const W = 1400, GAP = 12, PAD = 8, LINE = 19, HEAD = 50, MAXN = 40;
+  const n = id => Math.min(MAXN, (PLAN.zones?.[id]?.units || []).length);
+  const need = col => col.reduce((s, [id]) => s + HEAD + Math.max(3, n(id)) * LINE + 20, 0) + GAP * (col.length - 1);
+  const H = Math.max(700, ...DEF.map(need)) + 2 * PAD;
+  const T = { x: 6, y: 6, w: W - 12, h: H - 12, r: 28 };
+  const colW = (T.w - 2 * PAD - GAP * 3) / 4;
+  const map = document.getElementById('map');
+  map.setAttribute('viewBox', `0 0 ${W} ${H}`);
 
   const zones = [];
   const tableRect = `x="${T.x}" y="${T.y}" width="${T.w}" height="${T.h}" rx="${T.r}"`;
-  let svg = `<defs><clipPath id="table"><rect ${tableRect}/></clipPath></defs>` +
-            `<g clip-path="url(#table)">`;
-  for (const c of COLS){
-    const n = c.zones.length, top = T.y, h = (T.h - GAP * (n - 1)) / n;
-    c.zones.forEach(([id, name, kind], i) => {
-      const y0 = top + i * (h + GAP), y1 = y0 + h;
-      const z = PLAN.zones?.[id] || {};
-      const units = z.units || [];
-      const box = inner(c.x0, y0, c.x1, y1);
-      // Roughly how many list lines fit in this zone; the rest go behind "+N more".
-      const fit = Math.max(1, Math.floor((box.h - 34) / 19));
+  let svg = `<defs><clipPath id="table"><rect ${tableRect}/></clipPath></defs><g clip-path="url(#table)">`;
+  DEF.forEach((col, ci) => {
+    const x0 = T.x + PAD + ci * (colW + GAP), x1 = x0 + colW;
+    // Zones in a column share its height in proportion to what they hold (but never below a minimum).
+    const want = col.map(([id]) => HEAD + Math.max(3, n(id)) * LINE + 20);
+    const avail = T.h - 2 * PAD - GAP * (col.length - 1), sum = want.reduce((a, b) => a + b, 0);
+    let y = T.y + PAD;
+    col.forEach(([id, name, kind], i) => {
+      const h = want[i] / sum * avail, y0 = y, y1 = y + h; y = y1 + GAP;
+      const z = PLAN.zones?.[id] || {}, units = z.units || [];
+      const fit = Math.max(1, Math.floor((h - HEAD - 16) / LINE));
       const shown = units.length > fit ? units.slice(0, fit - 1) : units;
       zones.push({ id, name, kind, units, note: z.note || '' });
       svg += `<g class="zone ${kind}" data-id="${id}" tabindex="0" role="button" aria-label="${esc(name)}">` +
-        `<rect x="${c.x0}" y="${y0}" width="${c.x1 - c.x0}" height="${h}" rx="14"/>` +
-        `<foreignObject x="${box.x}" y="${box.y}" width="${box.w}" height="${box.h}"><div xmlns="http://www.w3.org/1999/xhtml" class="zc">` +
+        `<rect x="${x0}" y="${y0}" width="${colW}" height="${h}" rx="14"/>` +
+        `<foreignObject x="${x0 + 14}" y="${y0 + 12}" width="${colW - 28}" height="${h - 24}"><div xmlns="http://www.w3.org/1999/xhtml" class="zc">` +
           `<div class="top"><span class="code">${id.toUpperCase()}</span><span class="kind">${kind === 'fl' ? 'Fleet' : 'Squads'}</span>` +
-          `</div>` +
+          (PLAN.slots ? `<span class="fill">${units.length} / ${PLAN.slots}</span>` : `<span class="fill">${units.length}</span>`) + `</div>` +
           `<div class="cnt">${units.length ? units.length + (units.length === 1 ? ' team' : ' teams') : '—'}</div>` +
-          (units.length ? `<ul>${shown.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` +
-                          (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more</div>` : '')
+          (units.length ? `<ul>${shown.map(u => li(u)).join('')}</ul>` +
+                          (units.length > shown.length ? `<div class="more">+${units.length - shown.length} more — click the zone</div>` : '')
                         : `<div class="empty">Not assigned yet</div>`) +
         `</div></foreignObject></g>`;
     });
-  }
+  });
   svg += `</g><rect class="table-rim" ${tableRect}/>`;
-  const map = document.getElementById('map');
   map.innerHTML = svg;
 
   const ORDER = ['ft','fb','mft','mfb','mbf','mbt','mbb','bf','bt','bb'];
-  document.getElementById('plist').innerHTML = ORDER.map(id => zones.find(z => z.id === id)).filter(Boolean).map(z =>
+  const byId = id => zones.find(z => z.id === id);
+  document.getElementById('plist').innerHTML = ORDER.map(byId).filter(Boolean).map(z =>
     `<section id="z-${z.id}"><h3>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h3>` +
-    (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+    (z.units.length ? `<ul>${z.units.map(u => li(u, true)).join('')}</ul>` : '<p>Not assigned yet.</p>') +
     (z.note ? `<p>${esc(z.note)}</p>` : '') + `</section>`).join('');
-  if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
 
-  // Click (or Enter) a zone: highlight it and show its full list below the map.
+  if (PLAN.note) document.getElementById('lede').textContent = PLAN.note;
+  const info = [];
+  info.push(PLAN.slots ? `<b>${PLAN.slots}</b> slots per zone this war.` : 'Slots per zone not set yet — set when the war starts.');
+  if (PLAN.absent?.length) info.push(`Not participating: ${PLAN.absent.map(esc).join(', ')}.`);
+  if (PLAN.short?.length) info.push(`<span class="warn">Fewer than 2 squads: ${PLAN.short.map(m => esc(m.name) + ' (' + m.squads + ')').join(', ')}.</span>`);
+  document.getElementById('planInfo').innerHTML = info.join(' ');
+
+  // ---- click a zone: its full list below the map ----
   const detail = document.getElementById('detail');
   function pick(id){
     map.querySelectorAll('.zone').forEach(g => g.classList.toggle('on', g.dataset.id === id));
-    const z = zones.find(x => x.id === id); if (!z) return;
+    const z = byId(id); if (!z) return;
     detail.hidden = false;
-    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'}</small></h2>` +
-      (z.units.length ? `<ul>${z.units.map(u => `<li>${entry(u)}</li>`).join('')}</ul>` : '<p>Not assigned yet.</p>') +
+    detail.innerHTML = `<h2>${z.id.toUpperCase()} — ${esc(z.name)}<small>${z.kind === 'fl' ? 'Fleet' : 'Squads'} · ${z.units.length}</small></h2>` +
+      (z.units.length ? `<ul>${z.units.map(u => li(u, true)).join('')}</ul>` : '<p>Not assigned yet.</p>') +
       (z.note ? `<p>${esc(z.note)}</p>` : '');
-    history.replaceState(null, '', '#' + id);
+    applyFilter();
     if (matchMedia('(max-width:640px)').matches) document.getElementById('z-' + id)?.scrollIntoView({ behavior:'smooth', block:'start' });
   }
   map.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
   map.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); pick(g.dataset.id); } });
+
+  // ---- find a member: highlight their squads, fade the rest, list their placements ----
+  const who = document.getElementById('who'), res = document.getElementById('whoRes'), clr = document.getElementById('whoClear');
+  const board = document.getElementById('board');
+  const players = [...new Set(zones.flatMap(z => z.units.map(u => u.player).filter(Boolean)))].sort((a, b) => a.localeCompare(b));
+  document.getElementById('whoList').innerHTML = players.map(p => `<option value="${esc(p)}">`).join('');
+  function applyFilter(){
+    const q = who.value.trim().toLowerCase();
+    document.body.classList.toggle('filtering', !!q);
+    document.querySelectorAll('li[data-p]').forEach(el => el.classList.toggle('hit', !!q && el.dataset.p.includes(q)));
+    map.querySelectorAll('.zone').forEach(g => g.classList.toggle('hit', !!q && !!g.querySelector('li.hit')));
+    clr.hidden = !q;
+    if (!q){ res.hidden = true; return; }
+    // Exact name first; otherwise everyone whose name contains the text.
+    const exact = players.filter(p => p.toLowerCase() === q);
+    const names = exact.length ? exact : players.filter(p => p.toLowerCase().includes(q));
+    res.hidden = false;
+    res.innerHTML = names.length ? names.slice(0, 6).map(p => {
+      const where = ORDER.map(byId).filter(Boolean).map(z => {
+        const mine = z.units.filter(u => u.player === p);
+        return mine.length ? `<b>${z.id.toUpperCase()}</b> ${mine.map(u => esc(u.team) + (u.weak ? ' <span class="weak">best available</span>' : '')).join(', ')}` : '';
+      }).filter(Boolean);
+      return `<span class="wn">${esc(p)}</span> ${where.join(' · ') || 'not placed'}`;
+    }).join('<br>') + (names.length > 6 ? `<br>…and ${names.length - 6} more — type more of the name` : '')
+      : 'No member by that name in the plan.';
+  }
+  const syncUrl = () => { const u = new URL(location); who.value ? u.searchParams.set('who', who.value) : u.searchParams.delete('who'); history.replaceState(null, '', u); };
+  who.addEventListener('input', () => { applyFilter(); syncUrl(); });
+  clr.onclick = () => { who.value = ''; applyFilter(); syncUrl(); who.focus(); };
+  const initial = new URL(location).searchParams.get('who');
+  if (initial){ who.value = initial; applyFilter(); }
   if (location.hash) pick(location.hash.slice(1));
 })();
 </script>
@@ -233,7 +280,7 @@
   // Guild rules: offense 10 = keep for offense; defense > offense = a defense team; plus the teams the
   // guild picks for defense (tw-plan.json "defenseTeams"). Ungraded teams get their own group.
   let picks = [];
-  try { picks = (await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json()).defenseTeams || []; } catch {}
+  try { picks = (await (await fetch('tw-settings.json?_=' + Date.now(), { cache:'no-store' })).json()).defenseTeams || []; } catch {}
   const pick = new Set(picks.map(n => n.toLowerCase()));
   const role = t => pick.has(t.name.toLowerCase()) ? 'def'
     : t.defense == null || t.offense == null ? 'none'
