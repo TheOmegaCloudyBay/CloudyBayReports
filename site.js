@@ -19,6 +19,7 @@
       lede:'Our war record — results, opponents and margins.',
       pages:[
         { href:'tw-map.html', title:'Map', desc:'Where each team goes on defense' },
+        { href:'tw-teams.html', title:'Teams', desc:'Best defense teams and who can field them' },
         { href:'tw-farms.html', title:'Required farms', desc:'Teams the guild needs for war' },
       ]},
     { id:'raid', href:'raid.html', label:'Raid', title:'Raids',
@@ -45,7 +46,7 @@
   };
 
   // Which topic a sub-page belongs to.
-  const PARENT = { 'rote-platoons.html':'tb', 'tb-required.html':'tb', 'reva-readiness.html':'tb', 'tw-map.html':'tw','player.html':'members' };
+  const PARENT = { 'rote-platoons.html':'tb', 'tb-required.html':'tb', 'reva-readiness.html':'tb', 'tw-map.html':'tw', 'tw-teams.html':'tw', 'player.html':'members' };
 
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();

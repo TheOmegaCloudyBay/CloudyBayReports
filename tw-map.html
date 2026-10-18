@@ -93,6 +93,11 @@
   .whores{margin:0 0 10px;padding:10px 12px;border-radius:8px;background:var(--cb-card);border:1px solid var(--cb-accent);font-size:14px;line-height:1.7}
   .whores .wn{font-weight:700;margin-right:6px}
   .wk{color:#f0a020 !important}
+  a.tl{color:inherit;text-decoration:none;pointer-events:auto} a.tl:hover{color:var(--cb-accent);text-decoration:underline}
+  .zc ul{pointer-events:auto}
+  li.fil{font-style:italic;opacity:.72} .filx{font-style:italic;opacity:.8}
+  .fl-tag{font-size:10px;font-weight:600;font-style:normal;color:var(--cb-dim);border:1px solid var(--cb-line);border-radius:4px;padding:0 4px}
+  body.filtering li.fil.hit{opacity:1}
   body.filtering li[data-p]{opacity:.22}
   body.filtering li[data-p].hit{opacity:1;font-weight:700}
   body.filtering li[data-p].hit .who{color:var(--cb-txt)}
@@ -116,28 +121,11 @@
   <p class="pinfo" id="planInfo"></p>
   <div class="dir"><span>Back</span><span class="enemy">Front · enemy →</span></div>
   <div class="board" id="board"><svg id="map" viewBox="0 0 1400 700" role="img" aria-label="Territory War map"></svg></div>
-  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span><b class="wk">Orange name</b> = best available team (the member has nothing graded 4+ on defense at R5+)</span></div>
+  <div class="legend"><span><i style="background:var(--sq)"></i>Squads</span><span><i style="background:var(--fl)"></i>Fleet</span><span><i class="filx">Grey italic</i> = filler (lower grade or relics, to fill every slot)</span><span><b class="wk">Orange name</b> = best available team (the member has nothing graded 4+ on defense at R5+)</span></div>
   <div class="detail" id="detail" hidden></div>
   <div class="plist" id="plist"></div>
 
-  <section class="dteams" id="dteams" hidden>
-    <div class="dhead">
-      <h2>Defense teams</h2>
-      <label>Show members with every unit at
-        <select id="minLvl">
-          <option value="0">any level (owns all)</option>
-          <option value="12">G12+</option>
-          <option value="14">R1+</option>
-          <option value="16">R3+</option>
-          <option value="18" selected>R5+</option>
-          <option value="20">R7+</option>
-          <option value="22">R9+</option>
-        </select>
-      </label>
-    </div>
-    <p class="credit" id="credit"></p>
-    <div class="dlist" id="dlist"></div>
-  </section>
+  <p class="pinfo" style="margin-top:22px">Which teams we can field, and how they rank: <a href="tw-teams.html" style="color:inherit">TW teams →</a></p>
 
 <script>
 (async function(){
@@ -145,11 +133,14 @@
   try { PLAN = await (await fetch('tw-plan.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch {}
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const mil = n => n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : Math.round(n / 1e3) + 'k';
+  // Team name → its card on our Teams page (listed and guild-added teams alike).
+  const slug = n => String(n).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const tname = n => n ? `<a class="tl" href="tw-teams.html#team-${slug(n)}" title="See this team on the Teams page">${esc(n)}</a>` : '';
   // A plan entry is a team name, or { team, player, score?, weak? }.
   const entry = (u, full) => typeof u === 'string' ? esc(u)
-    : esc(u.team || '') + (u.player ? ` <span class="who${u.weak ? ' wk' : ''}">— <bdi>${esc(u.player)}</bdi>${u.score ? ' · ' + mil(u.score) : ''}</span>` : '')
+    : tname(u.team || '') + (u.player ? ` <span class="who${u.weak ? ' wk' : ''}">— <bdi>${esc(u.player)}</bdi>${u.score ? ' · ' + mil(u.score) : ''}</span>` : '')
       + (u.weak && full ? ' <span class="weak">best available</span>' : '');
-  const li = (u, full) => `<li data-p="${esc((u.player || '').toLowerCase())}">${entry(u, full)}</li>`;
+  const li = (u, full) => `<li data-p="${esc((u.player || '').toLowerCase())}"${u.filler ? ' class="fil"' : ''}>${entry(u, full)}${u.filler && full ? ' <span class="fl-tag">filler</span>' : ''}</li>`;
 
   // Our side of the board, front (nearest the enemy) on the right — as in game.
   //   back: bf/bt/bb · middle back: mbf/mbt/mbb · middle front: mft/mfb · front: ft/fb
@@ -225,7 +216,7 @@
     applyFilter();
     if (matchMedia('(max-width:640px)').matches) document.getElementById('z-' + id)?.scrollIntoView({ behavior:'smooth', block:'start' });
   }
-  map.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
+  map.addEventListener('click', e => { if (e.target.closest('a')) return; const g = e.target.closest('.zone'); if (g) pick(g.dataset.id); });
   map.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); pick(g.dataset.id); } });
 
   // ---- find a member: highlight their squads, fade the rest, list their placements ----
@@ -259,61 +250,6 @@
   const initial = new URL(location).searchParams.get('who');
   if (initial){ who.value = initial; applyFilter(); }
   if (location.hash) pick(location.hash.slice(1));
-})();
-</script>
-<script>
-// Defense teams: AhnaldT101's Grand Arena list (graded on offense/defense) × the members who own the
-// whole lineup, with their weakest unit's level. Monthly snapshot, written by the publish run.
-(async function(){
-  let D;
-  try { D = await (await fetch('tw-teams.json?_=' + Date.now(), { cache:'no-store' })).json(); } catch { return; }
-  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const acode = n => { const s = String(n || ''); return s.length === 9 ? `${s.slice(0,3)}-${s.slice(3,6)}-${s.slice(6)}` : s; };
-  const lvl = v => v >= 13 ? 'R' + (v - 13) : 'G' + v;
-  const grade = v => v == null ? '—' : Number(v).toFixed(1);
-
-  document.getElementById('credit').innerHTML =
-    `Team list and grades by <a href="${esc(D.source)}" target="_blank" rel="noopener">${esc(D.author)}</a> ` +
-    `(Grand Arena 5v5 — the defense grade is the closest guide for TW), snapshot ${new Date(D.fetched).toLocaleDateString(undefined, { day:'numeric', month:'short', year:'numeric' })}. ` +
-    `Members listed own the whole lineup; the level shown is their weakest unit. Toons marked “not in game yet” aren’t counted.`;
-
-  // Guild rules: offense 10 = keep for offense; defense > offense = a defense team; plus the teams the
-  // guild picks for defense (tw-plan.json "defenseTeams"). Ungraded teams get their own group.
-  let picks = [];
-  try { picks = (await (await fetch('tw-settings.json?_=' + Date.now(), { cache:'no-store' })).json()).defenseTeams || []; } catch {}
-  const pick = new Set(picks.map(n => n.toLowerCase()));
-  const role = t => pick.has(t.name.toLowerCase()) ? 'def'
-    : t.defense == null || t.offense == null ? 'none'
-    : t.offense >= 10 ? 'off'
-    : t.defense > t.offense && t.defense >= 4 ? 'def' : 'either';
-  const GROUPS = [
-    ['def', 'Defense teams', 'Guild picks, and teams graded higher on defense than offense (defense 4+).'],
-    ['either', 'Either', 'Graded the same or better on offense — fine on defense if needed.'],
-    ['off', 'Keep for offense', 'Offense 10 — save these for attacking.'],
-    ['none', 'Ungraded', 'Not graded yet on the list.'],
-  ];
-  const byDef = (a, b) => (b.defense ?? -1) - (a.defense ?? -1) || (b.overall ?? 0) - (a.overall ?? 0) || a.name.localeCompare(b.name);
-  const sel = document.getElementById('minLvl');
-  function draw(){
-    const min = +sel.value;
-    document.getElementById('dlist').innerHTML = GROUPS.map(([key, title, sub]) => {
-      const ts = D.teams.filter(t => role(t) === key).sort(byDef);
-      if (!ts.length) return '';
-      return `<h3 class="grp-h">${title} <span>${ts.length}</span></h3><p class="grp-s">${sub}</p><div class="grp-g">` + ts.map(t => {
-      const ps = t.players.filter(p => p.min >= min);
-      const lineup = t.units.map(u => u.id === 'flex' ? 'Flex slot' : u.id ? esc(u.name) : `<span class="new">${esc(u.name)} (not in game yet)</span>`).join(', ');
-      return `<div class="tcard ${key}"><div class="th"><b>${esc(t.name)}</b><span class="gr">DEF <span class="d">${grade(t.defense)}</span> · OFF ${grade(t.offense)}</span></div>
-        <div class="tier">${esc(t.tier)}${pick.has(t.name.toLowerCase()) ? ' · <span class="gp">guild pick</span>' : ''}</div>
-        <div class="lu">${lineup}</div>${t.note ? `<p class="nt">${esc(t.note)}</p>` : ''}
-        <p class="cnt2">${ps.length} member${ps.length === 1 ? '' : 's'}</p>
-        ${ps.length ? `<div class="pl">${ps.map(p => `<span>${esc(p.name)}${p.ally ? `<span class="ally">#${acode(p.ally)}</span>` : ''}<em>${lvl(p.min)}</em></span>`).join('')}</div>`
-                     : '<span class="none">Nobody at this level yet</span>'}</div>`;
-      }).join('') + '</div>';
-    }).join('');
-  }
-  sel.onchange = draw;
-  draw();
-  document.getElementById('dteams').hidden = false;
 })();
 </script>
 </body>
