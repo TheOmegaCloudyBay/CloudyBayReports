@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-20T18:57:37.057Z",
+  "generated": "2026-10-20T22:35:30.515Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -504,7 +504,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2699583
+          "score": 2701804
         },
         {
           "team": "Home One",
@@ -539,7 +539,7 @@
         {
           "team": "Home One",
           "player": "NeonZombie",
-          "score": 2334445
+          "score": 2339779
         },
         {
           "team": "Home One",
@@ -549,7 +549,7 @@
         {
           "team": "Home One",
           "player": "Seamus dono",
-          "score": 2261624
+          "score": 2261658
         },
         {
           "team": "Home One",
@@ -929,12 +929,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2699583
+          "score": 2701804
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2699583
+          "score": 2701804
         },
         {
           "team": "Chimaera",
@@ -992,8 +992,8 @@
           "weak": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Jerome Willem",
+          "team": "Great Mothers",
+          "player": "DarthMalgus",
           "weak": true
         },
         {
@@ -1032,12 +1032,12 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Great Mothers",
           "player": "Paladin12434",
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Carth with Zaalbar Omicron",
           "player": "R0ttin",
           "weak": true
         },
@@ -1117,8 +1117,8 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "DarthMalgus",
+          "team": "General Skywalker 501st",
+          "player": "Jerome Willem",
           "weak": true
         },
         {
@@ -1158,17 +1158,17 @@
         },
         {
           "team": "Great Mothers",
-          "player": "Paladin12434",
+          "player": "4L1V3 2 THR1V3",
           "weak": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
-          "player": "R0ttin",
+          "player": "Paladin12434",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "4L1V3 2 THR1V3",
+          "team": "Nightsisters",
+          "player": "R0ttin",
           "weak": true
         },
         {
