@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-19T22:35:39.383Z",
+  "generated": "2026-10-20T06:35:41.098Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -531,12 +531,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2345553
-        },
-        {
-          "team": "Home One",
-          "player": "lordbigius771",
-          "score": 2338250
+          "score": 2362452
         },
         {
           "team": "Home One",
@@ -546,7 +541,7 @@
         {
           "team": "Home One",
           "player": "RoastMyChestnuts",
-          "score": 2274627
+          "score": 2275032
         },
         {
           "team": "Home One",
@@ -562,6 +557,11 @@
           "team": "Home One",
           "player": "Javin Vigil",
           "score": 2211151
+        },
+        {
+          "team": "Home One",
+          "player": "AngelDüst",
+          "score": 2199691
         }
       ],
       "note": ""
@@ -745,11 +745,6 @@
         },
         {
           "team": "Great Mothers",
-          "player": "lordbigius771",
-          "filler": true
-        },
-        {
-          "team": "Great Mothers",
           "player": "Jchiodo",
           "filler": true
         },
@@ -821,6 +816,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "Vibara",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "MrKrol",
           "filler": true
         }
       ],
@@ -979,27 +979,22 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "Matt The Radar Technician",
-          "weak": true
-        },
-        {
           "team": "Great Mothers",
-          "player": "DarthMalgus",
+          "player": "Bliss",
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "General Skywalker 501st",
+          "player": "Jerome Willem",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
           "player": "Yarael Poof",
           "weak": true
         },
         {
-          "team": "Zorii Resistance",
-          "player": "יול ילט",
-          "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Sith Triumvirate",
           "player": "AngelDüst",
           "weak": true
         },
@@ -1055,11 +1050,6 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "MrKrol",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
           "player": "TOMER",
           "filler": true
         },
@@ -1081,6 +1071,16 @@
         {
           "team": "Sith Triumvirate",
           "player": "DeathlessKing",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "жало",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Mol Eliza",
           "filler": true
         }
       ],
@@ -1104,28 +1104,23 @@
           "weak": true
         },
         {
-          "team": "Tuskens",
-          "player": "lordbigius771",
+          "team": "Sith Triumvirate",
+          "player": "Matt The Radar Technician",
           "weak": true
         },
         {
           "team": "Great Mothers",
-          "player": "Bliss",
+          "player": "DarthMalgus",
           "weak": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Jerome Willem",
-          "weak": true
-        },
-        {
-          "team": "Nightsisters",
+          "team": "Commander Luke Skywalker",
           "player": "Yarael Poof",
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "AngelDüst",
+          "team": "Zorii Resistance",
+          "player": "יול ילט",
           "weak": true
         },
         {
@@ -1185,21 +1180,6 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "lordbigius771",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
           "player": "Bliss",
           "filler": true
         },
@@ -1211,6 +1191,26 @@
         {
           "team": "Sith Triumvirate",
           "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Itsmemario",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "морфей",
           "filler": true
         }
       ],
