@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-20T06:35:41.098Z",
+  "generated": "2026-10-20T10:35:36.866Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -361,6 +361,10 @@
         },
         {
           "team": "Zorii Resistance",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "Zorii Resistance",
           "player": "Myers324"
         },
         {
@@ -426,11 +430,6 @@
         {
           "team": "Taron Malicos",
           "player": "TOMER",
-          "filler": true
-        },
-        {
-          "team": "Taron Malicos",
-          "player": "EW",
           "filler": true
         }
       ],
@@ -511,7 +510,7 @@
         {
           "team": "Home One",
           "player": "Nightfury2714",
-          "score": 2465697
+          "score": 2477800
         },
         {
           "team": "Home One",
@@ -568,6 +567,11 @@
     },
     "mbt": {
       "units": [
+        {
+          "team": "Taron Malicos",
+          "player": "EW",
+          "filler": true
+        },
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "MrKrol",
@@ -687,17 +691,17 @@
           "team": "Great Mothers",
           "player": "MrKrol",
           "filler": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "жало",
-          "filler": true
         }
       ],
       "note": ""
     },
     "mbb": {
       "units": [
+        {
+          "team": "Great Mothers",
+          "player": "жало",
+          "filler": true
+        },
         {
           "team": "Great Mothers",
           "player": "TOMER",
@@ -816,11 +820,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "Vibara",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "MrKrol",
           "filler": true
         }
       ],
@@ -951,7 +950,7 @@
         {
           "team": "Chimaera",
           "player": "Nightfury2714",
-          "score": 2465697
+          "score": 2477800
         }
       ],
       "note": ""
@@ -1050,6 +1049,11 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "TOMER",
           "filler": true
         },
@@ -1076,11 +1080,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
           "filler": true
         }
       ],
@@ -1180,6 +1179,11 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "Mol Eliza",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "Bliss",
           "filler": true
         },
@@ -1206,11 +1210,6 @@
         {
           "team": "General Skywalker 501st",
           "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "морфей",
           "filler": true
         }
       ],
