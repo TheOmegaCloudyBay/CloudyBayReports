@@ -1,13 +1,8 @@
 {
-  "generated": "2026-10-26T04:21:46.5441904Z",
+  "generated": "2026-10-26T06:36:37.3487272Z",
   "slots": 25,
   "absent": [],
-  "short": [
-    {
-      "name": "Ceth Senpai",
-      "squads": 1
-    }
-  ],
+  "short": [],
   "dropped": 0,
   "note": "Plan — Galactic Legends split between the front zones, then our best defense teams, best in front. Every member has at least 2 placements (a fleet counts).",
   "zones": {
@@ -1184,11 +1179,6 @@
           "weak": true
         },
         {
-          "team": "Captain Rex Phoenix",
-          "player": "Ceth Senpai",
-          "weak": true
-        },
-        {
           "team": "Carth with Zaalbar Omicron",
           "player": "EW",
           "filler": true
@@ -1226,6 +1216,11 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "жало",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DAVE115",
           "filler": true
         }
       ],
