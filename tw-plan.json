@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T18:35:30.5208942Z",
+  "generated": "2026-10-26T22:35:32.1726430Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -505,12 +505,12 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2726580
+          "score": 2726622
         },
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2671814
+          "score": 2674816
         },
         {
           "team": "Home One",
@@ -930,22 +930,22 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2726580
+          "score": 2726622
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2726580
+          "score": 2726622
         },
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2671814
+          "score": 2674816
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2671814
+          "score": 2674816
         },
         {
           "team": "Chimaera",
@@ -1008,7 +1008,7 @@
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "Nightsisters",
           "player": "Diego",
           "weak": true
         },
@@ -1133,13 +1133,13 @@
           "weak": true
         },
         {
-          "team": "Tuskens",
-          "player": "GabiZK90",
+          "team": "Commander Luke Skywalker",
+          "player": "Diego",
           "weak": true
         },
         {
-          "team": "Nightsisters",
-          "player": "Diego",
+          "team": "Tuskens",
+          "player": "GabiZK90",
           "weak": true
         },
         {
