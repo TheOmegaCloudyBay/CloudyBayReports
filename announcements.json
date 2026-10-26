@@ -2,7 +2,7 @@
   {
     "date": "2026-10-26",
     "title": "Members: GP threshold for new members",
-    "text": "During their first two weeks, new members whose GP is under 70% of the guild average (or below every existing member) are marked “Below threshold”.",
+    "text": "During their first month, new members whose GP is under 70% of the guild average (or below every existing member) are marked “Below threshold”.",
     "link": "members.html"
   },
   {

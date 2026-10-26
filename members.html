@@ -103,13 +103,13 @@
   document.getElementById('lede').textContent =
     `${rows.length} members · ${counts.Leader || 0} leader · ${counts.Officer || 0} officers. Ordered by Galactic Power.`;
 
-  // Below threshold (guild rule), preliminary members only: GP under 70% of the guild average, or less GP
+  // Below threshold (guild rule), newly joined members only (first month): GP under 70% of the guild average, or less GP
   // than every existing member. Shown with a reddish name and a tag saying why.
   const avgGp = D.rows.reduce((s, r) => s + (r.gp || 0), 0) / Math.max(1, D.rows.length);
   const existing = D.rows.filter(r => daysIn(r) >= 30).map(r => r.gp || 0);
   const lowestExisting = existing.length ? Math.min(...existing) : 0;
-  // Only preliminary members (first two weeks) are judged — established members are never marked.
-  const lowReason = r => !r.prelim ? null
+  // Only newly joined members (first month) are judged — established members are never marked.
+  const lowReason = r => daysIn(r) >= 30 ? null
     : (r.gp || 0) < 0.7 * avgGp
       ? `GP ${mil(r.gp)} is under 70% of the guild average (${mil(avgGp)})`
     : daysIn(r) < 30 && (r.gp || 0) < lowestExisting
@@ -171,7 +171,7 @@
   document.getElementById('note').innerHTML =
     `Names are colored by assessment rank — deep green for the top, yellowish green further down. Hover a name for the breakdown: ` +
     `the score averages <b>Participation</b> (raid tickets, TB deployment, raid turnout, Reva readiness, plus a small bonus for an ` +
-    `improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP). Members in their first month are tagged <i>newly joined</i>. <b style="color:#ff6b5e">Below threshold</b> (red name): a member in their first two weeks with GP under 70% of the guild average, or less GP than every existing member — hover the tag for why. ` +
+    `improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP). Members in their first month are tagged <i>newly joined</i>. <b style="color:#ff6b5e">Below threshold</b> (red name): a member in their first month with GP under 70% of the guild average, or less GP than every existing member — hover the tag for why. ` +
     `<b>Returns</b>: members who rejoined after leaving get a mark that lasts a month; three marks means kick on sight.`;
 })();
 </script>
