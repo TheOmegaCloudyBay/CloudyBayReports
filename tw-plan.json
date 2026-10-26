@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T06:36:37.3487272Z",
+  "generated": "2026-10-26T10:39:09.8250084Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -39,6 +39,10 @@
         {
           "team": "Lord Vader (DS Clones)",
           "player": "Vibara"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "GabiZK90"
         },
         {
           "team": "Rey",
@@ -103,13 +107,9 @@
         {
           "team": "Darth Malgus",
           "player": "Nexzos"
-        },
-        {
-          "team": "Great Mothers",
-          "player": "יול ילט"
         }
       ],
-      "note": "Galactic Legends: Jabba the Hutt (3), Lord Vader (DS Clones) (5), Rey (3)"
+      "note": "Galactic Legends: Jabba the Hutt (3), Lord Vader (DS Clones) (6), Rey (3)"
     },
     "fb": {
       "units": [
@@ -156,6 +156,10 @@
         {
           "team": "Sith Eternal Emperor",
           "player": "Jchiodo"
+        },
+        {
+          "team": "Great Mothers",
+          "player": "יול ילט"
         },
         {
           "team": "Great Mothers",
@@ -208,16 +212,16 @@
         {
           "team": "Sith Triumvirate",
           "player": "Ven of Thila"
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Nexzos"
         }
       ],
       "note": "Galactic Legends: Jedi Master Kenobi (4), Sith Eternal Emperor (7)"
     },
     "mft": {
       "units": [
+        {
+          "team": "General Skywalker 501st",
+          "player": "Nexzos"
+        },
         {
           "team": "General Skywalker 501st",
           "player": "NeonZombie"
@@ -313,16 +317,16 @@
         {
           "team": "Qui-Gon Jinn",
           "player": "Jchiodo"
-        },
-        {
-          "team": "Zorii Resistance",
-          "player": "Nexzos"
         }
       ],
       "note": ""
     },
     "mfb": {
       "units": [
+        {
+          "team": "Zorii Resistance",
+          "player": "Nexzos"
+        },
         {
           "team": "Zorii Resistance",
           "player": "Itsmemario"
@@ -437,11 +441,6 @@
           "team": "Tuskens",
           "player": "Eytanobi",
           "filler": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "Squaredevil",
-          "filler": true
         }
       ],
       "note": ""
@@ -555,6 +554,11 @@
         },
         {
           "team": "Home One",
+          "player": "יול ילט",
+          "score": 2224615
+        },
+        {
+          "team": "Home One",
           "player": "Javin Vigil",
           "score": 2212565
         },
@@ -562,11 +566,6 @@
           "team": "Home One",
           "player": "AngelDüst",
           "score": 2199691
-        },
-        {
-          "team": "Home One",
-          "player": "יול ילט",
-          "score": 2183300
         },
         {
           "team": "Home One",
@@ -578,6 +577,11 @@
     },
     "mbt": {
       "units": [
+        {
+          "team": "Tuskens",
+          "player": "Squaredevil",
+          "filler": true
+        },
         {
           "team": "Bo Katan (Mand'alor)",
           "player": "EW",
@@ -680,6 +684,11 @@
         },
         {
           "team": "Great Mothers",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "Great Mothers",
           "player": "DeathlessKing",
           "filler": true
         },
@@ -692,7 +701,12 @@
           "team": "Dark Trooper Moff Gideon",
           "player": "Vibara",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
         {
           "team": "Dark Trooper Moff Gideon",
           "player": "TOMER",
@@ -702,12 +716,7 @@
           "team": "Dark Trooper Moff Gideon",
           "player": "Eytanobi",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Dark Trooper Moff Gideon",
           "player": "EW",
@@ -821,16 +830,6 @@
         {
           "team": "General Skywalker 501st",
           "player": "Bliss",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Javin Vigil",
-          "filler": true
-        },
-        {
-          "team": "Mon Mothma w/ Luthen Rael",
-          "player": "Nexzos",
           "filler": true
         }
       ],
@@ -1009,49 +1008,54 @@
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Commander Luke Skywalker",
           "player": "Diego",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "GabiZK90",
-          "weak": true
-        },
-        {
-          "team": "Zorii Resistance",
+          "team": "Nightsisters",
           "player": "BlastBomber",
           "weak": true
         },
         {
-          "team": "Baylan Skoll",
+          "team": "Tuskens",
           "player": "DeathlessKing",
           "weak": true
         },
         {
-          "team": "Great Mothers",
+          "team": "Gungans",
           "player": "Paladin12434",
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Carth with Zaalbar Omicron",
           "player": "R0ttin",
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "Great Mothers",
+          "player": "4L1V3 2 THR1V3",
+          "weak": true
+        },
+        {
+          "team": "Zorii Resistance",
           "player": "Adrian",
           "weak": true
         },
         {
-          "team": "Tuskens",
-          "player": "Ven of Thila",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Theduke321",
           "weak": true
         },
         {
-          "team": "Nightsisters",
-          "player": "Theduke321",
-          "weak": true
+          "team": "General Skywalker 501st",
+          "player": "Javin Vigil",
+          "filler": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Nexzos",
+          "filler": true
         },
         {
           "team": "Mon Mothma w/ Luthen Rael",
@@ -1086,11 +1090,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "Vibara",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "MrKrol",
           "filler": true
         }
       ],
@@ -1134,49 +1133,54 @@
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
-          "player": "Diego",
-          "weak": true
-        },
-        {
           "team": "Tuskens",
           "player": "GabiZK90",
           "weak": true
         },
         {
           "team": "Nightsisters",
-          "player": "BlastBomber",
-          "weak": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "DeathlessKing",
-          "weak": true
-        },
-        {
-          "team": "Gungans",
-          "player": "Paladin12434",
-          "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "R0ttin",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "4L1V3 2 THR1V3",
+          "player": "Diego",
           "weak": true
         },
         {
           "team": "Zorii Resistance",
+          "player": "BlastBomber",
+          "weak": true
+        },
+        {
+          "team": "Baylan Skoll",
+          "player": "DeathlessKing",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Paladin12434",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
+          "player": "R0ttin",
+          "weak": true
+        },
+        {
+          "team": "Commander Luke Skywalker",
           "player": "Adrian",
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Tuskens",
+          "player": "Ven of Thila",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
           "player": "Theduke321",
           "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "MrKrol",
+          "filler": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
@@ -1216,11 +1220,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "DAVE115",
           "filler": true
         }
       ],
