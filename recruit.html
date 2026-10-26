@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Recruit — Cloudy Bay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.5;margin:0 auto;max-width:900px;
+    padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
+  h1{font-size:26px}
+  .lede{color:var(--cb-dim);margin:0 0 16px;font-size:14px}
+  .bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
+  .copy{background:#5865f2;color:#fff;border:0;border-radius:8px;padding:9px 18px;font:inherit;font-weight:700;cursor:pointer}
+  .copy:hover{background:#4752c4}
+  .copy.done{background:#37b24d}
+  .count{font-size:13px;color:var(--cb-dim)} .count.over{color:#e0524a;font-weight:600}
+  /* Discord-like preview of the message. */
+  .msg{padding:16px 18px;border-radius:10px;background:#313338;color:#dbdee1;border:1px solid var(--cb-line);
+    font-size:15px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+  .msg b{color:#f2f3f5}
+  .msg a{color:#00a8fc;text-decoration:none}
+  details{margin-top:16px} summary{cursor:pointer;color:var(--cb-dim);font-size:13px}
+  textarea{width:100%;min-height:220px;margin-top:8px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);
+    border-radius:8px;padding:10px;font:13px/1.45 ui-monospace,Consolas,monospace}
+  .note{font-size:12px;color:var(--cb-dim);margin-top:18px}
+  .note code{background:var(--cb-card);border:1px solid var(--cb-line);border-radius:4px;padding:0 4px}
+</style>
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+</head>
+<body data-topic="recruit">
+  <h1>Recruit</h1>
+  <p class="lede">Our recruiting message with today’s numbers — copy it and post it where you recruit.</p>
+  <div class="bar">
+    <button type="button" class="copy" id="copy">Copy message</button>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="msg" id="preview">Loading…</div>
+  <details><summary>Show the raw text (Discord formatting)</summary><textarea id="raw" readonly></textarea></details>
+  <p class="note">The numbers update with every refresh. The wording lives in <code>recruit.json</code> — placeholders:
+    <code>{tbStars}</code> <code>{raidName}</code> <code>{raidScore}</code> <code>{crate}</code> <code>{crates}</code> <code>{members}</code>
+    <code>{memberMax}</code> <code>{openSpots}</code> <code>{guildGp}</code> <code>{avgGp}</code> <code>{minGp}</code>.</p>
+  <div id="cb-links"></div>
+
+<script>
+(async function(){
+  const get = async f => (await fetch(f + '?_=' + Date.now(), { cache:'no-store' })).json();
+  let T, M;
+  try { [T, M] = await Promise.all([get('recruit.json'), get('site-meta.json')]); }
+  catch { document.getElementById('preview').textContent = 'Could not load the message — refresh to try again.'; return; }
+
+  const mil = n => (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
+  // Same join rule as the welcome page: 80% of the guild's average GP, rounded down to 500k.
+  const avg = M.gp / Math.max(1, M.members);
+  const vals = {
+    tbStars: M.tbStars ?? '—',
+    raidName: RAIDS[M.raid?.id] || M.raid?.id || '—',
+    raidScore: M.raid?.score ? mil(M.raid.score) : '—',
+    crate: M.raid?.crate ?? '—', crates: M.raid?.crates ?? '—',
+    members: M.members, memberMax: M.memberMax, openSpots: Math.max(0, M.memberMax - M.members),
+    guildGp: mil(M.gp), avgGp: mil(avg),
+    minGp: mil(Math.floor(avg * 0.8 / 5e5) * 5e5),
+  };
+  const text = T.template.replace(/\{(\w+)\}/g, (m, k) => k in vals ? String(vals[k]) : m);
+
+  // Preview: escape, then render Discord's **bold** and links.
+  const esc = s => s.replace(/[&<>]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]));
+  document.getElementById('preview').innerHTML = esc(text)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  document.getElementById('raw').value = text;
+  const count = document.getElementById('count');
+  count.textContent = `${text.length} / 2000 characters`;
+  count.classList.toggle('over', text.length > 2000);
+
+  const btn = document.getElementById('copy');
+  btn.onclick = async () => {
+    try { await navigator.clipboard.writeText(text); }
+    catch { const r = document.getElementById('raw'); r.closest('details').open = true; r.select(); document.execCommand('copy'); }
+    btn.textContent = 'Copied ✓'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy message'; btn.classList.remove('done'); }, 1800);
+  };
+})();
+</script>
+</body>
+</html>

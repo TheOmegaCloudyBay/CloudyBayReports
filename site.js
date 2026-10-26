@@ -33,6 +33,9 @@
         { href:'player.html', title:'Players data', desc:'Roster, gear and relics, GP, journeys, mods — and the gear planner' },
         { title:'Roster changes', desc:'Who joined, who left, and returning members', soon:true },
       ]},
+    { id:'recruit', href:'recruit.html', label:'Recruit', title:'Recruit',
+      lede:'Our recruiting message with today’s numbers, ready to copy.',
+      pages:[] },
   ];
 
   // Small list pages: a page with <body data-list="key">. Empty lists say so.

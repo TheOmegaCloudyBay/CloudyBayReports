@@ -1,6 +1,12 @@
 [
   {
     "date": "2026-10-26",
+    "title": "New: Recruit tab",
+    "text": "Our recruiting message with always-current numbers and a copy button — share it wherever you recruit.",
+    "link": "recruit.html"
+  },
+  {
+    "date": "2026-10-26",
     "title": "Members: GP threshold for new members",
     "text": "During their first week, new members whose GP is under 70% of the guild average (or below every existing member) are marked “Below threshold”.",
     "link": "members.html"
