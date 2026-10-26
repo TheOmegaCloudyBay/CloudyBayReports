@@ -26,6 +26,8 @@
   .role.Leader{color:#f2c94c;border-color:#d4a72c;background:rgba(242,201,76,.12);font-weight:600}
   .role.Officer{color:#37b24d;border-color:rgba(55,178,77,.5)}
   .since{color:var(--cb-dim);font-size:12px;margin-left:6px}
+  .low{font-size:11px;font-weight:600;color:#ff6b5e;border:1px solid rgba(255,107,94,.55);background:rgba(255,107,94,.1);
+    border-radius:4px;padding:0 5px;margin-left:7px;vertical-align:1px;cursor:help}
   .newbie{font-size:11px;font-weight:600;color:#2bb6c4;border:1px solid rgba(43,182,196,.5);border-radius:4px;
     padding:0 5px;margin-left:7px;vertical-align:1px}
   /* Return marks: once, twice, kick on sight. */
@@ -101,14 +103,28 @@
   document.getElementById('lede').textContent =
     `${rows.length} members · ${counts.Leader || 0} leader · ${counts.Officer || 0} officers. Ordered by Galactic Power.`;
 
+  // Below threshold (guild rule), preliminary members only: GP under 70% of the guild average, or less GP
+  // than every existing member. Shown with a reddish name and a tag saying why.
+  const avgGp = D.rows.reduce((s, r) => s + (r.gp || 0), 0) / Math.max(1, D.rows.length);
+  const existing = D.rows.filter(r => daysIn(r) >= 30).map(r => r.gp || 0);
+  const lowestExisting = existing.length ? Math.min(...existing) : 0;
+  // Only preliminary members (first two weeks) are judged — established members are never marked.
+  const lowReason = r => !r.prelim ? null
+    : (r.gp || 0) < 0.7 * avgGp
+      ? `GP ${mil(r.gp)} is under 70% of the guild average (${mil(avgGp)})`
+    : daysIn(r) < 30 && (r.gp || 0) < lowestExisting
+      ? `Newly joined with less GP (${mil(r.gp)}) than every existing member (lowest ${mil(lowestExisting)})`
+    : null;
+
   document.getElementById('roster').innerHTML =
     `<thead><tr><th>#</th><th>Member</th><th>Role</th><th>Joined</th><th class="num">GP</th><th class="last">Returns</th></tr></thead><tbody>` +
     rows.map((r, i) => {
       const role = D.roles[r.id] || 'Member';
-      const col = SHADE ? shade(aRank.get(r.id)) : null;
+      const low = lowReason(r);
+      const col = low ? '#ff6b5e' : SHADE ? shade(aRank.get(r.id)) : null;
       return `<tr>
         <td class="rank">${i + 1}</td>
-        <td class="who"><a href="player.html?ally=${esc(r.ally)}" data-id="${esc(r.id)}" style="${col ? `--name:${col}` : ''}">${esc(r.name)}</a>${r.ally ? `<span class="ally">#${acode(r.ally)}</span>` : ''}${daysIn(r) < 30 ? '<span class="newbie">Newly joined</span>' : ''}</td>
+        <td class="who"><a href="player.html?ally=${esc(r.ally)}" data-id="${esc(r.id)}" style="${col ? `--name:${col}` : ''}">${esc(r.name)}</a>${r.ally ? `<span class="ally">#${acode(r.ally)}</span>` : ''}${daysIn(r) < 30 ? '<span class="newbie">Newly joined</span>' : ''}${low ? `<span class="low" title="${esc(low)}">Below threshold</span>` : ''}</td>
         <td><span class="role ${role}">${role}</span></td>
         <td>${joined(r.joinTs)}</td>
         <td class="num">${mil(r.gp)}</td>
@@ -155,7 +171,7 @@
   document.getElementById('note').innerHTML =
     `Names are colored by assessment rank — deep green for the top, yellowish green further down. Hover a name for the breakdown: ` +
     `the score averages <b>Participation</b> (raid tickets, TB deployment, raid turnout, Reva readiness, plus a small bonus for an ` +
-    `improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP). Members in their first month are tagged <i>newly joined</i>. ` +
+    `improving raid score) and <b>Worth</b> (raid score, TB GP deployed, GP). Members in their first month are tagged <i>newly joined</i>. <b style="color:#ff6b5e">Below threshold</b> (red name): a member in their first two weeks with GP under 70% of the guild average, or less GP than every existing member — hover the tag for why. ` +
     `<b>Returns</b>: members who rejoined after leaving get a mark that lasts a month; three marks means kick on sight.`;
 })();
 </script>
