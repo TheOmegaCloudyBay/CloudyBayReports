@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T14:35:32.8777601Z",
+  "generated": "2026-10-26T18:35:30.5208942Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -500,12 +500,12 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 2743943
+          "score": 2779589
         },
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2724702
+          "score": 2726580
         },
         {
           "team": "Home One",
@@ -515,7 +515,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2479166
+          "score": 2485714
         },
         {
           "team": "Home One",
@@ -530,7 +530,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2381214
+          "score": 2381457
         },
         {
           "team": "Home One",
@@ -555,7 +555,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2224615
+          "score": 2228031
         },
         {
           "team": "Home One",
@@ -920,22 +920,22 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2743943
+          "score": 2779589
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2743943
+          "score": 2779589
         },
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2724702
+          "score": 2726580
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2724702
+          "score": 2726580
         },
         {
           "team": "Chimaera",
@@ -950,12 +950,12 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2479166
+          "score": 2485714
         },
         {
           "team": "Endurance",
           "player": "Bliss",
-          "score": 2479166
+          "score": 2485714
         },
         {
           "team": "Chimaera",
