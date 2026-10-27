@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-27T10:35:36.4931759Z",
+  "generated": "2026-10-27T14:35:37.2008021Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -517,7 +517,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2501312
+          "score": 2508521
         },
         {
           "team": "Home One",
@@ -796,12 +796,12 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
+          "player": "Bliss",
           "filler": true
         },
         {
           "team": "Sith Triumvirate",
-          "player": "Bliss",
+          "player": "Mol Eliza",
           "filler": true
         },
         {
@@ -957,7 +957,7 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2501312
+          "score": 2508521
         }
       ],
       "note": ""
