@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-27T22:35:33.2858399Z",
+  "generated": "2026-10-28T02:35:34.5285658Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -260,6 +260,10 @@
         },
         {
           "team": "Commander Luke Skywalker",
+          "player": "NeonZombie"
+        },
+        {
+          "team": "Commander Luke Skywalker",
           "player": "DarthMalgus"
         },
         {
@@ -285,10 +289,6 @@
         {
           "team": "Commander Luke Skywalker",
           "player": "Leksi beyter"
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "NeonZombie"
         },
         {
           "team": "Commander Luke Skywalker",
@@ -502,7 +502,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2726622
+          "score": 2726972
         },
         {
           "team": "Home One",
@@ -532,7 +532,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2381457
+          "score": 2382721
         },
         {
           "team": "Home One",
@@ -927,12 +927,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2726622
+          "score": 2726972
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2726622
+          "score": 2726972
         },
         {
           "team": "Chimaera",
