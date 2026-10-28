@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-28T06:40:30.7480576Z",
+  "generated": "2026-10-28T10:35:49.7423631Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -517,7 +517,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2508521
+          "score": 2508930
         },
         {
           "team": "Home One",
@@ -557,7 +557,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2228031
+          "score": 2229337
         },
         {
           "team": "Home One",
@@ -957,7 +957,7 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2508521
+          "score": 2508930
         }
       ],
       "note": ""
@@ -1050,6 +1050,11 @@
           "weak": true
         },
         {
+          "team": "Captain Rex Phoenix",
+          "player": "Thraken Vih'Torr",
+          "weak": true
+        },
+        {
           "team": "General Skywalker 501st",
           "player": "EW",
           "filler": true
@@ -1082,11 +1087,6 @@
         {
           "team": "Mon Mothma w/ Luthen Rael",
           "player": "Nexzos",
-          "filler": true
-        },
-        {
-          "team": "Mon Mothma w/ Luthen Rael",
-          "player": "Eytanobi",
           "filler": true
         }
       ],
@@ -1175,6 +1175,16 @@
           "weak": true
         },
         {
+          "team": "Sith Triumvirate",
+          "player": "Thraken Vih'Torr",
+          "weak": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
           "team": "Dr. Aphra",
           "player": "MrKrol",
           "filler": true
@@ -1207,16 +1217,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "MrKrol",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "TOMER",
           "filler": true
         }
       ],
