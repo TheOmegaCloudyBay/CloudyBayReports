@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-30T15:21:24.5632576Z",
+  "generated": "2026-10-30T19:21:18.4529650Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -516,7 +516,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2514794
+          "score": 2517115
         },
         {
           "team": "Home One",
@@ -536,7 +536,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2386215
+          "score": 2389630
         },
         {
           "team": "Home One",
@@ -956,7 +956,7 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2514794
+          "score": 2517115
         }
       ],
       "note": ""
