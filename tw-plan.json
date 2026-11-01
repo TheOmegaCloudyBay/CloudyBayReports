@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-01T06:36:15.7092371Z",
+  "generated": "2026-11-01T10:35:32.4581953Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -466,7 +466,7 @@
         {
           "team": "Home One",
           "player": "Vibara",
-          "score": 4014281
+          "score": 4014319
         },
         {
           "team": "Home One",
@@ -550,6 +550,11 @@
         },
         {
           "team": "Home One",
+          "player": "יול ילט",
+          "score": 2257367
+        },
+        {
+          "team": "Home One",
           "player": "Mol Eliza",
           "score": 2256696
         },
@@ -562,11 +567,6 @@
           "team": "Profundity",
           "player": "Matt The Radar Technician",
           "score": 2243732
-        },
-        {
-          "team": "Home One",
-          "player": "יול ילט",
-          "score": 2229337
         }
       ],
       "note": ""
@@ -856,12 +856,12 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4014281
+          "score": 4014319
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4014281
+          "score": 4014319
         },
         {
           "team": "Chimaera",
