@@ -1,8 +1,13 @@
 {
-  "generated": "2026-11-01T10:35:32.4581953Z",
+  "generated": "2026-11-02T06:36:15.5998165Z",
   "slots": 25,
   "absent": [],
-  "short": [],
+  "short": [
+    {
+      "name": "Sergey",
+      "squads": 0
+    }
+  ],
   "dropped": 0,
   "note": "Plan — Galactic Legends split between the front zones, then our best defense teams, best in front. Every member has at least 2 placements (a fleet counts).",
   "zones": {
@@ -456,12 +461,12 @@
         {
           "team": "Home One",
           "player": "MrKrol",
-          "score": 4158338
+          "score": 4162749
         },
         {
           "team": "Profundity",
           "player": "MrKrol",
-          "score": 4158338
+          "score": 4162749
         },
         {
           "team": "Home One",
@@ -476,7 +481,7 @@
         {
           "team": "Home One",
           "player": "морфей",
-          "score": 3914873
+          "score": 3914894
         },
         {
           "team": "Home One",
@@ -501,7 +506,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2740425
+          "score": 2751978
         },
         {
           "team": "Home One",
@@ -516,7 +521,7 @@
         {
           "team": "Home One",
           "player": "Jchiodo",
-          "score": 2455502
+          "score": 2455709
         },
         {
           "team": "Home One",
@@ -525,18 +530,18 @@
         },
         {
           "team": "Home One",
+          "player": "Тай",
+          "score": 2396315
+        },
+        {
+          "team": "Home One",
           "player": "lordbigius771",
           "score": 2395117
         },
         {
           "team": "Home One",
-          "player": "Тай",
-          "score": 2391437
-        },
-        {
-          "team": "Home One",
           "player": "NeonZombie",
-          "score": 2349657
+          "score": 2352481
         },
         {
           "team": "Home One",
@@ -551,7 +556,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2257367
+          "score": 2258311
         },
         {
           "team": "Home One",
@@ -846,12 +851,12 @@
         {
           "team": "Chimaera",
           "player": "MrKrol",
-          "score": 4158338
+          "score": 4162749
         },
         {
           "team": "Endurance",
           "player": "MrKrol",
-          "score": 4158338
+          "score": 4162749
         },
         {
           "team": "Chimaera",
@@ -876,12 +881,12 @@
         {
           "team": "Chimaera",
           "player": "морфей",
-          "score": 3914873
+          "score": 3914894
         },
         {
           "team": "Endurance",
           "player": "морфей",
-          "score": 3914873
+          "score": 3914894
         },
         {
           "team": "Chimaera",
@@ -926,12 +931,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2740425
+          "score": 2751978
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2740425
+          "score": 2751978
         },
         {
           "team": "Chimaera",
@@ -956,7 +961,7 @@
         {
           "team": "Chimaera",
           "player": "Jchiodo",
-          "score": 2455502
+          "score": 2455709
         }
       ],
       "note": ""
