@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02T10:35:32.2244655Z",
+  "generated": "2026-11-02T14:35:32.9973143Z",
   "slots": 25,
   "absent": [],
   "short": [
@@ -521,7 +521,7 @@
         {
           "team": "Home One",
           "player": "Jchiodo",
-          "score": 2455709
+          "score": 2455919
         },
         {
           "team": "Home One",
@@ -541,7 +541,7 @@
         {
           "team": "Home One",
           "player": "NeonZombie",
-          "score": 2352481
+          "score": 2354352
         },
         {
           "team": "Home One",
@@ -556,7 +556,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2258311
+          "score": 2258917
         },
         {
           "team": "Home One",
@@ -961,7 +961,7 @@
         {
           "team": "Chimaera",
           "player": "Jchiodo",
-          "score": 2455709
+          "score": 2455919
         }
       ],
       "note": ""
