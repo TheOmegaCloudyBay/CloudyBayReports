@@ -1,13 +1,8 @@
 {
-  "generated": "2026-11-04T06:37:17.2601901Z",
+  "generated": "2026-11-04T14:35:34.9983821Z",
   "slots": 25,
   "absent": [],
-  "short": [
-    {
-      "name": "Sergey",
-      "squads": 0
-    }
-  ],
+  "short": [],
   "dropped": 0,
   "note": "Plan — Galactic Legends split between the front zones, then our best defense teams, best in front. Every member has at least 2 placements (a fleet counts).",
   "zones": {
@@ -456,12 +451,12 @@
         {
           "team": "Home One",
           "player": "MrKrol",
-          "score": 4163329
+          "score": 4163856
         },
         {
           "team": "Profundity",
           "player": "MrKrol",
-          "score": 4163329
+          "score": 4163856
         },
         {
           "team": "Home One",
@@ -481,7 +476,7 @@
         {
           "team": "Home One",
           "player": "EW",
-          "score": 3785708
+          "score": 3788699
         },
         {
           "team": "Home One",
@@ -501,7 +496,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 2785493
+          "score": 2789705
         },
         {
           "team": "Home One",
@@ -511,7 +506,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2689694
+          "score": 2732037
         },
         {
           "team": "Home One",
@@ -546,7 +541,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2267774
+          "score": 2271190
         },
         {
           "team": "Home One",
@@ -846,12 +841,12 @@
         {
           "team": "Chimaera",
           "player": "MrKrol",
-          "score": 4163329
+          "score": 4163856
         },
         {
           "team": "Endurance",
           "player": "MrKrol",
-          "score": 4163329
+          "score": 4163856
         },
         {
           "team": "Chimaera",
@@ -886,12 +881,12 @@
         {
           "team": "Chimaera",
           "player": "EW",
-          "score": 3785708
+          "score": 3788699
         },
         {
           "team": "Endurance",
           "player": "EW",
-          "score": 3785708
+          "score": 3788699
         },
         {
           "team": "Chimaera",
@@ -926,12 +921,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2785493
+          "score": 2789705
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2785493
+          "score": 2789705
         },
         {
           "team": "Chimaera",
@@ -946,12 +941,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2689694
+          "score": 2732037
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2689694
+          "score": 2732037
         },
         {
           "team": "Chimaera",
@@ -1054,11 +1049,6 @@
           "weak": true
         },
         {
-          "team": "Captain Rex Phoenix",
-          "player": "The Bendu",
-          "weak": true
-        },
-        {
           "team": "Sith Triumvirate",
           "player": "EW",
           "filler": true
@@ -1086,6 +1076,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "Забулдыга",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DAVE115",
           "filler": true
         }
       ],
@@ -1179,16 +1174,6 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "The Bendu",
-          "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "DAVE115",
-          "filler": true
-        },
-        {
           "team": "Sith Triumvirate",
           "player": "GabiZK90",
           "filler": true
@@ -1216,6 +1201,16 @@
         {
           "team": "General Skywalker 501st",
           "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Bliss",
           "filler": true
         }
       ],
