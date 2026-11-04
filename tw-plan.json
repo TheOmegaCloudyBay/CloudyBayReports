@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T14:35:34.9983821Z",
+  "generated": "2026-11-04T18:36:53.0075332Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -506,7 +506,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2732037
+          "score": 2732446
         },
         {
           "team": "Home One",
@@ -531,7 +531,7 @@
         {
           "team": "Home One",
           "player": "NeonZombie",
-          "score": 2354352
+          "score": 2356913
         },
         {
           "team": "Home One",
@@ -941,12 +941,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2732037
+          "score": 2732446
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2732037
+          "score": 2732446
         },
         {
           "team": "Chimaera",
@@ -1024,11 +1024,6 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Paladin12434",
-          "weak": true
-        },
-        {
           "team": "Commander Luke Skywalker",
           "player": "Adrian",
           "weak": true
@@ -1046,6 +1041,11 @@
         {
           "team": "Nightsisters",
           "player": "Theduke321",
+          "weak": true
+        },
+        {
+          "team": "Captain Rex Phoenix",
+          "player": "The Bendu",
           "weak": true
         },
         {
@@ -1149,11 +1149,6 @@
           "weak": true
         },
         {
-          "team": "Gungans",
-          "player": "Paladin12434",
-          "weak": true
-        },
-        {
           "team": "Great Mothers",
           "player": "4L1V3 2 THR1V3",
           "weak": true
@@ -1171,6 +1166,11 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "Theduke321",
+          "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "The Bendu",
           "weak": true
         },
         {
