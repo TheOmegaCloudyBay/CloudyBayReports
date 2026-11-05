@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T06:35:42.2139011Z",
+  "generated": "2026-11-05T10:40:30.7825471Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -496,7 +496,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 2795777
+          "score": 2804986
         },
         {
           "team": "Home One",
@@ -921,12 +921,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2795777
+          "score": 2804986
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2795777
+          "score": 2804986
         },
         {
           "team": "Chimaera",
@@ -1044,11 +1044,6 @@
           "weak": true
         },
         {
-          "team": "Captain Rex Phoenix",
-          "player": "The Bendu",
-          "weak": true
-        },
-        {
           "team": "Sith Triumvirate",
           "player": "EW",
           "filler": true
@@ -1081,6 +1076,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "GabiZK90",
           "filler": true
         }
       ],
@@ -1169,16 +1169,6 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "The Bendu",
-          "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "GabiZK90",
-          "filler": true
-        },
-        {
           "team": "General Skywalker 501st",
           "player": "Itsmemario",
           "filler": true
@@ -1211,6 +1201,16 @@
         {
           "team": "General Skywalker 501st",
           "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Nexzos",
+          "filler": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Eytanobi",
           "filler": true
         }
       ],
