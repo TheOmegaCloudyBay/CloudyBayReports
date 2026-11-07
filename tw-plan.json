@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-07T03:49:09.4399347Z",
+  "generated": "2026-11-07T06:35:37.6838255Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -1037,11 +1037,6 @@
           "weak": true
         },
         {
-          "team": "Captain Phasma",
-          "player": "Vaexqua Grupen",
-          "weak": true
-        },
-        {
           "team": "Sith Triumvirate",
           "player": "RoastMyChestnuts",
           "filler": true
@@ -1079,6 +1074,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "CDave",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Eytanobi",
           "filler": true
         }
       ],
@@ -1162,16 +1162,6 @@
           "weak": true
         },
         {
-          "team": "Captain Rex Phoenix",
-          "player": "Vaexqua Grupen",
-          "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Eytanobi",
-          "filler": true
-        },
-        {
           "team": "Sith Triumvirate",
           "player": "EW",
           "filler": true
@@ -1209,6 +1199,16 @@
         {
           "team": "Sith Triumvirate",
           "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Itsmemario",
           "filler": true
         }
       ],
