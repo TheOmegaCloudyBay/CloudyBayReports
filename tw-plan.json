@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-08T14:35:36.0445455Z",
+  "generated": "2026-11-08T16:28:33.2064315Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -512,7 +512,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2760610
+          "score": 2760881
         },
         {
           "team": "Home One",
@@ -952,7 +952,7 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2760610
+          "score": 2760881
         }
       ],
       "note": ""
