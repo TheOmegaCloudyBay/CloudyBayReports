@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-07T20:32:34.8803931Z",
+  "generated": "2026-11-08T08:28:42.0611156Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -512,7 +512,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2735766
+          "score": 2760610
         },
         {
           "team": "Home One",
@@ -522,7 +522,7 @@
         {
           "team": "Home One",
           "player": "Jchiodo",
-          "score": 2458685
+          "score": 2462168
         },
         {
           "team": "Home One",
@@ -532,7 +532,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2435866
+          "score": 2435920
         },
         {
           "team": "Home One",
@@ -952,7 +952,7 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2735766
+          "score": 2760610
         }
       ],
       "note": ""
@@ -990,13 +990,13 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "AngelDüst",
+          "team": "Great Mothers",
+          "player": "Chewwy29",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Chewwy29",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "AngelDüst",
           "weak": true
         },
         {
@@ -1120,7 +1120,7 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Sith Triumvirate",
           "player": "AngelDüst",
           "weak": true
         },
