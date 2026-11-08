@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-08T20:29:04.3248550Z",
+  "generated": "2026-11-08T22:35:30.7231718Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -383,6 +383,11 @@
         },
         {
           "team": "Queen Amidala",
+          "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Queen Amidala",
           "player": "DAVE115",
           "filler": true
         },
@@ -399,6 +404,11 @@
         {
           "team": "Taron Malicos",
           "player": "TOMER",
+          "filler": true
+        },
+        {
+          "team": "Taron Malicos",
+          "player": "MrKrol",
           "filler": true
         },
         {
@@ -425,16 +435,6 @@
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "Забулдыга",
           "filler": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "Nexzos",
-          "filler": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "MrKrol",
-          "filler": true
         }
       ],
       "note": ""
@@ -454,12 +454,12 @@
         {
           "team": "Home One",
           "player": "MrKrol",
-          "score": 4174090
+          "score": 4176393
         },
         {
           "team": "Profundity",
           "player": "MrKrol",
-          "score": 4174090
+          "score": 4176393
         },
         {
           "team": "Home One",
@@ -504,7 +504,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2777658
+          "score": 2780185
         },
         {
           "team": "Home One",
@@ -529,7 +529,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2435920
+          "score": 2445822
         },
         {
           "team": "Home One",
@@ -571,6 +571,16 @@
     },
     "mbt": {
       "units": [
+        {
+          "team": "Tuskens",
+          "player": "Nexzos",
+          "filler": true
+        },
+        {
+          "team": "Tuskens",
+          "player": "MrKrol",
+          "filler": true
+        },
         {
           "team": "Tuskens",
           "player": "TOMER",
@@ -685,7 +695,12 @@
           "team": "Great Mothers",
           "player": "Eytanobi",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
         {
           "team": "Great Mothers",
           "player": "морфей",
@@ -695,12 +710,7 @@
           "team": "Great Mothers",
           "player": "EW",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Great Mothers",
           "player": "Squaredevil",
@@ -815,16 +825,6 @@
           "team": "Sith Triumvirate",
           "player": "Eytanobi",
           "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "DeathlessKing",
-          "filler": true
         }
       ],
       "note": ""
@@ -844,12 +844,12 @@
         {
           "team": "Chimaera",
           "player": "MrKrol",
-          "score": 4174090
+          "score": 4176393
         },
         {
           "team": "Endurance",
           "player": "MrKrol",
-          "score": 4174090
+          "score": 4176393
         },
         {
           "team": "Chimaera",
@@ -934,12 +934,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2777658
+          "score": 2780185
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2777658
+          "score": 2780185
         },
         {
           "team": "Chimaera",
@@ -1048,6 +1048,16 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DeathlessKing",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "жало",
           "filler": true
         },
@@ -1074,16 +1084,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "DAVE115",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "GabiZK90",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Itsmemario",
           "filler": true
         }
       ],
@@ -1172,6 +1172,16 @@
           "weak": true
         },
         {
+          "team": "Sith Triumvirate",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Itsmemario",
+          "filler": true
+        },
+        {
           "team": "General Skywalker 501st",
           "player": "EW",
           "filler": true
@@ -1204,16 +1214,6 @@
         {
           "team": "Mon Mothma w/ Luthen Rael",
           "player": "Nexzos",
-          "filler": true
-        },
-        {
-          "team": "Mon Mothma w/ Luthen Rael",
-          "player": "Eytanobi",
-          "filler": true
-        },
-        {
-          "team": "Dr. Aphra",
-          "player": "MrKrol",
           "filler": true
         }
       ],
