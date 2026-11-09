@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T06:35:37.4496804Z",
+  "generated": "2026-11-09T10:35:31.9806054Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -61,6 +61,10 @@
           "player": "JadenRaven"
         },
         {
+          "team": "Rey",
+          "player": "EW"
+        },
+        {
           "team": "Queen Amidala",
           "player": "Nexzos"
         },
@@ -103,13 +107,9 @@
         {
           "team": "Bo Katan (Mand'alor)",
           "player": "DAVE115"
-        },
-        {
-          "team": "Gungans",
-          "player": "MrKrol"
         }
       ],
-      "note": "Galactic Legends: Jabba the Hutt (5), Jedi Master Kenobi (4), Rey (4)"
+      "note": "Galactic Legends: Jabba the Hutt (5), Jedi Master Kenobi (4), Rey (5)"
     },
     "fb": {
       "units": [
@@ -163,6 +163,10 @@
         },
         {
           "team": "Gungans",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Gungans",
           "player": "somo4"
         },
         {
@@ -208,16 +212,16 @@
         {
           "team": "Sith Triumvirate",
           "player": "Nexzos"
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Itsmemario"
         }
       ],
       "note": "Galactic Legends: Lord Vader (DS Clones) (6), Sith Eternal Emperor (6)"
     },
     "mft": {
       "units": [
+        {
+          "team": "Sith Triumvirate",
+          "player": "Itsmemario"
+        },
         {
           "team": "Sith Triumvirate",
           "player": "Myers324"
@@ -313,16 +317,16 @@
         {
           "team": "Rogue One",
           "player": "Тай"
-        },
-        {
-          "team": "Rogue One",
-          "player": "MrKrol"
         }
       ],
       "note": ""
     },
     "mfb": {
       "units": [
+        {
+          "team": "Rogue One",
+          "player": "MrKrol"
+        },
         {
           "team": "Rogue One",
           "player": "Itsmemario"
@@ -388,6 +392,11 @@
         },
         {
           "team": "Queen Amidala",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Queen Amidala",
           "player": "DAVE115",
           "filler": true
         },
@@ -424,16 +433,6 @@
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "TOMER",
-          "filler": true
-        },
-        {
-          "team": "Saw Gerrera w/ Luthen Rael",
-          "player": "Vibara",
-          "filler": true
-        },
-        {
-          "team": "Saw Gerrera w/ Luthen Rael",
-          "player": "Забулдыга",
           "filler": true
         }
       ],
@@ -509,7 +508,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2764972
+          "score": 2765503
         },
         {
           "team": "Home One",
@@ -571,6 +570,26 @@
     },
     "mbt": {
       "units": [
+        {
+          "team": "Saw Gerrera w/ Luthen Rael",
+          "player": "Vibara",
+          "filler": true
+        },
+        {
+          "team": "Saw Gerrera w/ Luthen Rael",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Saw Gerrera w/ Luthen Rael",
+          "player": "JadenRaven",
+          "filler": true
+        },
+        {
+          "team": "Saw Gerrera w/ Luthen Rael",
+          "player": "Забулдыга",
+          "filler": true
+        },
         {
           "team": "Tuskens",
           "player": "Nexzos",
@@ -675,7 +694,12 @@
           "team": "Great Mothers",
           "player": "жало",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
         {
           "team": "Great Mothers",
           "player": "TOMER",
@@ -695,12 +719,7 @@
           "team": "Great Mothers",
           "player": "Eytanobi",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Great Mothers",
           "player": "морфей",
@@ -804,26 +823,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "MrKrol",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "TOMER",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "JadenRaven",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "CDave",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Eytanobi",
           "filler": true
         }
       ],
@@ -944,12 +943,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2764972
+          "score": 2765503
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2764972
+          "score": 2765503
         },
         {
           "team": "Chimaera",
@@ -1048,6 +1047,26 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "TOMER",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "JadenRaven",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "CDave",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "EW",
           "filler": true
         },
@@ -1064,26 +1083,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "hello there",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Bliss",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Забулдыга",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "DAVE115",
           "filler": true
         }
       ],
@@ -1173,22 +1172,32 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Mol Eliza",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Забулдыга",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "GabiZK90",
           "filler": true
         },
         {
           "team": "General Skywalker 501st",
           "player": "Itsmemario",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "JadenRaven",
           "filler": true
         },
         {
@@ -1204,16 +1213,6 @@
         {
           "team": "General Skywalker 501st",
           "player": "GabiZK90",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Bliss",
-          "filler": true
-        },
-        {
-          "team": "Mon Mothma w/ Luthen Rael",
-          "player": "Nexzos",
           "filler": true
         }
       ],
