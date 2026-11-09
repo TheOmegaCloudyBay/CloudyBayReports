@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T14:35:36.2232867Z",
+  "generated": "2026-11-09T22:35:34.6865902Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -513,7 +513,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2531674
+          "score": 2535150
         },
         {
           "team": "Home One",
@@ -528,7 +528,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2445822
+          "score": 2452321
         },
         {
           "team": "Home One",
@@ -953,7 +953,7 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2531674
+          "score": 2535150
         }
       ],
       "note": ""
@@ -971,7 +971,7 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
+          "team": "Sith Triumvirate",
           "player": "The Omega",
           "weak": true
         },
@@ -1096,13 +1096,13 @@
           "weak": true
         },
         {
-          "team": "Queen Amidala",
-          "player": "Забулдыга",
+          "team": "Great Mothers",
+          "player": "The Omega",
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "The Omega",
+          "team": "Queen Amidala",
+          "player": "Забулдыга",
           "weak": true
         },
         {
