@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T10:35:31.9806054Z",
+  "generated": "2026-11-09T14:35:36.2232867Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -508,7 +508,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2765503
+          "score": 2765871
         },
         {
           "team": "Home One",
@@ -538,7 +538,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2314307
+          "score": 2314312
         },
         {
           "team": "Home One",
@@ -943,12 +943,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2765503
+          "score": 2765871
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2765503
+          "score": 2765871
         },
         {
           "team": "Chimaera",
@@ -1072,17 +1072,17 @@
         },
         {
           "team": "Sith Triumvirate",
+          "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "DeathlessKing",
           "filler": true
         },
         {
           "team": "Sith Triumvirate",
           "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "hello there",
           "filler": true
         }
       ],
@@ -1172,7 +1172,7 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "Bliss",
+          "player": "hello there",
           "filler": true
         },
         {
