@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T22:35:34.6865902Z",
+  "generated": "2026-11-10T02:35:32.1216722Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -503,7 +503,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2780185
+          "score": 2780300
         },
         {
           "team": "Home One",
@@ -933,12 +933,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2780185
+          "score": 2780300
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2780185
+          "score": 2780300
         },
         {
           "team": "Chimaera",
@@ -1036,6 +1036,11 @@
           "weak": true
         },
         {
+          "team": "Great Mothers",
+          "player": "original name",
+          "weak": true
+        },
+        {
           "team": "Baylan Skoll",
           "player": "hello there",
           "weak": true
@@ -1078,11 +1083,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "DeathlessKing",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "жало",
           "filler": true
         }
       ],
@@ -1161,6 +1161,11 @@
           "weak": true
         },
         {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "original name",
+          "weak": true
+        },
+        {
           "team": "Tuskens",
           "player": "hello there",
           "weak": true
@@ -1169,6 +1174,11 @@
           "team": "Carth with Zaalbar Omicron",
           "player": "Theduke321",
           "weak": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "жало",
+          "filler": true
         },
         {
           "team": "Sith Triumvirate",
@@ -1203,16 +1213,6 @@
         {
           "team": "General Skywalker 501st",
           "player": "alfa",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "морфей",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "GabiZK90",
           "filler": true
         }
       ],
