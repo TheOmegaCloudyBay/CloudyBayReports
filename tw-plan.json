@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T10:35:59.9400284Z",
+  "generated": "2026-11-11T02:40:42.0588367Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -503,17 +503,17 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2780300
+          "score": 2782774
         },
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2765871
+          "score": 2768596
         },
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2535150
+          "score": 2536081
         },
         {
           "team": "Home One",
@@ -523,7 +523,7 @@
         {
           "team": "Home One",
           "player": "Забулдыга",
-          "score": 2455678
+          "score": 2457096
         },
         {
           "team": "Home One",
@@ -771,11 +771,6 @@
           "filler": true
         },
         {
-          "team": "Great Mothers",
-          "player": "hello there",
-          "filler": true
-        },
-        {
           "team": "Dark Trooper Moff Gideon",
           "player": "Vibara",
           "filler": true
@@ -823,6 +818,11 @@
         {
           "team": "Sith Triumvirate",
           "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "TOMER",
           "filler": true
         }
       ],
@@ -933,27 +933,27 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2780300
+          "score": 2782774
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2780300
+          "score": 2782774
         },
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2765871
+          "score": 2768596
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2765871
+          "score": 2768596
         },
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2535150
+          "score": 2536081
         }
       ],
       "note": ""
@@ -971,7 +971,7 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
+          "team": "Great Mothers",
           "player": "The Omega",
           "weak": true
         },
@@ -1041,19 +1041,9 @@
           "weak": true
         },
         {
-          "team": "Baylan Skoll",
-          "player": "hello there",
-          "weak": true
-        },
-        {
           "team": "Nightsisters",
           "player": "Theduke321",
           "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "TOMER",
-          "filler": true
         },
         {
           "team": "Sith Triumvirate",
@@ -1072,17 +1062,27 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
           "player": "Bliss",
           "filler": true
         },
         {
           "team": "Sith Triumvirate",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "DeathlessKing",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "жало",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Mol Eliza",
           "filler": true
         }
       ],
@@ -1096,13 +1096,13 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "The Omega",
+          "team": "Queen Amidala",
+          "player": "Забулдыга",
           "weak": true
         },
         {
-          "team": "Queen Amidala",
-          "player": "Забулдыга",
+          "team": "Sith Triumvirate",
+          "player": "The Omega",
           "weak": true
         },
         {
@@ -1131,7 +1131,7 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Great Mothers",
           "player": "FallenProphett",
           "weak": true
         },
@@ -1166,29 +1166,9 @@
           "weak": true
         },
         {
-          "team": "Tuskens",
-          "player": "hello there",
-          "weak": true
-        },
-        {
           "team": "Carth with Zaalbar Omicron",
           "player": "Theduke321",
           "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "hello there",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
-          "filler": true
         },
         {
           "team": "Sith Triumvirate",
@@ -1213,6 +1193,26 @@
         {
           "team": "General Skywalker 501st",
           "player": "alfa",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Nexzos",
           "filler": true
         }
       ],
