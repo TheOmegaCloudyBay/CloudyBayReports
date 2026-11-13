@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-13T10:36:14.2750448Z",
+  "generated": "2026-11-13T14:35:52.0707290Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -501,7 +501,7 @@
         {
           "team": "Home One",
           "player": "TOMER",
-          "score": 3435183
+          "score": 3439240
         },
         {
           "team": "Home One",
@@ -521,7 +521,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2536081
+          "score": 2601828
         },
         {
           "team": "Home One",
@@ -916,12 +916,12 @@
         {
           "team": "Chimaera",
           "player": "TOMER",
-          "score": 3435183
+          "score": 3439240
         },
         {
           "team": "Endurance",
           "player": "TOMER",
-          "score": 3435183
+          "score": 3439240
         },
         {
           "team": "Chimaera",
@@ -956,12 +956,12 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2536081
+          "score": 2601828
         },
         {
           "team": "Endurance",
           "player": "Bliss",
-          "score": 2536081
+          "score": 2601828
         },
         {
           "team": "Chimaera",
