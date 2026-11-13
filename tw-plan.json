@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11T02:40:42.0588367Z",
+  "generated": "2026-11-13T10:36:14.2750448Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -8,10 +8,6 @@
   "zones": {
     "ft": {
       "units": [
-        {
-          "team": "Jabba the Hutt",
-          "player": "Nexzos"
-        },
         {
           "team": "Jabba the Hutt",
           "player": "Vibara"
@@ -25,14 +21,6 @@
           "player": "alfa"
         },
         {
-          "team": "Jabba the Hutt",
-          "player": "JadenRaven"
-        },
-        {
-          "team": "Jedi Master Kenobi",
-          "player": "Nexzos"
-        },
-        {
           "team": "Jedi Master Kenobi",
           "player": "Vibara"
         },
@@ -46,10 +34,6 @@
         },
         {
           "team": "Rey",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Rey",
           "player": "Vibara"
         },
         {
@@ -58,23 +42,11 @@
         },
         {
           "team": "Rey",
-          "player": "JadenRaven"
-        },
-        {
-          "team": "Rey",
           "player": "EW"
         },
         {
           "team": "Queen Amidala",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Queen Amidala",
           "player": "Eytanobi"
-        },
-        {
-          "team": "Taron Malicos",
-          "player": "Nexzos"
         },
         {
           "team": "Tuskens",
@@ -89,77 +61,12 @@
           "player": "Jchiodo"
         },
         {
-          "team": "Reva Inquisitors",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Baylan Skoll",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Bo Katan (Mand'alor)",
-          "player": "Nexzos"
-        },
-        {
           "team": "Bo Katan (Mand'alor)",
           "player": "Chewwy29"
         },
         {
           "team": "Bo Katan (Mand'alor)",
           "player": "DAVE115"
-        }
-      ],
-      "note": "Galactic Legends: Jabba the Hutt (5), Jedi Master Kenobi (4), Rey (5)"
-    },
-    "fb": {
-      "units": [
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "Eytanobi"
-        },
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "NeonZombie"
-        },
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "Myers324"
-        },
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "Vibara"
-        },
-        {
-          "team": "Lord Vader (DS Clones)",
-          "player": "GabiZK90"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "MrKrol"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "EW"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "Vibara"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "жало"
-        },
-        {
-          "team": "Sith Eternal Emperor",
-          "player": "Jchiodo"
         },
         {
           "team": "Gungans",
@@ -170,20 +77,8 @@
           "player": "somo4"
         },
         {
-          "team": "Darth Malgus",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Darth Malgus",
-          "player": "JadenRaven"
-        },
-        {
           "team": "Great Mothers",
           "player": "יול ילט"
-        },
-        {
-          "team": "Great Mothers",
-          "player": "Nexzos"
         },
         {
           "team": "Great Mothers",
@@ -211,16 +106,52 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "Nexzos"
+          "player": "Itsmemario"
         }
       ],
-      "note": "Galactic Legends: Lord Vader (DS Clones) (6), Sith Eternal Emperor (6)"
+      "note": "Galactic Legends: Jabba the Hutt (3), Jedi Master Kenobi (3), Rey (3)"
     },
-    "mft": {
+    "fb": {
       "units": [
         {
-          "team": "Sith Triumvirate",
-          "player": "Itsmemario"
+          "team": "Lord Vader (DS Clones)",
+          "player": "Eytanobi"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "NeonZombie"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Myers324"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "Vibara"
+        },
+        {
+          "team": "Lord Vader (DS Clones)",
+          "player": "GabiZK90"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "MrKrol"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "EW"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "Vibara"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "жало"
+        },
+        {
+          "team": "Sith Eternal Emperor",
+          "player": "Jchiodo"
         },
         {
           "team": "Sith Triumvirate",
@@ -240,10 +171,6 @@
         },
         {
           "team": "General Skywalker 501st",
-          "player": "Nexzos"
-        },
-        {
-          "team": "General Skywalker 501st",
           "player": "NeonZombie"
         },
         {
@@ -260,10 +187,6 @@
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Commander Luke Skywalker",
           "player": "Vibara"
         },
         {
@@ -272,11 +195,11 @@
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "DarthMalgus"
+          "player": "CDave"
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "CDave"
+          "player": "DarthMalgus"
         },
         {
           "team": "Commander Luke Skywalker",
@@ -289,7 +212,12 @@
         {
           "team": "Commander Luke Skywalker",
           "player": "Eytanobi"
-        },
+        }
+      ],
+      "note": "Galactic Legends: Lord Vader (DS Clones) (5), Sith Eternal Emperor (5)"
+    },
+    "mft": {
+      "units": [
         {
           "team": "Commander Luke Skywalker",
           "player": "EW"
@@ -300,29 +228,20 @@
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "JadenRaven"
+          "player": "Seamus dono"
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "Seamus dono"
+          "player": "Galatea Griffiths"
         },
         {
           "team": "Commander Luke Skywalker",
           "player": "FallenProphett"
         },
         {
-          "team": "Iden Versio Special Forces",
-          "player": "Nexzos"
-        },
-        {
           "team": "Rogue One",
           "player": "Тай"
-        }
-      ],
-      "note": ""
-    },
-    "mfb": {
-      "units": [
+        },
         {
           "team": "Rogue One",
           "player": "MrKrol"
@@ -333,23 +252,11 @@
         },
         {
           "team": "Bad Batch V2",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Bad Batch V2",
           "player": "Jerome Willem"
         },
         {
           "team": "Qui-Gon Jinn",
-          "player": "Nexzos"
-        },
-        {
-          "team": "Qui-Gon Jinn",
           "player": "Jchiodo"
-        },
-        {
-          "team": "Zorii Resistance",
-          "player": "Nexzos"
         },
         {
           "team": "Zorii Resistance",
@@ -372,10 +279,6 @@
           "player": "somo4"
         },
         {
-          "team": "General Grievous",
-          "player": "Nexzos"
-        },
-        {
           "team": "Queen Amidala",
           "player": "Vibara",
           "filler": true
@@ -424,7 +327,12 @@
           "team": "Taron Malicos",
           "player": "EW",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mfb": {
+      "units": [
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "MrKrol",
@@ -434,142 +342,7 @@
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "TOMER",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbf": {
-      "units": [
-        {
-          "team": "Home One",
-          "player": "Nexzos",
-          "score": 5027804
         },
-        {
-          "team": "Profundity",
-          "player": "Nexzos",
-          "score": 5027804
-        },
-        {
-          "team": "Home One",
-          "player": "MrKrol",
-          "score": 4182502
-        },
-        {
-          "team": "Profundity",
-          "player": "MrKrol",
-          "score": 4182502
-        },
-        {
-          "team": "Home One",
-          "player": "Vibara",
-          "score": 4014557
-        },
-        {
-          "team": "Home One",
-          "player": "Eytanobi",
-          "score": 3955181
-        },
-        {
-          "team": "Home One",
-          "player": "морфей",
-          "score": 3915250
-        },
-        {
-          "team": "Home One",
-          "player": "EW",
-          "score": 3788699
-        },
-        {
-          "team": "Home One",
-          "player": "жало",
-          "score": 3723630
-        },
-        {
-          "team": "Home One",
-          "player": "TOMER",
-          "score": 3435183
-        },
-        {
-          "team": "Home One",
-          "player": "JadenRaven",
-          "score": 3233996
-        },
-        {
-          "team": "Home One",
-          "player": "DAVE115",
-          "score": 2804986
-        },
-        {
-          "team": "Home One",
-          "player": "Squaredevil",
-          "score": 2782774
-        },
-        {
-          "team": "Home One",
-          "player": "Itsmemario",
-          "score": 2768596
-        },
-        {
-          "team": "Home One",
-          "player": "Bliss",
-          "score": 2536081
-        },
-        {
-          "team": "Home One",
-          "player": "Jchiodo",
-          "score": 2462168
-        },
-        {
-          "team": "Home One",
-          "player": "Забулдыга",
-          "score": 2457096
-        },
-        {
-          "team": "Home One",
-          "player": "Тай",
-          "score": 2452599
-        },
-        {
-          "team": "Home One",
-          "player": "NeonZombie",
-          "score": 2361320
-        },
-        {
-          "team": "Home One",
-          "player": "יול ילט",
-          "score": 2316236
-        },
-        {
-          "team": "Home One",
-          "player": "RoastMyChestnuts",
-          "score": 2313026
-        },
-        {
-          "team": "Home One",
-          "player": "Seamus dono",
-          "score": 2266781
-        },
-        {
-          "team": "Home One",
-          "player": "Mol Eliza",
-          "score": 2258082
-        },
-        {
-          "team": "Home One",
-          "player": "Matt The Radar Technician",
-          "score": 2243509
-        },
-        {
-          "team": "Profundity",
-          "player": "Matt The Radar Technician",
-          "score": 2243509
-        }
-      ],
-      "note": ""
-    },
-    "mbt": {
-      "units": [
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "Vibara",
@@ -582,17 +355,7 @@
         },
         {
           "team": "Saw Gerrera w/ Luthen Rael",
-          "player": "JadenRaven",
-          "filler": true
-        },
-        {
-          "team": "Saw Gerrera w/ Luthen Rael",
           "player": "Забулдыга",
-          "filler": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "Nexzos",
           "filler": true
         },
         {
@@ -628,11 +391,6 @@
         {
           "team": "Tuskens",
           "player": "Eytanobi",
-          "filler": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "JadenRaven",
           "filler": true
         },
         {
@@ -658,11 +416,6 @@
         {
           "team": "Gungans",
           "player": "Vibara",
-          "filler": true
-        },
-        {
-          "team": "Gungans",
-          "player": "Nexzos",
           "filler": true
         },
         {
@@ -694,12 +447,7 @@
           "team": "Great Mothers",
           "player": "жало",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Great Mothers",
           "player": "TOMER",
@@ -709,7 +457,142 @@
           "team": "Great Mothers",
           "player": "Vibara",
           "filler": true
+        }
+      ],
+      "note": ""
+    },
+    "mbf": {
+      "units": [
+        {
+          "team": "Home One",
+          "player": "MrKrol",
+          "score": 4182502
         },
+        {
+          "team": "Profundity",
+          "player": "MrKrol",
+          "score": 4182502
+        },
+        {
+          "team": "Home One",
+          "player": "Vibara",
+          "score": 4016068
+        },
+        {
+          "team": "Home One",
+          "player": "Eytanobi",
+          "score": 3955181
+        },
+        {
+          "team": "Home One",
+          "player": "морфей",
+          "score": 3926204
+        },
+        {
+          "team": "Home One",
+          "player": "EW",
+          "score": 3788699
+        },
+        {
+          "team": "Home One",
+          "player": "жало",
+          "score": 3723630
+        },
+        {
+          "team": "Home One",
+          "player": "TOMER",
+          "score": 3435183
+        },
+        {
+          "team": "Home One",
+          "player": "DAVE115",
+          "score": 2822515
+        },
+        {
+          "team": "Home One",
+          "player": "Squaredevil",
+          "score": 2783734
+        },
+        {
+          "team": "Home One",
+          "player": "Itsmemario",
+          "score": 2774921
+        },
+        {
+          "team": "Home One",
+          "player": "Bliss",
+          "score": 2536081
+        },
+        {
+          "team": "Home One",
+          "player": "Тай",
+          "score": 2464548
+        },
+        {
+          "team": "Home One",
+          "player": "Jchiodo",
+          "score": 2462168
+        },
+        {
+          "team": "Home One",
+          "player": "Забулдыга",
+          "score": 2457096
+        },
+        {
+          "team": "Home One",
+          "player": "NeonZombie",
+          "score": 2370851
+        },
+        {
+          "team": "Home One",
+          "player": "יול ילט",
+          "score": 2333512
+        },
+        {
+          "team": "Home One",
+          "player": "RoastMyChestnuts",
+          "score": 2326440
+        },
+        {
+          "team": "Home One",
+          "player": "Seamus dono",
+          "score": 2268856
+        },
+        {
+          "team": "Home One",
+          "player": "Mol Eliza",
+          "score": 2258082
+        },
+        {
+          "team": "Home One",
+          "player": "Matt The Radar Technician",
+          "score": 2243509
+        },
+        {
+          "team": "Profundity",
+          "player": "Matt The Radar Technician",
+          "score": 2243509
+        },
+        {
+          "team": "Home One",
+          "player": "Javin Vigil",
+          "score": 2232089
+        },
+        {
+          "team": "Home One",
+          "player": "AngelDüst",
+          "score": 2200071
+        },
+        {
+          "team": "Home One",
+          "player": "The Omega",
+          "score": 2186230
+        }
+      ],
+      "note": ""
+    },
+    "mbt": {
+      "units": [
         {
           "team": "Great Mothers",
           "player": "Забулдыга",
@@ -747,7 +630,7 @@
         },
         {
           "team": "Great Mothers",
-          "player": "JadenRaven",
+          "player": "Тай",
           "filler": true
         },
         {
@@ -824,6 +707,146 @@
           "team": "Sith Triumvirate",
           "player": "TOMER",
           "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "CDave",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Galatea Griffiths",
+          "filler": true
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
+        {
+          "team": "Sith Triumvirate",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DeathlessKing",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "жало",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Mol Eliza",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Забулдыга",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "The Omega",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Itsmemario",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Galatea Griffiths",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "alfa",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "GabiZK90",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
+          "player": "Javin Vigil",
+          "filler": true
+        },
+        {
+          "team": "Mon Mothma w/ Luthen Rael",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Dr. Aphra",
+          "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Dr. Aphra",
+          "player": "Squaredevil",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Vibara",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "TOMER",
+          "filler": true
         }
       ],
       "note": ""
@@ -832,16 +855,6 @@
       "units": [
         {
           "team": "Chimaera",
-          "player": "Nexzos",
-          "score": 5027804
-        },
-        {
-          "team": "Endurance",
-          "player": "Nexzos",
-          "score": 5027804
-        },
-        {
-          "team": "Chimaera",
           "player": "MrKrol",
           "score": 4182502
         },
@@ -853,12 +866,12 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4014557
+          "score": 4016068
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4014557
+          "score": 4016068
         },
         {
           "team": "Chimaera",
@@ -873,12 +886,12 @@
         {
           "team": "Chimaera",
           "player": "морфей",
-          "score": 3915250
+          "score": 3926204
         },
         {
           "team": "Endurance",
           "player": "морфей",
-          "score": 3915250
+          "score": 3926204
         },
         {
           "team": "Chimaera",
@@ -912,48 +925,58 @@
         },
         {
           "team": "Chimaera",
-          "player": "JadenRaven",
-          "score": 3233996
-        },
-        {
-          "team": "Endurance",
-          "player": "JadenRaven",
-          "score": 3233996
-        },
-        {
-          "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2804986
+          "score": 2822515
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2804986
+          "score": 2822515
         },
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2782774
+          "score": 2783734
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2782774
+          "score": 2783734
         },
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2768596
+          "score": 2774921
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2768596
+          "score": 2774921
         },
         {
           "team": "Chimaera",
           "player": "Bliss",
           "score": 2536081
+        },
+        {
+          "team": "Endurance",
+          "player": "Bliss",
+          "score": 2536081
+        },
+        {
+          "team": "Chimaera",
+          "player": "Тай",
+          "score": 2464548
+        },
+        {
+          "team": "Endurance",
+          "player": "Тай",
+          "score": 2464548
+        },
+        {
+          "team": "Chimaera",
+          "player": "Jchiodo",
+          "score": 2462168
         }
       ],
       "note": ""
@@ -966,13 +989,8 @@
           "weak": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Javin Vigil",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "The Omega",
+          "team": "Queen Amidala",
+          "player": "Забулдыга",
           "weak": true
         },
         {
@@ -992,11 +1010,11 @@
         },
         {
           "team": "Great Mothers",
-          "player": "Chewwy29",
+          "player": "Galatea Griffiths",
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Sith Triumvirate",
           "player": "AngelDüst",
           "weak": true
         },
@@ -1026,7 +1044,7 @@
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "Zorii Resistance",
           "player": "Adrian",
           "weak": true
         },
@@ -1036,53 +1054,58 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "original name",
-          "weak": true
-        },
-        {
           "team": "Nightsisters",
           "player": "Theduke321",
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "JadenRaven",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Mol Eliza",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "CDave",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DarthMalgus",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "Eytanobi",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Galatea Griffiths",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "Bliss",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "alfa",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "EW",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "4L1V3 2 THR1V3",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "DeathlessKing",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Ven of Thila",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
+          "team": "Carth with Zaalbar Omicron",
           "player": "жало",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "Mol Eliza",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Squaredevil",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Bliss",
           "filler": true
         }
       ],
@@ -1096,12 +1119,7 @@
           "weak": true
         },
         {
-          "team": "Queen Amidala",
-          "player": "Забулдыга",
-          "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
+          "team": "Great Mothers",
           "player": "The Omega",
           "weak": true
         },
@@ -1121,8 +1139,8 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "AngelDüst",
+          "team": "Great Mothers",
+          "player": "Chewwy29",
           "weak": true
         },
         {
@@ -1151,18 +1169,13 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "4L1V3 2 THR1V3",
-          "weak": true
-        },
-        {
-          "team": "Zorii Resistance",
+          "team": "Commander Luke Skywalker",
           "player": "Adrian",
           "weak": true
         },
         {
-          "team": "Bo Katan (Mand'alor)",
-          "player": "original name",
+          "team": "Great Mothers",
+          "player": "4L1V3 2 THR1V3",
           "weak": true
         },
         {
@@ -1171,48 +1184,58 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "Забулдыга",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "AngelDüst",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "DAVE115",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "CDave",
           "filler": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "GabiZK90",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DeathlessKing",
           "filler": true
         },
         {
-          "team": "General Skywalker 501st",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "Itsmemario",
           "filler": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "alfa",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "RoastMyChestnuts",
           "filler": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "морфей",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "NeonZombie",
           "filler": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "GabiZK90",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Javin Vigil",
           "filler": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Bliss",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Забулдыга",
           "filler": true
         },
         {
-          "team": "Mon Mothma w/ Luthen Rael",
-          "player": "Nexzos",
+          "team": "Carth with Zaalbar Omicron",
+          "player": "zohar",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Matt The Radar Technician",
           "filler": true
         }
       ],
