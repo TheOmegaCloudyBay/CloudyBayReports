@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-14T18:27:42.9215437Z",
+  "generated": "2026-11-14T21:38:14.4549330Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -199,11 +199,11 @@
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "DarthMalgus"
+          "player": "CDave"
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "CDave"
+          "player": "DarthMalgus"
         },
         {
           "team": "Commander Luke Skywalker",
@@ -513,7 +513,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2843558
+          "score": 2846303
         },
         {
           "team": "Home One",
@@ -538,7 +538,7 @@
         {
           "team": "Home One",
           "player": "Забулдыга",
-          "score": 2457096
+          "score": 2456504
         },
         {
           "team": "Home One",
@@ -558,7 +558,12 @@
         {
           "team": "Home One",
           "player": "Seamus dono",
-          "score": 2268856
+          "score": 2270830
+        },
+        {
+          "team": "Home One",
+          "player": "Javin Vigil",
+          "score": 2264147
         },
         {
           "team": "Home One",
@@ -574,11 +579,6 @@
           "team": "Profundity",
           "player": "Matt The Radar Technician",
           "score": 2243509
-        },
-        {
-          "team": "Home One",
-          "player": "Javin Vigil",
-          "score": 2240170
         },
         {
           "team": "Home One",
@@ -943,12 +943,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2843558
+          "score": 2846303
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2843558
+          "score": 2846303
         },
         {
           "team": "Chimaera",
