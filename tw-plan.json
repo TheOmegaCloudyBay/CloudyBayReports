@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-14T04:08:34.6518409Z",
+  "generated": "2026-11-14T06:36:06.8008091Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -543,7 +543,7 @@
         {
           "team": "Home One",
           "player": "NeonZombie",
-          "score": 2370851
+          "score": 2370412
         },
         {
           "team": "Home One",
@@ -1056,11 +1056,6 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Hot ca",
-          "weak": true
-        },
-        {
           "team": "Carth with Zaalbar Omicron",
           "player": "Vibara",
           "filler": true
@@ -1103,6 +1098,11 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "alfa",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "4L1V3 2 THR1V3",
           "filler": true
         }
       ],
@@ -1186,16 +1186,6 @@
           "weak": true
         },
         {
-          "team": "Bad Batch V2",
-          "player": "Hot ca",
-          "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "4L1V3 2 THR1V3",
-          "filler": true
-        },
-        {
           "team": "Carth with Zaalbar Omicron",
           "player": "Ven of Thila",
           "filler": true
@@ -1233,6 +1223,16 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "DeathlessKing",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Eytanobi",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Itsmemario",
           "filler": true
         }
       ],
