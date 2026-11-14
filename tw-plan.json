@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-14T06:36:06.8008091Z",
+  "generated": "2026-11-14T18:27:42.9215437Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -199,11 +199,11 @@
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "CDave"
+          "player": "DarthMalgus"
         },
         {
           "team": "Commander Luke Skywalker",
-          "player": "DarthMalgus"
+          "player": "CDave"
         },
         {
           "team": "Commander Luke Skywalker",
@@ -463,12 +463,12 @@
         {
           "team": "Home One",
           "player": "MrKrol",
-          "score": 4182502
+          "score": 4184667
         },
         {
           "team": "Profundity",
           "player": "MrKrol",
-          "score": 4182502
+          "score": 4184667
         },
         {
           "team": "Home One",
@@ -503,22 +503,22 @@
         {
           "team": "Home One",
           "player": "DarthGab",
-          "score": 3058926
+          "score": 3069977
         },
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 2822515
-        },
-        {
-          "team": "Home One",
-          "player": "Squaredevil",
-          "score": 2783734
+          "score": 2982164
         },
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2774921
+          "score": 2843558
+        },
+        {
+          "team": "Home One",
+          "player": "Squaredevil",
+          "score": 2784001
         },
         {
           "team": "Home One",
@@ -528,7 +528,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2464548
+          "score": 2464603
         },
         {
           "team": "Home One",
@@ -543,7 +543,7 @@
         {
           "team": "Home One",
           "player": "NeonZombie",
-          "score": 2370412
+          "score": 2370156
         },
         {
           "team": "Home One",
@@ -578,7 +578,7 @@
         {
           "team": "Home One",
           "player": "Javin Vigil",
-          "score": 2232089
+          "score": 2240170
         },
         {
           "team": "Home One",
@@ -817,6 +817,11 @@
         },
         {
           "team": "General Skywalker 501st",
+          "player": "DAVE115",
+          "filler": true
+        },
+        {
+          "team": "General Skywalker 501st",
           "player": "Bliss",
           "filler": true
         },
@@ -839,11 +844,6 @@
           "team": "Dr. Aphra",
           "player": "Squaredevil",
           "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "морфей",
-          "filler": true
         }
       ],
       "note": ""
@@ -853,12 +853,12 @@
         {
           "team": "Chimaera",
           "player": "MrKrol",
-          "score": 4182502
+          "score": 4184667
         },
         {
           "team": "Endurance",
           "player": "MrKrol",
-          "score": 4182502
+          "score": 4184667
         },
         {
           "team": "Chimaera",
@@ -923,42 +923,42 @@
         {
           "team": "Chimaera",
           "player": "DarthGab",
-          "score": 3058926
+          "score": 3069977
         },
         {
           "team": "Endurance",
           "player": "DarthGab",
-          "score": 3058926
+          "score": 3069977
         },
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 2822515
+          "score": 2982164
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 2822515
-        },
-        {
-          "team": "Chimaera",
-          "player": "Squaredevil",
-          "score": 2783734
-        },
-        {
-          "team": "Endurance",
-          "player": "Squaredevil",
-          "score": 2783734
+          "score": 2982164
         },
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2774921
+          "score": 2843558
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2774921
+          "score": 2843558
+        },
+        {
+          "team": "Chimaera",
+          "player": "Squaredevil",
+          "score": 2784001
+        },
+        {
+          "team": "Endurance",
+          "player": "Squaredevil",
+          "score": 2784001
         },
         {
           "team": "Chimaera",
@@ -973,7 +973,7 @@
         {
           "team": "Chimaera",
           "player": "Тай",
-          "score": 2464548
+          "score": 2464603
         }
       ],
       "note": ""
@@ -1057,6 +1057,11 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
+          "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "Vibara",
           "filler": true
         },
@@ -1098,11 +1103,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "alfa",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "4L1V3 2 THR1V3",
           "filler": true
         }
       ],
@@ -1187,6 +1187,11 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
+          "player": "4L1V3 2 THR1V3",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "Ven of Thila",
           "filler": true
         },
@@ -1197,12 +1202,12 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
-          "player": "Squaredevil",
+          "player": "DAVE115",
           "filler": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
-          "player": "DAVE115",
+          "player": "Squaredevil",
           "filler": true
         },
         {
@@ -1228,11 +1233,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "Eytanobi",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Itsmemario",
           "filler": true
         }
       ],
