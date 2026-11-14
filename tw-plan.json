@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-13T14:35:52.0707290Z",
+  "generated": "2026-11-14T04:08:34.6518409Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -31,6 +31,10 @@
         {
           "team": "Jedi Master Kenobi",
           "player": "EW"
+        },
+        {
+          "team": "Jedi Master Kenobi",
+          "player": "DarthGab"
         },
         {
           "team": "Rey",
@@ -103,13 +107,9 @@
         {
           "team": "Great Mothers",
           "player": "somo4"
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Itsmemario"
         }
       ],
-      "note": "Galactic Legends: Jabba the Hutt (3), Jedi Master Kenobi (3), Rey (3)"
+      "note": "Galactic Legends: Jabba the Hutt (3), Jedi Master Kenobi (4), Rey (3)"
     },
     "fb": {
       "units": [
@@ -152,6 +152,10 @@
         {
           "team": "Sith Eternal Emperor",
           "player": "Jchiodo"
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "Itsmemario"
         },
         {
           "team": "Sith Triumvirate",
@@ -208,16 +212,16 @@
         {
           "team": "Commander Luke Skywalker",
           "player": "MrKrol"
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "Eytanobi"
         }
       ],
       "note": "Galactic Legends: Lord Vader (DS Clones) (5), Sith Eternal Emperor (5)"
     },
     "mft": {
       "units": [
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Eytanobi"
+        },
         {
           "team": "Commander Luke Skywalker",
           "player": "EW"
@@ -272,11 +276,19 @@
         },
         {
           "team": "Captain Rex Phoenix",
+          "player": "DarthGab"
+        },
+        {
+          "team": "Captain Rex Phoenix",
           "player": "Henry"
         },
         {
           "team": "Captain Rex Phoenix",
           "player": "somo4"
+        },
+        {
+          "team": "Dash Rendar",
+          "player": "DarthGab"
         },
         {
           "team": "Queen Amidala",
@@ -312,7 +324,12 @@
           "team": "Taron Malicos",
           "player": "Eytanobi",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mfb": {
+      "units": [
         {
           "team": "Taron Malicos",
           "player": "TOMER",
@@ -327,12 +344,7 @@
           "team": "Taron Malicos",
           "player": "EW",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mfb": {
-      "units": [
+        },
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "MrKrol",
@@ -442,21 +454,6 @@
           "team": "Great Mothers",
           "player": "CDave",
           "filler": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "TOMER",
-          "filler": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "Vibara",
-          "filler": true
         }
       ],
       "note": ""
@@ -496,12 +493,17 @@
         {
           "team": "Home One",
           "player": "жало",
-          "score": 3723630
+          "score": 3724309
         },
         {
           "team": "Home One",
           "player": "TOMER",
           "score": 3439240
+        },
+        {
+          "team": "Home One",
+          "player": "DarthGab",
+          "score": 3058926
         },
         {
           "team": "Home One",
@@ -521,7 +523,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2601828
+          "score": 2606414
         },
         {
           "team": "Home One",
@@ -581,18 +583,28 @@
         {
           "team": "Home One",
           "player": "AngelDüst",
-          "score": 2200071
-        },
-        {
-          "team": "Home One",
-          "player": "The Omega",
-          "score": 2186230
+          "score": 2207309
         }
       ],
       "note": ""
     },
     "mbt": {
       "units": [
+        {
+          "team": "Great Mothers",
+          "player": "жало",
+          "filler": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "TOMER",
+          "filler": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Vibara",
+          "filler": true
+        },
         {
           "team": "Great Mothers",
           "player": "Забулдыга",
@@ -621,6 +633,11 @@
         {
           "team": "Great Mothers",
           "player": "Bliss",
+          "filler": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "DarthGab",
           "filler": true
         },
         {
@@ -697,7 +714,12 @@
           "team": "Sith Triumvirate",
           "player": "Vibara",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
         {
           "team": "Sith Triumvirate",
           "player": "MrKrol",
@@ -717,12 +739,7 @@
           "team": "Sith Triumvirate",
           "player": "Galatea Griffiths",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Sith Triumvirate",
           "player": "Eytanobi",
@@ -760,7 +777,7 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "The Omega",
+          "player": "DarthGab",
           "filler": true
         },
         {
@@ -827,26 +844,6 @@
           "team": "Carth with Zaalbar Omicron",
           "player": "морфей",
           "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Vibara",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "MrKrol",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "EW",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "TOMER",
-          "filler": true
         }
       ],
       "note": ""
@@ -906,12 +903,12 @@
         {
           "team": "Chimaera",
           "player": "жало",
-          "score": 3723630
+          "score": 3724309
         },
         {
           "team": "Endurance",
           "player": "жало",
-          "score": 3723630
+          "score": 3724309
         },
         {
           "team": "Chimaera",
@@ -922,6 +919,16 @@
           "team": "Endurance",
           "player": "TOMER",
           "score": 3439240
+        },
+        {
+          "team": "Chimaera",
+          "player": "DarthGab",
+          "score": 3058926
+        },
+        {
+          "team": "Endurance",
+          "player": "DarthGab",
+          "score": 3058926
         },
         {
           "team": "Chimaera",
@@ -956,27 +963,17 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2601828
+          "score": 2606414
         },
         {
           "team": "Endurance",
           "player": "Bliss",
-          "score": 2601828
+          "score": 2606414
         },
         {
           "team": "Chimaera",
           "player": "Тай",
           "score": 2464548
-        },
-        {
-          "team": "Endurance",
-          "player": "Тай",
-          "score": 2464548
-        },
-        {
-          "team": "Chimaera",
-          "player": "Jchiodo",
-          "score": 2462168
         }
       ],
       "note": ""
@@ -991,6 +988,136 @@
         {
           "team": "Queen Amidala",
           "player": "Забулдыга",
+          "weak": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "The Omega",
+          "weak": true
+        },
+        {
+          "team": "Sith Triumvirate",
+          "player": "zohar",
+          "weak": true
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Yarael Poof",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "DarthMalgus",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Chewwy29",
+          "weak": true
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Diego",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "FallenProphett",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
+          "player": "BlastBomber",
+          "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "R0ttin",
+          "weak": true
+        },
+        {
+          "team": "Tuskens",
+          "player": "DeathlessKing",
+          "weak": true
+        },
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "Adrian",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "4L1V3 2 THR1V3",
+          "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Theduke321",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "Hot ca",
+          "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Vibara",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "MrKrol",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "TOMER",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DarthGab",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Mol Eliza",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "DarthMalgus",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Galatea Griffiths",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "alfa",
+          "filler": true
+        }
+      ],
+      "note": ""
+    },
+    "bb": {
+      "units": [
+        {
+          "team": "Great Mothers",
+          "player": "Javin Vigil",
+          "weak": true
+        },
+        {
+          "team": "Great Mothers",
+          "player": "The Omega",
           "weak": true
         },
         {
@@ -1059,24 +1186,9 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Mol Eliza",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "DarthMalgus",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Galatea Griffiths",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "alfa",
-          "filler": true
+          "team": "Bad Batch V2",
+          "player": "Hot ca",
+          "weak": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
@@ -1107,81 +1219,6 @@
           "team": "Carth with Zaalbar Omicron",
           "player": "Bliss",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "bb": {
-      "units": [
-        {
-          "team": "Great Mothers",
-          "player": "Javin Vigil",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "The Omega",
-          "weak": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "zohar",
-          "weak": true
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "Yarael Poof",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "DarthMalgus",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "Chewwy29",
-          "weak": true
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "Diego",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "FallenProphett",
-          "weak": true
-        },
-        {
-          "team": "Nightsisters",
-          "player": "BlastBomber",
-          "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "R0ttin",
-          "weak": true
-        },
-        {
-          "team": "Tuskens",
-          "player": "DeathlessKing",
-          "weak": true
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "Adrian",
-          "weak": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "4L1V3 2 THR1V3",
-          "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Theduke321",
-          "weak": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
@@ -1196,46 +1233,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "DeathlessKing",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Eytanobi",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Itsmemario",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "RoastMyChestnuts",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "NeonZombie",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Javin Vigil",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Забулдыга",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "zohar",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Matt The Radar Technician",
           "filler": true
         }
       ],
