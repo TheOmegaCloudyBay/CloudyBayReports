@@ -39,7 +39,7 @@
   <div class="msg" id="preview">Loading…</div>
   <details><summary>Show the raw text (Discord formatting)</summary><textarea id="raw" readonly></textarea></details>
   <p class="note">The numbers update with every refresh. The wording lives in <code>recruit.json</code> — placeholders:
-    <code>{tbStars}</code> <code>{raidName}</code> <code>{raidScore}</code> <code>{crate}</code> <code>{crates}</code> <code>{members}</code>
+    <code>{tbStars}</code> <code>{tbStarsBest}</code> <code>{raidName}</code> <code>{raidScore}</code> <code>{crate}</code> <code>{crates}</code> <code>{members}</code>
     <code>{memberMax}</code> <code>{openSpots}</code> <code>{guildGp}</code> <code>{avgGp}</code> <code>{minGp}</code>.</p>
   <div id="cb-links"></div>
 
@@ -49,6 +49,9 @@
   let T, M;
   try { [T, M] = await Promise.all([get('recruit.json'), get('site-meta.json')]); }
   catch { document.getElementById('preview').textContent = 'Could not load the message — refresh to try again.'; return; }
+  // Best TB result so far, from the published TB history (falls back to the latest).
+  let best = M.tbStars;
+  try { const G = await get('guild-stats-data.json'); best = Math.max(best || 0, ...(G.tbStarHist || []).map(h => h.score || 0)); } catch {}
 
   const mil = n => (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
   const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
@@ -56,6 +59,7 @@
   const avg = M.gp / Math.max(1, M.members);
   const vals = {
     tbStars: M.tbStars ?? '—',
+    tbStarsBest: best || '—',
     raidName: RAIDS[M.raid?.id] || M.raid?.id || '—',
     raidScore: M.raid?.score ? mil(M.raid.score) : '—',
     crate: M.raid?.crate ?? '—', crates: M.raid?.crates ?? '—',
