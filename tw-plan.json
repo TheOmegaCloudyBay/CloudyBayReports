@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-15T09:39:00.8850588Z",
+  "generated": "2026-11-15T10:35:45.2129233Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -487,7 +487,7 @@
         {
           "team": "Home One",
           "player": "EW",
-          "score": 3788699
+          "score": 3793106
         },
         {
           "team": "Home One",
@@ -501,18 +501,18 @@
         },
         {
           "team": "Home One",
+          "player": "DAVE115",
+          "score": 3071605
+        },
+        {
+          "team": "Home One",
           "player": "DarthGab",
           "score": 3069977
         },
         {
           "team": "Home One",
-          "player": "DAVE115",
-          "score": 3059548
-        },
-        {
-          "team": "Home One",
           "player": "Itsmemario",
-          "score": 2846513
+          "score": 2846715
         },
         {
           "team": "Home One",
@@ -892,12 +892,12 @@
         {
           "team": "Chimaera",
           "player": "EW",
-          "score": 3788699
+          "score": 3793106
         },
         {
           "team": "Endurance",
           "player": "EW",
-          "score": 3788699
+          "score": 3793106
         },
         {
           "team": "Chimaera",
@@ -921,6 +921,16 @@
         },
         {
           "team": "Chimaera",
+          "player": "DAVE115",
+          "score": 3071605
+        },
+        {
+          "team": "Endurance",
+          "player": "DAVE115",
+          "score": 3071605
+        },
+        {
+          "team": "Chimaera",
           "player": "DarthGab",
           "score": 3069977
         },
@@ -931,23 +941,13 @@
         },
         {
           "team": "Chimaera",
-          "player": "DAVE115",
-          "score": 3059548
-        },
-        {
-          "team": "Endurance",
-          "player": "DAVE115",
-          "score": 3059548
-        },
-        {
-          "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2846513
+          "score": 2846715
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2846513
+          "score": 2846715
         },
         {
           "team": "Chimaera",
