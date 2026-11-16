@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16T06:35:34.1264974Z",
+  "generated": "2026-11-16T10:35:51.0287381Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -501,7 +501,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 3071958
+          "score": 3072213
         },
         {
           "team": "Home One",
@@ -511,7 +511,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2846715
+          "score": 2857722
         },
         {
           "team": "Home One",
@@ -521,7 +521,7 @@
         {
           "team": "Home One",
           "player": "Bliss",
-          "score": 2624862
+          "score": 2628862
         },
         {
           "team": "Home One",
@@ -566,7 +566,7 @@
         {
           "team": "Home One",
           "player": "Mol Eliza",
-          "score": 2260714
+          "score": 2263280
         },
         {
           "team": "Home One",
@@ -921,12 +921,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 3071958
+          "score": 3072213
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 3071958
+          "score": 3072213
         },
         {
           "team": "Chimaera",
@@ -941,12 +941,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2846715
+          "score": 2857722
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2846715
+          "score": 2857722
         },
         {
           "team": "Chimaera",
@@ -961,12 +961,12 @@
         {
           "team": "Chimaera",
           "player": "Bliss",
-          "score": 2624862
+          "score": 2628862
         },
         {
           "team": "Endurance",
           "player": "Bliss",
-          "score": 2624862
+          "score": 2628862
         },
         {
           "team": "Chimaera",
@@ -1029,7 +1029,7 @@
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Carth with Zaalbar Omicron",
           "player": "R0ttin",
           "weak": true
         },
@@ -1154,7 +1154,7 @@
           "weak": true
         },
         {
-          "team": "Carth with Zaalbar Omicron",
+          "team": "Great Mothers",
           "player": "R0ttin",
           "weak": true
         },
