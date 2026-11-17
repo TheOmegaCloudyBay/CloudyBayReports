@@ -1,3 +1,12 @@
 {
-  "template": "**⚓ Cloudy Bay is recruiting!**\n\nA semi-competitive F2P guild.\n\n• **Rise of the Empire:** up to {tbStarsBest} stars\n• **Raids:** pursuing Droid Destruction\n• **Members:** {members}/{memberMax} · {guildGp} guild GP\n\n**What we expect**\n• {minGp}+ Galactic Power\n• 600 raid tickets every day\n• Participation in TB, TW (when signed up) and raids (600k+)\n\nLooking for active, friendly members to join us on our quest for glory and credits!\n🔗 Discord: https://discord.gg/pwecTHqru3\n🌐 Guild site: https://cloudybay.online"
+  "flavours": [
+    {
+      "name": "Short",
+      "template": "**⚓ Cloudy Bay is recruiting!**\n\nA semi-competitive F2P guild.\n\n• **Rise of the Empire:** up to {tbStarsBest} stars\n• **Raids:** pursuing Droid Destruction\n• **Members:** {members}/{memberMax} · {guildGp} guild GP\n\n**What we expect**\n• {minGp}+ Galactic Power\n• 600 raid tickets every day\n• Participation in TB, TW (when signed up) and raids (600k+)\n\nLooking for active, friendly members to join us on our quest for glory and credits!\n🔗 Discord: https://discord.gg/pwecTHqru3\n🌐 Guild site: https://cloudybay.online"
+    },
+    {
+      "name": "Recruiting site",
+      "template": ",gg https://swgoh.gg/g/jhOqHnCMTrWx-LXOeG3LRA/\n\nCloudy bay Is recruiting\nLooking for dedicated and reliable SWGOH players ready to join raids, Territory Battles, and Territory Wars!\n\n:bar_chart:  About us:\n:muscle: {guildGpFloor}+ Guild GP | :busts_in_silhouette: {members}/ {memberMax} active members\n:shield: Droid Destruction Raid — {raidStatus}\n:trophy: Territory Wars: organized war!\n\n:fire: Our Current Campaigns:\n:crossed_swords: Droid Destruction Raid — {raidCampaign}\n:shield: Territory Battles —Rote {tbStarsBest}*\n:map: Territory Wars — full coordination & strategy\n\n:dart: Who We’re Looking For:\n:punch: Active raid participants — every Droid Destruction!\n:bow_and_arrow: TW & TB warriors who follow instructions\n:scroll: Communicative and disciplined players\n:muscle: Players ready to grow & push the guild forward\n\n:crossed_swords: Requirements:\n:sun_with_face: Daily activity\n:fire: Mandatory raid participation\n:map: TW participation when signed up\n:shield: Active TB deployments\n:muscle: Minimum {minGp} GP\n\nJoin our Discord: https://discord.gg/ZkCAugyVf9\nGuild site: https://cloudybay.online"
+    }
+  ]
 }

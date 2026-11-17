@@ -10,6 +10,10 @@
     padding:20px 16px 60px;color:var(--cb-txt);background:var(--cb-bg)}
   h1{font-size:26px}
   .lede{color:var(--cb-dim);margin:0 0 16px;font-size:14px}
+  .flav{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--cb-line);border-radius:10px;background:var(--cb-card);margin:0 0 12px}
+  .flav button{background:none;border:0;border-radius:7px;color:var(--cb-dim);font:inherit;font-size:14px;padding:6px 14px;cursor:pointer}
+  .flav button:hover{color:var(--cb-txt)}
+  .flav button.on{background:var(--cb-bg);color:var(--cb-txt);box-shadow:inset 0 -2px 0 var(--cb-accent)}
   .bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 12px}
   .copy{background:#5865f2;color:#fff;border:0;border-radius:8px;padding:9px 18px;font:inherit;font-weight:700;cursor:pointer}
   .copy:hover{background:#4752c4}
@@ -21,7 +25,7 @@
   .msg b{color:#f2f3f5}
   .msg a{color:#00a8fc;text-decoration:none}
   details{margin-top:16px} summary{cursor:pointer;color:var(--cb-dim);font-size:13px}
-  textarea{width:100%;min-height:220px;margin-top:8px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);
+  textarea{width:100%;min-height:260px;margin-top:8px;background:var(--cb-card);color:var(--cb-txt);border:1px solid var(--cb-line);
     border-radius:8px;padding:10px;font:13px/1.45 ui-monospace,Consolas,monospace}
   .note{font-size:12px;color:var(--cb-dim);margin-top:18px}
   .note code{background:var(--cb-card);border:1px solid var(--cb-line);border-radius:4px;padding:0 4px}
@@ -31,16 +35,19 @@
 </head>
 <body data-topic="recruit">
   <h1>Recruit</h1>
-  <p class="lede">Our recruiting message with today’s numbers — copy it and post it where you recruit.</p>
+  <p class="lede">Our recruiting messages with today’s numbers — pick one, copy it and post it where you recruit.</p>
+  <div class="flav" id="flav" role="tablist"></div>
   <div class="bar">
     <button type="button" class="copy" id="copy">Copy message</button>
     <span class="count" id="count"></span>
   </div>
   <div class="msg" id="preview">Loading…</div>
-  <details><summary>Show the raw text (Discord formatting)</summary><textarea id="raw" readonly></textarea></details>
-  <p class="note">The numbers update with every refresh. The wording lives in <code>recruit.json</code> — placeholders:
-    <code>{tbStars}</code> <code>{tbStarsBest}</code> <code>{raidName}</code> <code>{raidScore}</code> <code>{crate}</code> <code>{crates}</code> <code>{members}</code>
-    <code>{memberMax}</code> <code>{openSpots}</code> <code>{guildGp}</code> <code>{avgGp}</code> <code>{minGp}</code>.</p>
+  <details><summary>Show the raw text (exactly what gets copied)</summary><textarea id="raw" readonly></textarea></details>
+  <p class="note">The numbers update with every refresh. The wording lives in <code>recruit.json</code> (one entry per flavour) — placeholders:
+    <code>{tbStars}</code> <code>{tbStarsBest}</code> <code>{raidName}</code> <code>{raidScore}</code> <code>{crate}</code> <code>{crates}</code>
+    <code>{raidStatus}</code> <code>{raidCampaign}</code> <code>{members}</code> <code>{memberMax}</code> <code>{openSpots}</code>
+    <code>{guildGp}</code> <code>{guildGpFloor}</code> <code>{avgGp}</code> <code>{minGp}</code>.
+    <code>:emoji:</code> codes are shown as emoji here but copied as codes.</p>
   <div id="cb-links"></div>
 
 <script>
@@ -54,7 +61,10 @@
   try { const G = await get('guild-stats-data.json'); best = Math.max(best || 0, ...(G.tbStarHist || []).map(h => h.score || 0)); } catch {}
 
   const mil = n => (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+  const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th','st','nd','rd'][n % 10] || 'th');
   const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
+  // Order 66 is retired: until a result from the new raid (Droid Destruction) exists, it's "waiting for 1st run".
+  const newRaid = M.raid && M.raid.id && M.raid.id !== 'order66' && M.raid.crate;
   // Same join rule as the welcome page: 80% of the guild's average GP, rounded down to 500k.
   const avg = M.gp / Math.max(1, M.members);
   const vals = {
@@ -63,26 +73,45 @@
     raidName: RAIDS[M.raid?.id] || M.raid?.id || '—',
     raidScore: M.raid?.score ? mil(M.raid.score) : '—',
     crate: M.raid?.crate ?? '—', crates: M.raid?.crates ?? '—',
+    raidStatus: newRaid ? `earning ${ord(M.raid.crate)} crate` : 'waiting for 1st run',
+    raidCampaign: newRaid ? `${ord(M.raid.crate)} crate rewards` : 'waiting for 1st run',
     members: M.members, memberMax: M.memberMax, openSpots: Math.max(0, M.memberMax - M.members),
-    guildGp: mil(M.gp), avgGp: mil(avg),
+    guildGp: mil(M.gp), guildGpFloor: Math.floor(M.gp / 1e7) * 10 + 'M', avgGp: mil(avg),
     minGp: mil(Math.floor(avg * 0.8 / 5e5) * 5e5),
   };
-  const text = T.template.replace(/\{(\w+)\}/g, (m, k) => k in vals ? String(vals[k]) : m);
+  const flavours = T.flavours || [{ name: 'Message', template: T.template }];
 
-  // Preview: escape, then render Discord's **bold** and links.
+  // Preview only: Discord-style :emoji: codes → emoji (the copied text keeps the codes).
+  const EMOJI = { bar_chart:'📊', muscle:'💪', busts_in_silhouette:'👥', shield:'🛡️', trophy:'🏆', fire:'🔥',
+    crossed_swords:'⚔️', map:'🗺️', dart:'🎯', punch:'👊', bow_and_arrow:'🏹', scroll:'📜', sun_with_face:'🌞',
+    anchor:'⚓', link:'🔗', globe_with_meridians:'🌐', star:'⭐' };
   const esc = s => s.replace(/[&<>]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]));
-  document.getElementById('preview').innerHTML = esc(text)
-    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
-    .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-  document.getElementById('raw').value = text;
-  const count = document.getElementById('count');
-  count.textContent = `${text.length} / 2000 characters`;
-  count.classList.toggle('over', text.length > 2000);
+  const preview = document.getElementById('preview'), raw = document.getElementById('raw'), count = document.getElementById('count');
+  let text = '';
+  function show(i){
+    const f = flavours[i] || flavours[0];
+    text = f.template.replace(/\{(\w+)\}/g, (m, k) => k in vals ? String(vals[k]) : m);
+    preview.innerHTML = esc(text)
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/:([a-z0-9_]+):/g, (m, k) => EMOJI[k] || m)
+      .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+    raw.value = text;
+    count.textContent = `${text.length} / 2000 characters`;
+    count.classList.toggle('over', text.length > 2000);
+    document.querySelectorAll('#flav button').forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', j === i); });
+    try { localStorage.setItem('cb-recruit-flavour', String(i)); } catch {}
+  }
+  const flav = document.getElementById('flav');
+  flav.innerHTML = flavours.map((f, i) => `<button type="button" role="tab" data-i="${i}">${esc(f.name)}</button>`).join('');
+  flav.hidden = flavours.length < 2;
+  flav.addEventListener('click', e => { const b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  let start = 0; try { start = Math.min(flavours.length - 1, +(localStorage.getItem('cb-recruit-flavour') || 0)); } catch {}
+  show(start);
 
   const btn = document.getElementById('copy');
   btn.onclick = async () => {
     try { await navigator.clipboard.writeText(text); }
-    catch { const r = document.getElementById('raw'); r.closest('details').open = true; r.select(); document.execCommand('copy'); }
+    catch { raw.closest('details').open = true; raw.select(); document.execCommand('copy'); }
     btn.textContent = 'Copied ✓'; btn.classList.add('done');
     setTimeout(() => { btn.textContent = 'Copy message'; btn.classList.remove('done'); }, 1800);
   };
