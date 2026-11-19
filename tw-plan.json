@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T10:36:56.5358725Z",
+  "generated": "2026-11-19T14:36:05.4381999Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -478,7 +478,7 @@
         {
           "team": "Home One",
           "player": "морфей",
-          "score": 3926204
+          "score": 3928252
         },
         {
           "team": "Home One",
@@ -518,7 +518,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2793882
+          "score": 2795249
         },
         {
           "team": "Home One",
@@ -878,12 +878,12 @@
         {
           "team": "Chimaera",
           "player": "морфей",
-          "score": 3926204
+          "score": 3928252
         },
         {
           "team": "Endurance",
           "player": "морфей",
-          "score": 3926204
+          "score": 3928252
         },
         {
           "team": "Chimaera",
@@ -958,12 +958,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2793882
+          "score": 2795249
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2793882
+          "score": 2795249
         },
         {
           "team": "Chimaera",
