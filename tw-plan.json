@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T02:35:48.6653068Z",
+  "generated": "2026-11-19T06:38:38.4604874Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -468,7 +468,7 @@
         {
           "team": "Home One",
           "player": "Vibara",
-          "score": 4033631
+          "score": 4033946
         },
         {
           "team": "Home One",
@@ -523,7 +523,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2631995
+          "score": 2632271
         },
         {
           "team": "Home One",
@@ -558,7 +558,7 @@
         {
           "team": "Home One",
           "player": "Javin Vigil",
-          "score": 2276888
+          "score": 2278865
         },
         {
           "team": "Home One",
@@ -858,12 +858,12 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4033631
+          "score": 4033946
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4033631
+          "score": 4033946
         },
         {
           "team": "Chimaera",
@@ -968,7 +968,7 @@
         {
           "team": "Chimaera",
           "player": "Тай",
-          "score": 2631995
+          "score": 2632271
         }
       ],
       "note": ""
