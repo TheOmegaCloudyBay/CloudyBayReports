@@ -149,7 +149,7 @@
       const mil = n => (n/1e6).toFixed(1).replace(/\.0$/, '') + 'M';
 
       // Live results line: latest TB stars, latest raid score + crate reached.
-      const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
+      const RAIDS = { order66:'Order 66', droiddestruction:'Droid Destruction', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
       const parts = [];
       if (m.tbStars) parts.push(`We currently run <b>Rise of the Empire</b> with <b>${m.tbStars} stars</b>`);
       if (m.raid && m.raid.score){

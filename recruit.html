@@ -62,7 +62,7 @@
 
   const mil = n => (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
   const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th','st','nd','rd'][n % 10] || 'th');
-  const RAIDS = { order66:'Order 66', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
+  const RAIDS = { order66:'Order 66', droiddestruction:'Droid Destruction', naboo:'Battle for Naboo', speederbike:'Speeder Bike', kraytdragon:'Krayt Dragon', sith_raid:'Sith Triumvirate' };
   // Order 66 is retired: until a result from the new raid (Droid Destruction) exists, it's "waiting for 1st run".
   const newRaid = M.raid && M.raid.id && M.raid.id !== 'order66' && M.raid.crate;
   // Same join rule as the welcome page: 80% of the guild's average GP, rounded down to 500k.

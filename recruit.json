@@ -2,7 +2,7 @@
   "flavours": [
     {
       "name": "Short",
-      "template": "**⚓ Cloudy Bay is recruiting!**\n\nA semi-competitive F2P guild.\n\n• **Rise of the Empire:** up to {tbStarsBest} stars\n• **Raids:** pursuing Droid Destruction\n• **Members:** {members}/{memberMax} · {guildGp} guild GP\n\n**What we expect**\n• {minGp}+ Galactic Power\n• 600 raid tickets every day\n• Participation in TB, TW (when signed up) and raids (600k+)\n\nLooking for active, friendly members to join us on our quest for glory and credits!\n🔗 Discord: https://discord.gg/pwecTHqru3\n🌐 Guild site: https://cloudybay.online"
+      "template": "**⚓ Cloudy Bay is recruiting!**\n\nA semi-competitive F2P guild.\n\n• **Rise of the Empire:** up to {tbStarsBest} stars\n• **Raids:** Droid Destruction — {raidStatus}\n• **Members:** {members}/{memberMax} · {guildGp} guild GP\n\n**What we expect**\n• {minGp}+ Galactic Power\n• 600 raid tickets every day\n• Participation in TB, TW (when signed up) and raids (600k+)\n\nLooking for active, friendly members to join us on our quest for glory and credits!\n🔗 Discord: https://discord.gg/pwecTHqru3\n🌐 Guild site: https://cloudybay.online"
     },
     {
       "name": "Recruiting site",
