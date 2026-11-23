@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T06:03:21.6798135Z",
+  "generated": "2026-11-23T08:54:11.2259717Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -986,7 +986,7 @@
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
+          "team": "Great Mothers",
           "player": "The Omega",
           "weak": true
         },
@@ -1112,12 +1112,12 @@
       "units": [
         {
           "team": "Great Mothers",
-          "player": "The Omega",
+          "player": "Javin Vigil",
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Javin Vigil",
+          "team": "Sith Triumvirate",
+          "player": "The Omega",
           "weak": true
         },
         {
