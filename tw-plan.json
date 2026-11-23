@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T10:36:39.8394371Z",
+  "generated": "2026-11-23T13:32:24.2964829Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -986,7 +986,7 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
+          "team": "Sith Triumvirate",
           "player": "The Omega",
           "weak": true
         },
@@ -1061,6 +1061,11 @@
           "weak": true
         },
         {
+          "team": "Great Mothers",
+          "player": "szk",
+          "weak": true
+        },
+        {
           "team": "Captain Rex Phoenix",
           "player": "O7",
           "weak": true
@@ -1099,11 +1104,6 @@
           "team": "Carth with Zaalbar Omicron",
           "player": "EW",
           "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "TOMER",
-          "filler": true
         }
       ],
       "note": ""
@@ -1112,12 +1112,12 @@
       "units": [
         {
           "team": "Great Mothers",
-          "player": "Javin Vigil",
+          "player": "The Omega",
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
-          "player": "The Omega",
+          "team": "Great Mothers",
+          "player": "Javin Vigil",
           "weak": true
         },
         {
@@ -1191,9 +1191,19 @@
           "weak": true
         },
         {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "szk",
+          "weak": true
+        },
+        {
           "team": "Geonosians",
           "player": "O7",
           "weak": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "TOMER",
+          "filler": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
@@ -1223,16 +1233,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "жало",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "DAVE115",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Bliss",
           "filler": true
         }
       ],
