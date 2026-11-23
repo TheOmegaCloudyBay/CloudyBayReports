@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-23T13:32:24.2964829Z",
+  "generated": "2026-11-23T14:36:04.3970086Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -682,6 +682,11 @@
         },
         {
           "team": "Great Mothers",
+          "player": "FallenProphett",
+          "filler": true
+        },
+        {
+          "team": "Great Mothers",
           "player": "GabiZK90",
           "filler": true
         },
@@ -709,17 +714,17 @@
           "team": "Dark Trooper Moff Gideon",
           "player": "Eytanobi",
           "filler": true
-        },
-        {
-          "team": "Dark Trooper Moff Gideon",
-          "player": "EW",
-          "filler": true
         }
       ],
       "note": ""
     },
     "mbb": {
       "units": [
+        {
+          "team": "Dark Trooper Moff Gideon",
+          "player": "EW",
+          "filler": true
+        },
         {
           "team": "Dark Trooper Moff Gideon",
           "player": "Забулдыга",
@@ -838,11 +843,6 @@
         {
           "team": "General Skywalker 501st",
           "player": "mingle",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Javin Vigil",
           "filler": true
         }
       ],
@@ -1026,7 +1026,7 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
+          "team": "Gungans",
           "player": "FallenProphett",
           "weak": true
         },
@@ -1071,6 +1071,11 @@
           "weak": true
         },
         {
+          "team": "General Skywalker 501st",
+          "player": "Javin Vigil",
+          "filler": true
+        },
+        {
           "team": "Mon Mothma w/ Luthen Rael",
           "player": "Eytanobi",
           "filler": true
@@ -1098,11 +1103,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "MrKrol",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "EW",
           "filler": true
         }
       ],
@@ -1202,6 +1202,11 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
+          "player": "EW",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "TOMER",
           "filler": true
         },
@@ -1228,11 +1233,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "Ven of Thila",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "жало",
           "filler": true
         }
       ],
