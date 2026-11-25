@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25T06:36:36.9192418Z",
+  "generated": "2026-11-25T10:35:32.4319424Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -179,6 +179,10 @@
         },
         {
           "team": "General Skywalker 501st",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "General Skywalker 501st",
           "player": "NeonZombie"
         },
         {
@@ -208,16 +212,16 @@
         {
           "team": "Commander Luke Skywalker",
           "player": "DarthMalgus"
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "MrKrol"
         }
       ],
       "note": "Galactic Legends: Lord Vader (DS Clones) (4), Sith Eternal Emperor (7)"
     },
     "mft": {
       "units": [
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "MrKrol"
+        },
         {
           "team": "Commander Luke Skywalker",
           "player": "Eytanobi"
@@ -322,17 +326,17 @@
           "team": "Taron Malicos",
           "player": "MrKrol",
           "filler": true
-        },
-        {
-          "team": "Taron Malicos",
-          "player": "EW",
-          "filler": true
         }
       ],
       "note": ""
     },
     "mfb": {
       "units": [
+        {
+          "team": "Taron Malicos",
+          "player": "EW",
+          "filler": true
+        },
         {
           "team": "Saw Gerrera w/ Luthen Rael",
           "player": "MrKrol",
@@ -452,11 +456,6 @@
           "team": "Great Mothers",
           "player": "MrKrol",
           "filler": true
-        },
-        {
-          "team": "Great Mothers",
-          "player": "CDave",
-          "filler": true
         }
       ],
       "note": ""
@@ -506,7 +505,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 3377553
+          "score": 3378106
         },
         {
           "team": "Home One",
@@ -521,7 +520,7 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2959888
+          "score": 2971407
         },
         {
           "team": "Home One",
@@ -586,13 +585,18 @@
         {
           "team": "Home One",
           "player": "The Omega",
-          "score": 2235038
+          "score": 2237851
         }
       ],
       "note": ""
     },
     "mbt": {
       "units": [
+        {
+          "team": "Great Mothers",
+          "player": "CDave",
+          "filler": true
+        },
         {
           "team": "Great Mothers",
           "player": "жало",
@@ -712,17 +716,17 @@
           "team": "Sith Triumvirate",
           "player": "морфей",
           "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
-          "player": "Vibara",
-          "filler": true
         }
       ],
       "note": ""
     },
     "mbb": {
       "units": [
+        {
+          "team": "Sith Triumvirate",
+          "player": "Vibara",
+          "filler": true
+        },
         {
           "team": "Sith Triumvirate",
           "player": "MrKrol",
@@ -786,11 +790,6 @@
         {
           "team": "Sith Triumvirate",
           "player": "GabiZK90",
-          "filler": true
-        },
-        {
-          "team": "General Skywalker 501st",
-          "player": "Itsmemario",
           "filler": true
         },
         {
@@ -926,12 +925,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 3377553
+          "score": 3378106
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 3377553
+          "score": 3378106
         },
         {
           "team": "Chimaera",
@@ -956,12 +955,12 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2959888
+          "score": 2971407
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2959888
+          "score": 2971407
         },
         {
           "team": "Chimaera",
