@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25T10:35:32.4319424Z",
+  "generated": "2026-11-26T06:35:56.5778582Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -86,11 +86,11 @@
         },
         {
           "team": "Great Mothers",
-          "player": "Itsmemario"
+          "player": "DAVE115"
         },
         {
           "team": "Great Mothers",
-          "player": "DAVE115"
+          "player": "Itsmemario"
         },
         {
           "team": "Great Mothers",
@@ -419,12 +419,12 @@
         },
         {
           "team": "Bo Katan (Mand'alor)",
-          "player": "DeathlessKing",
+          "player": "CDave",
           "filler": true
         },
         {
           "team": "Bo Katan (Mand'alor)",
-          "player": "CDave",
+          "player": "DeathlessKing",
           "filler": true
         },
         {
@@ -475,12 +475,12 @@
         {
           "team": "Home One",
           "player": "Vibara",
-          "score": 4041610
+          "score": 4043020
         },
         {
           "team": "Home One",
           "player": "Eytanobi",
-          "score": 3965007
+          "score": 3965759
         },
         {
           "team": "Home One",
@@ -505,7 +505,7 @@
         {
           "team": "Home One",
           "player": "DAVE115",
-          "score": 3378106
+          "score": 3417856
         },
         {
           "team": "Home One",
@@ -520,17 +520,17 @@
         {
           "team": "Home One",
           "player": "Itsmemario",
-          "score": 2971407
+          "score": 2974816
         },
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2801987
+          "score": 2802332
         },
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2637679
+          "score": 2641614
         },
         {
           "team": "Home One",
@@ -545,7 +545,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2476121
+          "score": 2476668
         },
         {
           "team": "Home One",
@@ -560,7 +560,7 @@
         {
           "team": "Home One",
           "player": "Javin Vigil",
-          "score": 2302164
+          "score": 2306962
         },
         {
           "team": "Home One",
@@ -575,7 +575,7 @@
         {
           "team": "Home One",
           "player": "Mol Eliza",
-          "score": 2279682
+          "score": 2282071
         },
         {
           "team": "Home One",
@@ -584,8 +584,8 @@
         },
         {
           "team": "Home One",
-          "player": "The Omega",
-          "score": 2237851
+          "player": "BlastBomber",
+          "score": 2265873
         }
       ],
       "note": ""
@@ -779,11 +779,6 @@
         },
         {
           "team": "Sith Triumvirate",
-          "player": "The Omega",
-          "filler": true
-        },
-        {
-          "team": "Sith Triumvirate",
           "player": "DAVE115",
           "filler": true
         },
@@ -846,6 +841,11 @@
           "team": "Carth with Zaalbar Omicron",
           "player": "MrKrol",
           "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "EW",
+          "filler": true
         }
       ],
       "note": ""
@@ -865,22 +865,22 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4041610
+          "score": 4043020
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4041610
+          "score": 4043020
         },
         {
           "team": "Chimaera",
           "player": "Eytanobi",
-          "score": 3965007
+          "score": 3965759
         },
         {
           "team": "Endurance",
           "player": "Eytanobi",
-          "score": 3965007
+          "score": 3965759
         },
         {
           "team": "Chimaera",
@@ -925,12 +925,12 @@
         {
           "team": "Chimaera",
           "player": "DAVE115",
-          "score": 3378106
+          "score": 3417856
         },
         {
           "team": "Endurance",
           "player": "DAVE115",
-          "score": 3378106
+          "score": 3417856
         },
         {
           "team": "Chimaera",
@@ -955,27 +955,27 @@
         {
           "team": "Chimaera",
           "player": "Itsmemario",
-          "score": 2971407
+          "score": 2974816
         },
         {
           "team": "Endurance",
           "player": "Itsmemario",
-          "score": 2971407
+          "score": 2974816
         },
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2801987
+          "score": 2802332
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2801987
+          "score": 2802332
         },
         {
           "team": "Chimaera",
           "player": "Тай",
-          "score": 2637679
+          "score": 2641614
         }
       ],
       "note": ""
@@ -988,33 +988,33 @@
           "weak": true
         },
         {
-          "team": "Great Mothers",
-          "player": "Javin Vigil",
+          "team": "Sith Triumvirate",
+          "player": "The Omega",
           "weak": true
         },
         {
-          "team": "Great Mothers",
+          "team": "Queen Amidala",
+          "player": "Забулдыга",
+          "weak": true
+        },
+        {
+          "team": "Sith Triumvirate",
           "player": "zohar",
           "weak": true
         },
         {
-          "team": "General Skywalker 501st",
-          "player": "Jerome Willem",
+          "team": "Commander Luke Skywalker",
+          "player": "Yarael Poof",
           "weak": true
         },
         {
           "team": "Nightsisters",
-          "player": "Yarael Poof",
+          "player": "BlastBomber",
           "weak": true
         },
         {
           "team": "Great Mothers",
           "player": "Chewwy29",
-          "weak": true
-        },
-        {
-          "team": "Zorii Resistance",
-          "player": "BlastBomber",
           "weak": true
         },
         {
@@ -1068,6 +1068,11 @@
           "weak": true
         },
         {
+          "team": "Nightsisters",
+          "player": "Gaz the wise",
+          "weak": true
+        },
+        {
           "team": "Geonosians",
           "player": "O7",
           "weak": true
@@ -1076,11 +1081,6 @@
           "team": "Captain Rex Phoenix",
           "player": "Elite Pineapple",
           "weak": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "EW",
-          "filler": true
         },
         {
           "team": "Carth with Zaalbar Omicron",
@@ -1118,28 +1118,28 @@
           "weak": true
         },
         {
-          "team": "Queen Amidala",
-          "player": "Забулдыга",
+          "team": "Great Mothers",
+          "player": "Javin Vigil",
           "weak": true
         },
         {
-          "team": "Sith Triumvirate",
+          "team": "Great Mothers",
           "player": "zohar",
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "General Skywalker 501st",
+          "player": "Jerome Willem",
+          "weak": true
+        },
+        {
+          "team": "Nightsisters",
           "player": "Yarael Poof",
           "weak": true
         },
         {
           "team": "Great Mothers",
           "player": "DarthMalgus",
-          "weak": true
-        },
-        {
-          "team": "Nightsisters",
-          "player": "BlastBomber",
           "weak": true
         },
         {
@@ -1193,6 +1193,11 @@
           "weak": true
         },
         {
+          "team": "Great Mothers",
+          "player": "Gaz the wise",
+          "weak": true
+        },
+        {
           "team": "Captain Rex Phoenix",
           "player": "O7",
           "weak": true
@@ -1230,11 +1235,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "DeathlessKing",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Eytanobi",
           "filler": true
         }
       ],
