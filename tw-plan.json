@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-26T10:40:29.9135799Z",
+  "generated": "2026-11-26T14:35:59.0240310Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -479,7 +479,7 @@
         {
           "team": "Home One",
           "player": "Eytanobi",
-          "score": 3965759
+          "score": 3968320
         },
         {
           "team": "Home One",
@@ -524,7 +524,7 @@
         {
           "team": "Home One",
           "player": "Squaredevil",
-          "score": 2802332
+          "score": 2803260
         },
         {
           "team": "Home One",
@@ -874,12 +874,12 @@
         {
           "team": "Chimaera",
           "player": "Eytanobi",
-          "score": 3965759
+          "score": 3968320
         },
         {
           "team": "Endurance",
           "player": "Eytanobi",
-          "score": 3965759
+          "score": 3968320
         },
         {
           "team": "Chimaera",
@@ -964,12 +964,12 @@
         {
           "team": "Chimaera",
           "player": "Squaredevil",
-          "score": 2802332
+          "score": 2803260
         },
         {
           "team": "Endurance",
           "player": "Squaredevil",
-          "score": 2802332
+          "score": 2803260
         },
         {
           "team": "Chimaera",
