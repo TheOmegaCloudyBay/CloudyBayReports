@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-26T14:35:59.0240310Z",
+  "generated": "2026-11-26T22:35:40.3303758Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -77,6 +77,10 @@
           "player": "DAVE115"
         },
         {
+          "team": "Bo Katan (Mand'alor)",
+          "player": "CDave"
+        },
+        {
           "team": "Gungans",
           "player": "MrKrol"
         },
@@ -90,11 +94,11 @@
         },
         {
           "team": "Great Mothers",
-          "player": "DAVE115"
+          "player": "Itsmemario"
         },
         {
           "team": "Great Mothers",
-          "player": "Itsmemario"
+          "player": "DAVE115"
         },
         {
           "team": "Great Mothers",
@@ -103,10 +107,6 @@
         {
           "team": "Great Mothers",
           "player": "Matt The Radar Technician"
-        },
-        {
-          "team": "Great Mothers",
-          "player": "Henry"
         }
       ],
       "note": "Galactic Legends: Jabba the Hutt (4), Jedi Master Kenobi (5), Rey (3)"
@@ -159,6 +159,10 @@
         },
         {
           "team": "Great Mothers",
+          "player": "Henry"
+        },
+        {
+          "team": "Great Mothers",
           "player": "somo4"
         },
         {
@@ -208,16 +212,16 @@
         {
           "team": "Commander Luke Skywalker",
           "player": "NeonZombie"
-        },
-        {
-          "team": "Commander Luke Skywalker",
-          "player": "CDave"
         }
       ],
       "note": "Galactic Legends: Lord Vader (DS Clones) (4), Sith Eternal Emperor (7)"
     },
     "mft": {
       "units": [
+        {
+          "team": "Commander Luke Skywalker",
+          "player": "CDave"
+        },
         {
           "team": "Commander Luke Skywalker",
           "player": "DarthMalgus"
@@ -243,16 +247,24 @@
           "player": "FallenProphett"
         },
         {
+          "team": "Iden Versio Special Forces",
+          "player": "Itsmemario"
+        },
+        {
+          "team": "Rogue One",
+          "player": "יול ילט"
+        },
+        {
           "team": "Rogue One",
           "player": "Тай"
         },
         {
           "team": "Rogue One",
-          "player": "MrKrol"
+          "player": "Itsmemario"
         },
         {
           "team": "Rogue One",
-          "player": "Itsmemario"
+          "player": "MrKrol"
         },
         {
           "team": "Bad Batch V2",
@@ -310,7 +322,12 @@
           "team": "Queen Amidala",
           "player": "DAVE115",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mfb": {
+      "units": [
         {
           "team": "Taron Malicos",
           "player": "Vibara",
@@ -325,12 +342,7 @@
           "team": "Taron Malicos",
           "player": "TOMER",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mfb": {
-      "units": [
+        },
         {
           "team": "Taron Malicos",
           "player": "MrKrol",
@@ -423,11 +435,6 @@
         },
         {
           "team": "Bo Katan (Mand'alor)",
-          "player": "CDave",
-          "filler": true
-        },
-        {
-          "team": "Bo Katan (Mand'alor)",
           "player": "DeathlessKing",
           "filler": true
         },
@@ -444,16 +451,6 @@
         {
           "team": "Darth Malgus",
           "player": "DAVE115",
-          "filler": true
-        },
-        {
-          "team": "Darth Malgus",
-          "player": "Забулдыга",
-          "filler": true
-        },
-        {
-          "team": "Darth Malgus",
-          "player": "Eytanobi",
           "filler": true
         }
       ],
@@ -513,18 +510,23 @@
         },
         {
           "team": "Home One",
+          "player": "Itsmemario",
+          "score": 3088163
+        },
+        {
+          "team": "Home One",
           "player": "mingle",
           "score": 3026458
         },
         {
           "team": "Home One",
-          "player": "Itsmemario",
-          "score": 2974816
+          "player": "Squaredevil",
+          "score": 2803260
         },
         {
           "team": "Home One",
-          "player": "Squaredevil",
-          "score": 2803260
+          "player": "יול ילט",
+          "score": 2731969
         },
         {
           "team": "Home One",
@@ -543,11 +545,6 @@
         },
         {
           "team": "Home One",
-          "player": "יול ילט",
-          "score": 2476668
-        },
-        {
-          "team": "Home One",
           "player": "NeonZombie",
           "score": 2392135
         },
@@ -559,7 +556,7 @@
         {
           "team": "Home One",
           "player": "Javin Vigil",
-          "score": 2306962
+          "score": 2312199
         },
         {
           "team": "Home One",
@@ -591,6 +588,16 @@
     },
     "mbt": {
       "units": [
+        {
+          "team": "Darth Malgus",
+          "player": "Забулдыга",
+          "filler": true
+        },
+        {
+          "team": "Darth Malgus",
+          "player": "Eytanobi",
+          "filler": true
+        },
         {
           "team": "Great Mothers",
           "player": "MrKrol",
@@ -705,7 +712,12 @@
           "team": "Dark Trooper Moff Gideon",
           "player": "EW",
           "filler": true
-        },
+        }
+      ],
+      "note": ""
+    },
+    "mbb": {
+      "units": [
         {
           "team": "Dark Trooper Moff Gideon",
           "player": "Забулдыга",
@@ -715,12 +727,7 @@
           "team": "Sith Triumvirate",
           "player": "RoastMyChestnuts",
           "filler": true
-        }
-      ],
-      "note": ""
-    },
-    "mbb": {
-      "units": [
+        },
         {
           "team": "Sith Triumvirate",
           "player": "Matt The Radar Technician",
@@ -835,16 +842,6 @@
           "team": "Dr. Aphra",
           "player": "Squaredevil",
           "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "морфей",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Vibara",
-          "filler": true
         }
       ],
       "note": ""
@@ -943,23 +940,23 @@
         },
         {
           "team": "Chimaera",
-          "player": "mingle",
-          "score": 3026458
+          "player": "Itsmemario",
+          "score": 3088163
         },
         {
           "team": "Endurance",
-          "player": "mingle",
-          "score": 3026458
+          "player": "Itsmemario",
+          "score": 3088163
         },
         {
           "team": "Chimaera",
-          "player": "Itsmemario",
-          "score": 2974816
+          "player": "mingle",
+          "score": 3026458
         },
         {
           "team": "Endurance",
-          "player": "Itsmemario",
-          "score": 2974816
+          "player": "mingle",
+          "score": 3026458
         },
         {
           "team": "Chimaera",
@@ -973,8 +970,8 @@
         },
         {
           "team": "Chimaera",
-          "player": "Тай",
-          "score": 2641614
+          "player": "יול ילט",
+          "score": 2731969
         }
       ],
       "note": ""
@@ -1068,6 +1065,16 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
+          "player": "морфей",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Vibara",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "MrKrol",
           "filler": true
         },
@@ -1094,16 +1101,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "DarthMalgus",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "4L1V3 2 THR1V3",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Ven of Thila",
           "filler": true
         }
       ],
@@ -1198,6 +1195,16 @@
         },
         {
           "team": "Carth with Zaalbar Omicron",
+          "player": "4L1V3 2 THR1V3",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
+          "player": "Ven of Thila",
+          "filler": true
+        },
+        {
+          "team": "Carth with Zaalbar Omicron",
           "player": "жало",
           "filler": true
         },
@@ -1224,16 +1231,6 @@
         {
           "team": "Carth with Zaalbar Omicron",
           "player": "Eytanobi",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "Itsmemario",
-          "filler": true
-        },
-        {
-          "team": "Carth with Zaalbar Omicron",
-          "player": "RoastMyChestnuts",
           "filler": true
         }
       ],
