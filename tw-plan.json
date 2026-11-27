@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-27T02:35:34.6306109Z",
+  "generated": "2026-11-27T06:40:11.2041650Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -471,7 +471,7 @@
         {
           "team": "Home One",
           "player": "Vibara",
-          "score": 4043020
+          "score": 4043113
         },
         {
           "team": "Home One",
@@ -531,7 +531,7 @@
         {
           "team": "Home One",
           "player": "Тай",
-          "score": 2641614
+          "score": 2642164
         },
         {
           "team": "Home One",
@@ -541,7 +541,7 @@
         {
           "team": "Home One",
           "player": "Jchiodo",
-          "score": 2482205
+          "score": 2483821
         },
         {
           "team": "Home One",
@@ -861,12 +861,12 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4043020
+          "score": 4043113
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4043020
+          "score": 4043113
         },
         {
           "team": "Chimaera",
@@ -999,7 +999,7 @@
           "weak": true
         },
         {
-          "team": "Commander Luke Skywalker",
+          "team": "Sith Triumvirate",
           "player": "Yarael Poof",
           "weak": true
         },
@@ -1129,7 +1129,7 @@
           "weak": true
         },
         {
-          "team": "Nightsisters",
+          "team": "Commander Luke Skywalker",
           "player": "Yarael Poof",
           "weak": true
         },
