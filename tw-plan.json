@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-27T06:40:11.2041650Z",
+  "generated": "2026-11-27T10:35:40.1549861Z",
   "slots": 25,
   "absent": [],
   "short": [],
@@ -471,7 +471,7 @@
         {
           "team": "Home One",
           "player": "Vibara",
-          "score": 4043113
+          "score": 4043680
         },
         {
           "team": "Home One",
@@ -526,7 +526,7 @@
         {
           "team": "Home One",
           "player": "יול ילט",
-          "score": 2731969
+          "score": 2730839
         },
         {
           "team": "Home One",
@@ -861,12 +861,12 @@
         {
           "team": "Chimaera",
           "player": "Vibara",
-          "score": 4043113
+          "score": 4043680
         },
         {
           "team": "Endurance",
           "player": "Vibara",
-          "score": 4043113
+          "score": 4043680
         },
         {
           "team": "Chimaera",
@@ -971,7 +971,7 @@
         {
           "team": "Chimaera",
           "player": "יול ילט",
-          "score": 2731969
+          "score": 2730839
         }
       ],
       "note": ""
